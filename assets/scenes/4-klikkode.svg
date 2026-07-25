@@ -1,10 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   SCENE 04 · KLIKKODE — "Trophy Hall"
-  Multi-tier podium, leaderboard screen, XP particles, dramatic pink lighting.
+  Animated: trophy glow pulse, confetti drift, screen flicker, spotlight sway.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" preserveAspectRatio="xMidYMid slice">
   <defs>
+    <style>
+      .trophy-glow { animation: trophy-pulse 3.2s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+      .podium-glow { animation: podium-pulse 4.0s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+      .podium-glow-2 { animation-delay: -1.4s; }
+      .podium-glow-3 { animation-delay: -2.6s; }
+      .spot-sway { animation: spot-sway 7s ease-in-out infinite alternate; transform-origin: center; transform-box: fill-box; }
+      .screen-flicker { animation: screen-flicker 5.5s steps(6,end) infinite; }
+      .confetti-a { animation: confetti 5s ease-in-out infinite alternate; transform-origin: center; transform-box: fill-box; }
+      .confetti-b { animation: confetti 6s ease-in-out infinite alternate-reverse; transform-origin: center; transform-box: fill-box; }
+      .confetti-c { animation: confetti 7s ease-in-out infinite alternate; transform-origin: center; transform-box: fill-box; }
+      .particle   { animation: rise 6s linear infinite; transform-origin: center; transform-box: fill-box; }
+      .particle-b { animation-delay: -1.5s; }
+      .particle-c { animation-delay: -3.0s; }
+      .particle-d { animation-delay: -4.5s; }
+      @keyframes trophy-pulse {
+        0%,100% { opacity: 0.65; transform: scale(1); }
+        50%     { opacity: 1.00; transform: scale(1.10); }
+      }
+      @keyframes podium-pulse {
+        0%,100% { opacity: 0.55; transform: scale(1); }
+        50%     { opacity: 0.85; transform: scale(1.05); }
+      }
+      @keyframes spot-sway {
+        0%   { transform: translateX(-15px); }
+        100% { transform: translateX(15px); }
+      }
+      @keyframes screen-flicker {
+        0%,100% { opacity: 0.95; }
+        50%     { opacity: 0.78; }
+      }
+      @keyframes confetti {
+        0%   { transform: translate(0,0)    rotate(0deg);   }
+        100% { transform: translate(8px,-12px) rotate(20deg); }
+      }
+      @keyframes rise {
+        0%   { transform: translate(0,0); opacity: 0; }
+        15%  { opacity: 0.85; }
+        85%  { opacity: 0.55; }
+        100% { transform: translate(0,-50px); opacity: 0; }
+      }
+    </style>
     <linearGradient id="s4-bg" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%"  stop-color="#3a0a20"/>
       <stop offset="55%" stop-color="#7d1d45"/>
@@ -38,66 +79,53 @@
   <rect width="1536" height="1024" fill="url(#s4-bg)"/>
   <rect width="1536" height="1024" fill="url(#s4-spot)"/>
 
-  <!-- Back wall: leaderboard screen -->
   <g transform="translate(420,180)">
-    <!-- screen glow -->
     <rect x="-10" y="-10" width="720" height="320" fill="url(#s4-screen)" filter="url(#s4-soft)"/>
-    <!-- screen frame -->
     <rect x="0" y="0" width="700" height="300" rx="14" fill="#1a0820"/>
-    <rect x="14" y="14" width="672" height="272" rx="6" fill="#0a0410"/>
-    <!-- title -->
-    <text x="350" y="50" text-anchor="middle" font-family="ui-rounded, system-ui, sans-serif" font-weight="700" font-size="22" fill="#ffaad0" letter-spacing="6">LEADERBOARD</text>
-    <!-- rows -->
-    <g font-family="ui-monospace, Menlo, monospace" font-size="22">
-      <!-- row 1 -->
-      <rect x="20" y="80"  width="660" height="44" fill="#ffb347" opacity="0.18"/>
-      <text x="40"  y="112" fill="#ffb347" font-weight="700">#1</text>
-      <text x="100" y="112" fill="#f5ede0">gilang_r</text>
-      <text x="600" y="112" fill="#ffb347" font-weight="700">+ 2840 XP</text>
-      <!-- row 2 -->
-      <rect x="20" y="130" width="660" height="44" fill="#c4a4ff" opacity="0.18"/>
-      <text x="40"  y="162" fill="#c4a4ff" font-weight="700">#2</text>
-      <text x="100" y="162" fill="#f5ede0">klikkode_fan</text>
-      <text x="600" y="162" fill="#c4a4ff" font-weight="700">+ 2105 XP</text>
-      <!-- row 3 -->
-      <rect x="20" y="180" width="660" height="44" fill="#7dd3a8" opacity="0.18"/>
-      <text x="40"  y="212" fill="#7dd3a8" font-weight="700">#3</text>
-      <text x="100" y="212" fill="#f5ede0">quizmaster.id</text>
-      <text x="600" y="212" fill="#7dd3a8" font-weight="700">+ 1980 XP</text>
-      <!-- row 4 -->
-      <text x="40"  y="262" fill="#f5ede0" opacity="0.6">#4</text>
-      <text x="100" y="262" fill="#f5ede0" opacity="0.85">dev_novice</text>
-      <text x="600" y="262" fill="#f5ede0" opacity="0.85">+ 1450 XP</text>
+    <g class="screen-flicker">
+      <rect x="14" y="14" width="672" height="272" rx="6" fill="#0a0410"/>
+      <text x="350" y="50" text-anchor="middle" font-family="ui-rounded, system-ui, sans-serif" font-weight="700" font-size="22" fill="#ffaad0" letter-spacing="6">LEADERBOARD</text>
+      <g font-family="ui-monospace, Menlo, monospace" font-size="22">
+        <rect x="20" y="80"  width="660" height="44" fill="#ffb347" opacity="0.18"/>
+        <text x="40"  y="112" fill="#ffb347" font-weight="700">#1</text>
+        <text x="100" y="112" fill="#f5ede0">gilang_r</text>
+        <text x="600" y="112" fill="#ffb347" font-weight="700">+ 2840 XP</text>
+        <rect x="20" y="130" width="660" height="44" fill="#c4a4ff" opacity="0.18"/>
+        <text x="40"  y="162" fill="#c4a4ff" font-weight="700">#2</text>
+        <text x="100" y="162" fill="#f5ede0">klikkode_fan</text>
+        <text x="600" y="162" fill="#c4a4ff" font-weight="700">+ 2105 XP</text>
+        <rect x="20" y="180" width="660" height="44" fill="#7dd3a8" opacity="0.18"/>
+        <text x="40"  y="212" fill="#7dd3a8" font-weight="700">#3</text>
+        <text x="100" y="212" fill="#f5ede0">quizmaster.id</text>
+        <text x="600" y="212" fill="#7dd3a8" font-weight="700">+ 1980 XP</text>
+        <text x="40"  y="262" fill="#f5ede0" opacity="0.6">#4</text>
+        <text x="100" y="262" fill="#f5ede0" opacity="0.85">dev_novice</text>
+        <text x="600" y="262" fill="#f5ede0" opacity="0.85">+ 1450 XP</text>
+      </g>
     </g>
   </g>
 
-  <!-- Stage spotlight from above -->
-  <g opacity="0.5" filter="url(#s4-strong)">
+  <g class="spot-sway" opacity="0.5" filter="url(#s4-strong)">
     <polygon points="700,0 836,0 920,540 616,540" fill="#ffaad0"/>
   </g>
 
-  <!-- Three podiums -->
   <g transform="translate(420,560)">
-    <!-- ground shadow -->
     <ellipse cx="350" cy="320" rx="500" ry="22" fill="#000" opacity="0.5" filter="url(#s4-strong)"/>
 
-    <!-- Podium 2 (left, silver) -->
     <g transform="translate(0,180)">
       <rect width="180" height="180" fill="#7d6b95"/>
       <rect x="0" y="0" width="180" height="14" fill="#c4a4ff"/>
-      <ellipse cx="90" cy="0" rx="120" ry="14" fill="#c4a4ff" opacity="0.7" filter="url(#s4-soft)"/>
+      <ellipse class="podium-glow podium-glow-2" cx="90" cy="0" rx="120" ry="14" fill="#c4a4ff" opacity="0.7" filter="url(#s4-soft)"/>
       <text x="90" y="110" text-anchor="middle" font-family="ui-rounded, system-ui, sans-serif" font-weight="900" font-size="64" fill="#f5ede0">2</text>
     </g>
-    <!-- Podium 1 (center, gold) -->
     <g transform="translate(220,100)">
       <rect width="220" height="260" fill="#a37810"/>
       <rect x="0" y="0" width="220" height="14" fill="#ffd9a0"/>
-      <ellipse cx="110" cy="0" rx="140" ry="14" fill="#ffb347" opacity="0.85" filter="url(#s4-soft)"/>
+      <ellipse class="podium-glow" cx="110" cy="0" rx="140" ry="14" fill="#ffb347" opacity="0.85" filter="url(#s4-soft)"/>
       <text x="110" y="160" text-anchor="middle" font-family="ui-rounded, system-ui, sans-serif" font-weight="900" font-size="84" fill="#fff7c2">1</text>
-      <!-- Trophy on top -->
+      <!-- Trophy on top (pulsing glow) -->
       <g transform="translate(110,-80)">
-        <ellipse cx="0" cy="0" rx="80" ry="80" fill="url(#s4-trophy)" opacity="0.85"/>
-        <!-- cup shape -->
+        <ellipse class="trophy-glow" cx="0" cy="0" rx="80" ry="80" fill="url(#s4-trophy)" opacity="0.85"/>
         <path d="M -36,-10 Q -42,30 0,40 Q 42,30 36,-10 Z" fill="#ffd9a0"/>
         <rect x="-6" y="38" width="12" height="22" fill="#cc9930"/>
         <rect x="-26" y="56" width="52" height="14" rx="2" fill="#cc9930"/>
@@ -106,16 +134,14 @@
         <circle cx="0" cy="-30" r="8" fill="#fff7c2"/>
       </g>
     </g>
-    <!-- Podium 3 (right, bronze) -->
     <g transform="translate(500,220)">
       <rect width="160" height="140" fill="#5b3d20"/>
       <rect x="0" y="0" width="160" height="14" fill="#cc8c40"/>
-      <ellipse cx="80" cy="0" rx="100" ry="12" fill="#cc8c40" opacity="0.7" filter="url(#s4-soft)"/>
+      <ellipse class="podium-glow podium-glow-3" cx="80" cy="0" rx="100" ry="12" fill="#cc8c40" opacity="0.7" filter="url(#s4-soft)"/>
       <text x="80" y="92" text-anchor="middle" font-family="ui-rounded, system-ui, sans-serif" font-weight="900" font-size="56" fill="#f5ede0">3</text>
     </g>
   </g>
 
-  <!-- Floating XP chips -->
   <g font-family="ui-rounded, system-ui, sans-serif" font-weight="700" fill="#f5ede0">
     <g transform="translate(120,260)">
       <rect width="120" height="44" rx="22" fill="#241d2b" stroke="#ec5b8e" stroke-width="2"/>
@@ -135,31 +161,36 @@
     </g>
   </g>
 
-  <!-- Confetti / sparkle particles -->
+  <!-- Confetti pieces (drift) -->
   <g>
-    <circle cx="240"  cy="200" r="3" fill="#ffb347" opacity="0.85"/>
-    <circle cx="320"  cy="120" r="2" fill="#ffaad0" opacity="0.8"/>
-    <circle cx="500"  cy="180" r="2" fill="#7dd3a8" opacity="0.7"/>
-    <circle cx="780"  cy="80"  r="3" fill="#c4a4ff" opacity="0.9"/>
-    <circle cx="1080" cy="120" r="2" fill="#ffb347" opacity="0.7"/>
-    <circle cx="1240" cy="180" r="3" fill="#ffaad0" opacity="0.85"/>
-    <circle cx="1380" cy="100" r="2" fill="#5b8def" opacity="0.7"/>
-    <rect x="200" y="80" width="6" height="6" fill="#7dd3a8" opacity="0.8" transform="rotate(30 203 83)"/>
-    <rect x="1280" y="60" width="6" height="6" fill="#ffb347" opacity="0.8" transform="rotate(45 1283 63)"/>
-    <rect x="700" y="60" width="6" height="6" fill="#ec5b8e" opacity="0.8" transform="rotate(20 703 63)"/>
+    <circle class="confetti-a" cx="240" cy="200" r="3" fill="#ffb347" opacity="0.85"/>
+    <circle class="confetti-b" cx="320" cy="120" r="2" fill="#ffaad0" opacity="0.8"/>
+    <circle class="confetti-c" cx="500" cy="180" r="2" fill="#7dd3a8" opacity="0.7"/>
+    <circle class="confetti-a" cx="780" cy="80"  r="3" fill="#c4a4ff" opacity="0.9"/>
+    <circle class="confetti-b" cx="1080" cy="120" r="2" fill="#ffb347" opacity="0.7"/>
+    <circle class="confetti-c" cx="1240" cy="180" r="3" fill="#ffaad0" opacity="0.85"/>
+    <circle class="confetti-a" cx="1380" cy="100" r="2" fill="#5b8def" opacity="0.7"/>
+    <rect class="confetti-b" x="200" y="80" width="6" height="6" fill="#7dd3a8" opacity="0.8" transform="rotate(30 203 83)"/>
+    <rect class="confetti-c" x="1280" y="60" width="6" height="6" fill="#ffb347" opacity="0.8" transform="rotate(45 1283 63)"/>
+    <rect class="confetti-a" x="700" y="60" width="6" height="6" fill="#ec5b8e" opacity="0.8" transform="rotate(20 703 63)"/>
   </g>
 
-  <!-- Floor -->
+  <!-- Confetti particles rising -->
+  <g>
+    <circle class="particle"            cx="380" cy="900" r="2" fill="#ffb347"/>
+    <circle class="particle particle-b" cx="540" cy="880" r="2" fill="#ffaad0"/>
+    <circle class="particle particle-c" cx="700" cy="940" r="2" fill="#7dd3a8"/>
+    <circle class="particle particle-d" cx="900" cy="900" r="2" fill="#c4a4ff"/>
+    <circle class="particle"            cx="1080" cy="920" r="2" fill="#ffb347"/>
+  </g>
+
   <rect x="0" y="850" width="1536" height="174" fill="url(#s4-floor)"/>
   <ellipse cx="768" cy="870" rx="500" ry="12" fill="#ec5b8e" opacity="0.22" filter="url(#s4-strong)"/>
 
-  <!-- Vignette -->
   <radialGradient id="s4-vig" cx="50%" cy="50%" r="70%">
     <stop offset="50%" stop-color="#000" stop-opacity="0"/>
     <stop offset="100%" stop-color="#000" stop-opacity="0.55"/>
   </radialGradient>
   <rect width="1536" height="1024" fill="url(#s4-vig)"/>
-
-  <!-- Grain -->
   <rect width="1536" height="1024" filter="url(#s4-grain)" opacity="0.5"/>
 </svg>

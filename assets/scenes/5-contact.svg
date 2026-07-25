@@ -1,11 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   SCENE 05 · CONTACT — "Open Door"
-  Workshop with front wall open, camera flying out into bright daylight.
-  Floating @ and <> symbols.
+  Animated: floating icons bob, daylight pulse, sparkles twinkle.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" preserveAspectRatio="xMidYMid slice">
   <defs>
+    <style>
+      .icon-bob   { animation: bob 4.0s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+      .icon-bob-2 { animation: bob 4.6s ease-in-out infinite; animation-delay: -1.5s; transform-origin: center; transform-box: fill-box; }
+      .daylight-pulse { animation: daylight 5.5s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+      .star { animation: twinkle 2.6s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+      .star-b { animation-delay: -1.0s; }
+      .star-c { animation-delay: -2.0s; }
+      .path-glow { animation: pulse-light 4s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+      .particle   { animation: rise 7s linear infinite; transform-origin: center; transform-box: fill-box; }
+      .particle-b { animation-delay: -2.0s; }
+      .particle-c { animation-delay: -4.0s; }
+      @keyframes bob {
+        0%,100% { transform: translateY(0); }
+        50%     { transform: translateY(-14px); }
+      }
+      @keyframes daylight {
+        0%,100% { opacity: 0.85; transform: scale(1); }
+        50%     { opacity: 1.00; transform: scale(1.05); }
+      }
+      @keyframes twilight {
+        0%,100% { opacity: 0.85; transform: scale(0.85); }
+        50%     { opacity: 1.00; transform: scale(1.15); }
+      }
+      @keyframes twinkle {
+        0%,100% { opacity: 0.40; transform: scale(0.85); }
+        50%     { opacity: 1.00; transform: scale(1.15); }
+      }
+      @keyframes pulse-light {
+        0%,100% { opacity: 0.75; }
+        50%     { opacity: 1.00; }
+      }
+      @keyframes rise {
+        0%   { transform: translate(0,0); opacity: 0; }
+        15%  { opacity: 0.85; }
+        85%  { opacity: 0.55; }
+        100% { transform: translate(0,-60px); opacity: 0; }
+      }
+    </style>
     <linearGradient id="s5-bg" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%"  stop-color="#0a1a3a"/>
       <stop offset="50%" stop-color="#1e3a78"/>
@@ -34,50 +71,36 @@
 
   <rect width="1536" height="1024" fill="url(#s5-bg)"/>
 
-  <!-- Bright daylight streaming from center door -->
-  <ellipse cx="768" cy="540" rx="780" ry="540" fill="url(#s5-daylight)" filter="url(#s5-soft)"/>
-  <ellipse cx="768" cy="540" rx="320" ry="320" fill="url(#s5-daylight)" opacity="0.85"/>
+  <!-- Bright daylight streaming (pulsing) -->
+  <ellipse class="daylight-pulse" cx="768" cy="540" rx="780" ry="540" fill="url(#s5-daylight)" filter="url(#s5-soft)"/>
+  <ellipse class="daylight-pulse" cx="768" cy="540" rx="320" ry="320" fill="url(#s5-daylight)" opacity="0.85"/>
 
-  <!-- distant landscape silhouette -->
   <g fill="#04101f" opacity="0.9">
     <rect x="0"   y="600" width="1536" height="220"/>
-    <!-- hills -->
     <path d="M 0,600 Q 200,560 400,600 T 800,600 T 1200,600 T 1536,600 L 1536,820 L 0,820 Z" fill="#04101f"/>
-    <!-- trees -->
     <ellipse cx="120"  cy="600" rx="40" ry="60" fill="#04101f"/>
     <ellipse cx="380"  cy="610" rx="50" ry="50" fill="#04101f"/>
     <ellipse cx="1180" cy="600" rx="50" ry="55" fill="#04101f"/>
     <ellipse cx="1380" cy="610" rx="40" ry="50" fill="#04101f"/>
   </g>
 
-  <!-- Workshop (left half, with opened front wall) -->
   <g transform="translate(120,260)">
-    <!-- shadow under building -->
     <ellipse cx="280" cy="500" rx="320" ry="20" fill="#000" opacity="0.6" filter="url(#s5-strong)"/>
-    <!-- side wall (right) -->
     <polygon points="560,0 640,-50 640,440 560,500" fill="#1a2f5a"/>
-    <!-- roof -->
     <polygon points="0,0 280,-100 640,-50 560,0" fill="#0a1226"/>
     <polygon points="280,-100 640,-50 640,-30 280,-80" fill="#1e3a78"/>
-    <!-- left wall (closed) -->
     <rect x="0" y="0" width="120" height="500" fill="#241d2b"/>
-    <!-- back wall -->
     <rect x="120" y="0" width="440" height="500" fill="#3a4f7a"/>
-    <!-- back wall window glow -->
     <rect x="180" y="60" width="180" height="120" fill="#ffd9a0"/>
     <line x1="270" y1="60" x2="270" y2="180" stroke="#241d2b" stroke-width="4"/>
     <line x1="180" y1="120" x2="360" y2="120" stroke="#241d2b" stroke-width="4"/>
-    <!-- desk inside -->
     <rect x="200" y="280" width="280" height="14" fill="#3a1d0a"/>
     <rect x="210" y="294" width="20" height="120" fill="#3a1d0a"/>
     <rect x="450" y="294" width="20" height="120" fill="#3a1d0a"/>
-    <!-- monitors -->
     <rect x="240" y="240" width="120" height="40" fill="#0a0410" stroke="#5b8def" stroke-width="2"/>
     <rect x="244" y="244" width="112" height="32" fill="#5b8def" opacity="0.7"/>
     <rect x="380" y="240" width="100" height="40" fill="#0a0410" stroke="#ec5b8e" stroke-width="2"/>
     <rect x="384" y="244" width="92" height="32" fill="#ec5b8e" opacity="0.7"/>
-
-    <!-- speech bubble on desk -->
     <g transform="translate(280,180)">
       <ellipse cx="60" cy="20" rx="100" ry="40" fill="#fff" opacity="0.95"/>
       <polygon points="60,55 50,75 80,55" fill="#fff" opacity="0.95"/>
@@ -85,21 +108,19 @@
     </g>
   </g>
 
-  <!-- Bright path leading OUT from the open door -->
   <g transform="translate(768,500)">
-    <!-- path perspective triangle -->
-    <polygon points="-80,0 80,0 280,500 -280,500" fill="url(#s5-path)" opacity="0.85"/>
+    <polygon class="path-glow" points="-80,0 80,0 280,500 -280,500" fill="url(#s5-path)" opacity="0.85"/>
     <polygon points="-40,0 40,0 140,500 -140,500" fill="#fff7d8" opacity="0.4"/>
   </g>
 
-  <!-- Floating @ symbol (email) -->
-  <g transform="translate(330,360)">
+  <!-- Floating @ symbol (bobs) -->
+  <g class="icon-bob" transform="translate(330,360)">
     <circle cx="0" cy="0" r="80" fill="#fff" opacity="0.95" filter="url(#s5-soft)"/>
     <circle cx="0" cy="0" r="56" fill="#241d2b"/>
     <text x="0" y="20" text-anchor="middle" font-family="ui-rounded, system-ui, sans-serif" font-weight="700" font-size="64" fill="#fff">@</text>
   </g>
-  <!-- Floating <> symbol (github) -->
-  <g transform="translate(1180,360)">
+  <!-- Floating <> symbol (bobs) -->
+  <g class="icon-bob-2" transform="translate(1180,360)">
     <circle cx="0" cy="0" r="80" fill="#fff" opacity="0.95" filter="url(#s5-soft)"/>
     <circle cx="0" cy="0" r="56" fill="#241d2b"/>
     <text x="0" y="22" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-weight="700" font-size="50" fill="#fff">&lt;/&gt;</text>
@@ -107,29 +128,32 @@
 
   <!-- Sparkle particles -->
   <g>
-    <circle cx="220"  cy="180" r="3" fill="#fff7d8" opacity="0.95"/>
-    <circle cx="1380" cy="180" r="3" fill="#fff7d8" opacity="0.95"/>
-    <circle cx="120"  cy="380" r="2" fill="#fff7d8" opacity="0.85"/>
-    <circle cx="1420" cy="380" r="2" fill="#fff7d8" opacity="0.85"/>
-    <circle cx="100"  cy="700" r="2" fill="#fff7d8" opacity="0.7"/>
-    <circle cx="1450" cy="700" r="2" fill="#fff7d8" opacity="0.7"/>
-    <circle cx="500"  cy="120" r="2" fill="#fff7d8" opacity="0.8"/>
-    <circle cx="900"  cy="120" r="2" fill="#fff7d8" opacity="0.8"/>
-    <circle cx="640"  cy="800" r="3" fill="#fff7d8" opacity="0.9"/>
-    <circle cx="900"  cy="820" r="2" fill="#fff7d8" opacity="0.85"/>
+    <circle class="star"            cx="220" cy="180" r="3" fill="#fff7d8"/>
+    <circle class="star star-b" cx="1380" cy="180" r="3" fill="#fff7d8"/>
+    <circle class="star star-c" cx="120" cy="380" r="2" fill="#fff7d8"/>
+    <circle class="star"            cx="1420" cy="380" r="2" fill="#fff7d8"/>
+    <circle class="star star-b" cx="100" cy="700" r="2" fill="#fff7d8"/>
+    <circle class="star star-c" cx="1450" cy="700" r="2" fill="#fff7d8"/>
+    <circle class="star"            cx="500" cy="120" r="2" fill="#fff7d8"/>
+    <circle class="star star-b" cx="900" cy="120" r="2" fill="#fff7d8"/>
+    <circle class="star star-c" cx="640" cy="800" r="3" fill="#fff7d8"/>
+    <circle class="star"            cx="900" cy="820" r="2" fill="#fff7d8"/>
   </g>
 
-  <!-- Floor -->
+  <g>
+    <circle class="particle"            cx="400" cy="900" r="2" fill="#fff7d8"/>
+    <circle class="particle particle-b" cx="640" cy="940" r="2" fill="#fff7d8"/>
+    <circle class="particle particle-c" cx="900" cy="900" r="2" fill="#fff7d8"/>
+    <circle class="particle"            cx="1100" cy="920" r="2" fill="#fff7d8"/>
+  </g>
+
   <rect x="0" y="850" width="1536" height="174" fill="url(#s5-floor)"/>
   <ellipse cx="768" cy="870" rx="500" ry="12" fill="#5b8def" opacity="0.22" filter="url(#s5-strong)"/>
 
-  <!-- Vignette -->
   <radialGradient id="s5-vig" cx="50%" cy="50%" r="70%">
     <stop offset="55%" stop-color="#000" stop-opacity="0"/>
     <stop offset="100%" stop-color="#000" stop-opacity="0.55"/>
   </radialGradient>
   <rect width="1536" height="1024" fill="url(#s5-vig)"/>
-
-  <!-- Grain -->
   <rect width="1536" height="1024" filter="url(#s5-grain)" opacity="0.5"/>
 </svg>

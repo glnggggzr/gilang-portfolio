@@ -1,10 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   SCENE 03 · KLINIKAPP — "The Clinic"
-  Isometric clinic with cross-lit interior, multiple rooms visible.
+  Animated: cross sign pulses, building gentle parallax, particles rise.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" preserveAspectRatio="xMidYMid slice">
   <defs>
+    <style>
+      .cross-pulse { animation: cross-pulse 2.8s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+      .cross-glow  { animation: cross-glow  2.8s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+      .building-bg { animation: parallax-bg 11s ease-in-out infinite alternate; }
+      .interior-glow { animation: interior-pulse 5.5s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+      .particle   { animation: rise 7s linear infinite; transform-origin: center; transform-box: fill-box; }
+      .particle-b { animation-delay: -2.0s; }
+      .particle-c { animation-delay: -4.5s; }
+      .cross-mark { animation: cross-spin 24s linear infinite; transform-origin: center; transform-box: fill-box; }
+      @keyframes cross-pulse {
+        0%,100% { transform: scale(1); }
+        50%     { transform: scale(1.08); }
+      }
+      @keyframes cross-glow {
+        0%,100% { opacity: 0.55; }
+        50%     { opacity: 0.95; }
+      }
+      @keyframes cross-spin {
+        0%   { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes parallax-bg {
+        0%   { transform: translate(0,0); }
+        100% { transform: translate(-3px,2px); }
+      }
+      @keyframes interior-pulse {
+        0%,100% { opacity: 0.75; }
+        50%     { opacity: 0.95; }
+      }
+      @keyframes rise {
+        0%   { transform: translate(0,0);     opacity: 0; }
+        15%  { opacity: 0.85; }
+        85%  { opacity: 0.55; }
+        100% { transform: translate(0,-60px); opacity: 0; }
+      }
+    </style>
     <linearGradient id="s3-bg" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%"  stop-color="#0a2418"/>
       <stop offset="60%" stop-color="#1c4733"/>
@@ -37,14 +73,12 @@
   <rect width="1536" height="1024" fill="url(#s3-bg)"/>
   <rect width="1536" height="1024" fill="url(#s3-spot)"/>
 
-  <!-- Distant city silhouettes -->
-  <g fill="#04140b" opacity="0.85">
+  <g class="building-bg" fill="#04140b" opacity="0.85">
     <rect x="0"    y="540" width="220" height="240"/>
     <rect x="240"  y="500" width="160" height="280"/>
     <rect x="1180" y="520" width="200" height="260"/>
     <rect x="1400" y="480" width="160" height="300"/>
   </g>
-  <!-- distant windows -->
   <g fill="#a7e8ca" opacity="0.4">
     <rect x="40"  y="580" width="10" height="14"/>
     <rect x="80"  y="600" width="10" height="14"/>
@@ -62,100 +96,72 @@
     <rect x="1500" y="580" width="10" height="14"/>
   </g>
 
-  <!-- Glow halo behind clinic -->
   <ellipse cx="768" cy="540" rx="500" ry="280" fill="url(#s3-cross)" opacity="0.5" filter="url(#s3-strong)"/>
 
-  <!-- Isometric clinic building -->
   <g transform="translate(540,300)">
-    <!-- ground shadow -->
     <ellipse cx="250" cy="450" rx="300" ry="20" fill="#000" opacity="0.5" filter="url(#s3-strong)"/>
-    <!-- front wall -->
     <rect x="0" y="0" width="500" height="380" fill="#f7fff8"/>
-    <!-- side wall -->
     <polygon points="500,0 580,-50 580,330 500,380" fill="#cfeee0"/>
-    <!-- roof -->
     <polygon points="0,0 250,-90 580,-50 500,0" fill="#3a9472"/>
     <polygon points="250,-90 580,-50 580,-30 250,-70" fill="#5cb38a"/>
 
-    <!-- Big cross sign on front -->
-    <rect x="60" y="40" width="100" height="100" fill="#ec5b8e"/>
-    <rect x="90" y="60" width="40" height="60" fill="#f7fff8"/>
-    <rect x="80" y="70" width="60" height="40" fill="#f7fff8"/>
-    <!-- cross glow -->
-    <circle cx="110" cy="90" r="80" fill="url(#s3-cross)" filter="url(#s3-soft)" opacity="0.7"/>
+    <!-- Big cross sign on front (pulsing) -->
+    <g class="cross-pulse">
+      <rect x="60" y="40" width="100" height="100" fill="#ec5b8e"/>
+      <rect x="90" y="60" width="40" height="60" fill="#f7fff8"/>
+      <rect x="80" y="70" width="60" height="40" fill="#f7fff8"/>
+    </g>
+    <circle class="cross-glow" cx="110" cy="90" r="80" fill="url(#s3-cross)" filter="url(#s3-soft)"/>
 
-    <!-- Big window: looking INTO interior -->
+    <!-- Big window -->
     <rect x="200" y="60" width="240" height="160" fill="#a7e8ca"/>
-    <g><circle cx="320" cy="140" r="120" fill="url(#s3-interior)" opacity="0.85"/></g>
-    <!-- window mullions -->
+    <g class="interior-glow"><circle cx="320" cy="140" r="120" fill="url(#s3-interior)" opacity="0.85"/></g>
     <line x1="320" y1="60" x2="320" y2="220" stroke="#3a9472" stroke-width="4"/>
     <line x1="200" y1="140" x2="440" y2="140" stroke="#3a9472" stroke-width="4"/>
 
-    <!-- Interior details (visible through window) -->
     <g opacity="0.95">
-      <!-- waiting chairs -->
       <rect x="220" y="180" width="20" height="20" fill="#7d4515"/>
       <rect x="245" y="180" width="20" height="20" fill="#7d4515"/>
       <rect x="270" y="180" width="20" height="20" fill="#7d4515"/>
-      <!-- reception desk -->
       <rect x="350" y="195" width="80" height="14" fill="#241d2b"/>
       <rect x="350" y="175" width="80" height="22" fill="#3a2f4a"/>
-      <!-- monitor on desk -->
       <rect x="370" y="160" width="22" height="14" fill="#a7e8ca"/>
       <rect x="395" y="160" width="22" height="14" fill="#a7e8ca"/>
     </g>
 
-    <!-- Bottom floor: doctor's office -->
     <rect x="60" y="280" width="160" height="80" fill="#3a9472" opacity="0.2"/>
     <line x1="220" y1="280" x2="220" y2="360" stroke="#3a9472" stroke-width="2"/>
     <text x="120" y="330" font-family="ui-rounded, system-ui, sans-serif" font-size="14" fill="#3a9472" font-weight="700">Doctor</text>
-    <!-- door -->
     <rect x="380" y="280" width="60" height="100" fill="#3a9472"/>
     <rect x="384" y="284" width="52" height="92" fill="#a7e8ca"/>
     <circle cx="430" cy="332" r="3" fill="#241d2b"/>
   </g>
 
-  <!-- foreground silhouette: a plant -->
-  <g transform="translate(80,720)">
-    <rect x="60" y="80" width="60" height="50" fill="#3a1d0a"/>
-    <ellipse cx="90" cy="80" rx="50" ry="14" fill="#7dd3a8" opacity="0.8"/>
-    <g fill="#5cb38a">
-      <ellipse cx="50"  cy="40" rx="30" ry="50"/>
-      <ellipse cx="100" cy="20" rx="26" ry="48"/>
-      <ellipse cx="130" cy="50" rx="28" ry="40"/>
-      <ellipse cx="80"  cy="10" rx="22" ry="36"/>
-    </g>
+  <!-- Floating particles -->
+  <g fill="#a7e8ca">
+    <circle class="particle"            cx="180"  cy="900" r="1.5"/>
+    <circle class="particle particle-b" cx="280"  cy="880" r="1"/>
+    <circle class="particle particle-c" cx="1380" cy="900" r="2"/>
+    <circle class="particle"            cx="120"  cy="900" r="1.5"/>
+    <circle class="particle particle-b" cx="1420" cy="900" r="1"/>
+    <circle class="particle particle-c" cx="200"  cy="900" r="2"/>
+    <circle class="particle particle-d" cx="1340" cy="880" r="1.5"/>
+    <circle class="particle"            cx="780"  cy="940" r="1"/>
+  </g>
+  <g fill="#ec5b8e" font-family="ui-rounded, system-ui, sans-serif" font-weight="900">
+    <text class="cross-mark" x="220" y="160" font-size="22">+</text>
+    <text class="cross-mark" x="1280" y="160" font-size="28" style="animation-delay:-12s">+</text>
+    <text class="cross-mark" x="140" y="660" font-size="32" style="animation-delay:-6s">+</text>
+    <text class="cross-mark" x="1380" y="640" font-size="20" style="animation-delay:-18s">+</text>
   </g>
 
-  <!-- floating particles (medical cross sparkles) -->
-  <g fill="#a7e8ca" opacity="0.65">
-    <circle cx="180"  cy="220" r="1.5"/>
-    <circle cx="280"  cy="180" r="1"/>
-    <circle cx="1380" cy="200" r="2"/>
-    <circle cx="120"  cy="500" r="1.5"/>
-    <circle cx="1420" cy="500" r="1"/>
-    <circle cx="200"  cy="900" r="2"/>
-    <circle cx="1340" cy="880" r="1.5"/>
-    <circle cx="780"  cy="940" r="1"/>
-  </g>
-  <g fill="#ec5b8e" opacity="0.85" font-family="ui-rounded, system-ui, sans-serif" font-weight="900">
-    <text x="220" y="160" font-size="22">+</text>
-    <text x="1280" y="160" font-size="28">+</text>
-    <text x="140" y="660" font-size="32">+</text>
-    <text x="1380" y="640" font-size="20">+</text>
-  </g>
-
-  <!-- Floor -->
   <rect x="0" y="800" width="1536" height="224" fill="url(#s3-floor)"/>
   <ellipse cx="768" cy="820" rx="500" ry="10" fill="#7dd3a8" opacity="0.18" filter="url(#s3-strong)"/>
 
-  <!-- Vignette -->
   <radialGradient id="s3-vig" cx="50%" cy="50%" r="70%">
     <stop offset="55%" stop-color="#000" stop-opacity="0"/>
     <stop offset="100%" stop-color="#000" stop-opacity="0.55"/>
   </radialGradient>
   <rect width="1536" height="1024" fill="url(#s3-vig)"/>
-
-  <!-- Grain -->
   <rect width="1536" height="1024" filter="url(#s3-grain)" opacity="0.5"/>
 </svg>

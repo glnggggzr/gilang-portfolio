@@ -1,11 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   SCENE 02 · ABOUT — "The Armory"
-  Workshop wall with crates of tools. Each tool on its own lit shelf.
+  Animated: spotlights drift, crates pulse-glow, particles rise.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" preserveAspectRatio="xMidYMid slice">
   <defs>
-    <!-- Warm amber studio background -->
+    <style>
+      .spot { animation: spot-sway 8s ease-in-out infinite alternate; transform-origin: center; transform-box: fill-box; }
+      .spot-2 { animation-delay: -2s; }
+      .spot-3 { animation-delay: -4s; }
+      .spot-4 { animation-delay: -6s; }
+      .crate-glow { animation: crate-pulse 4.5s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+      .crate-glow-2 { animation-delay: -1.5s; }
+      .crate-glow-3 { animation-delay: -3.0s; }
+      .drift-shelf { animation: shelf-sway 7s ease-in-out infinite alternate; }
+      .particle   { animation: rise 6s linear infinite; transform-origin: center; transform-box: fill-box; }
+      .particle-b { animation-delay: -1.4s; }
+      .particle-c { animation-delay: -2.8s; }
+      .particle-d { animation-delay: -4.2s; }
+      @keyframes spot-sway {
+        0%   { transform: translateX(-12px); opacity: 0.30; }
+        100% { transform: translateX(12px);  opacity: 0.45; }
+      }
+      @keyframes crate-pulse {
+        0%,100% { opacity: 0.30; transform: scale(1); }
+        50%     { opacity: 0.65; transform: scale(1.04); }
+      }
+      @keyframes shelf-sway {
+        0%   { transform: translate(0,0); }
+        100% { transform: translate(0,-3px); }
+      }
+      @keyframes rise {
+        0%   { transform: translate(0,0);     opacity: 0; }
+        15%  { opacity: 0.85; }
+        85%  { opacity: 0.55; }
+        100% { transform: translate(0,-50px); opacity: 0; }
+      }
+    </style>
     <linearGradient id="s2-bg" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%"  stop-color="#3a1f0a"/>
       <stop offset="50%" stop-color="#7d4515"/>
@@ -19,13 +50,10 @@
       <stop offset="0%"  stop-color="#3a1f0a"/>
       <stop offset="100%" stop-color="#0a0500"/>
     </linearGradient>
-
-    <!-- per-crate glow -->
     <radialGradient id="s2-crate-glow" cx="50%" cy="40%" r="60%">
       <stop offset="0%" stop-color="#ffd9a0" stop-opacity="0.6"/>
       <stop offset="100%" stop-color="#ffd9a0" stop-opacity="0"/>
     </radialGradient>
-
     <filter id="s2-soft" x="-50%" y="-50%" width="200%" height="200%">
       <feGaussianBlur stdDeviation="12"/>
     </filter>
@@ -41,7 +69,6 @@
   <rect width="1536" height="1024" fill="url(#s2-bg)"/>
   <rect width="1536" height="1024" fill="url(#s2-spot)"/>
 
-  <!-- Back wall texture: vertical wood plank lines -->
   <g stroke="#1a0c00" stroke-width="2" opacity="0.5">
     <line x1="0"    y1="0" x2="0"    y2="1024"/>
     <line x1="120"  y1="0" x2="120"  y2="1024"/>
@@ -58,37 +85,31 @@
     <line x1="1440" y1="0" x2="1440" y2="1024"/>
   </g>
 
-  <!-- Spotlight cones (top) -->
+  <!-- Drifting spotlights -->
   <g opacity="0.25" filter="url(#s2-strong)">
-    <ellipse cx="240"  cy="100" rx="120" ry="60" fill="#ffe5b8"/>
-    <ellipse cx="540"  cy="100" rx="120" ry="60" fill="#ffe5b8"/>
-    <ellipse cx="840"  cy="100" rx="120" ry="60" fill="#ffe5b8"/>
-    <ellipse cx="1140" cy="100" rx="120" ry="60" fill="#ffe5b8"/>
+    <ellipse class="spot"        cx="240"  cy="100" rx="120" ry="60" fill="#ffe5b8"/>
+    <ellipse class="spot spot-2" cx="540"  cy="100" rx="120" ry="60" fill="#ffe5b8"/>
+    <ellipse class="spot spot-3" cx="840"  cy="100" rx="120" ry="60" fill="#ffe5b8"/>
+    <ellipse class="spot spot-4" cx="1140" cy="100" rx="120" ry="60" fill="#ffe5b8"/>
   </g>
 
-  <!-- Shelves (4) with crates -->
   <g>
-    <!-- Row 1: Laravel · CodeIgniter · PHP · MySQL · Git -->
     <g transform="translate(160,320)">
-      <!-- shelf -->
       <rect x="-10" y="180" width="290" height="14" fill="#1a0c00"/>
-      <!-- crate 1: Laravel (red) -->
       <g transform="translate(0,0)">
         <rect width="220" height="180" rx="6" fill="#7a1d1d"/>
-        <ellipse cx="110" cy="180" rx="120" ry="14" fill="#ff4d4d" opacity="0.35" filter="url(#s2-strong)"/>
+        <ellipse class="crate-glow" cx="110" cy="180" rx="120" ry="14" fill="#ff4d4d" opacity="0.6" filter="url(#s2-strong)"/>
         <text x="110" y="100" text-anchor="middle" font-family="ui-rounded, system-ui, sans-serif" font-weight="700" font-size="42" fill="#fff">Laravel</text>
         <text x="110" y="140" text-anchor="middle" font-family="ui-monospace, monospace" font-size="20" fill="#ffd9a0" opacity="0.8">v11.x</text>
-        <!-- decorative stripe -->
         <rect x="0" y="0" width="220" height="14" fill="#ff4d4d"/>
       </g>
     </g>
 
     <g transform="translate(490,320)">
       <rect x="-10" y="180" width="290" height="14" fill="#1a0c00"/>
-      <!-- crate 2: CodeIgniter (orange) -->
       <g transform="translate(0,0)">
         <rect width="220" height="180" rx="6" fill="#7a3010"/>
-        <ellipse cx="110" cy="180" rx="120" ry="14" fill="#ee6a36" opacity="0.35" filter="url(#s2-strong)"/>
+        <ellipse class="crate-glow crate-glow-2" cx="110" cy="180" rx="120" ry="14" fill="#ee6a36" opacity="0.6" filter="url(#s2-strong)"/>
         <text x="110" y="92" text-anchor="middle" font-family="ui-rounded, system-ui, sans-serif" font-weight="700" font-size="34" fill="#fff">CodeIgniter</text>
         <text x="110" y="132" text-anchor="middle" font-family="ui-monospace, monospace" font-size="20" fill="#ffd9a0" opacity="0.8">v4.7</text>
         <rect x="0" y="0" width="220" height="14" fill="#ee6a36"/>
@@ -97,10 +118,9 @@
 
     <g transform="translate(820,320)">
       <rect x="-10" y="180" width="290" height="14" fill="#1a0c00"/>
-      <!-- crate 3: PHP (purple) -->
       <g transform="translate(0,0)">
         <rect width="220" height="180" rx="6" fill="#3d2a6d"/>
-        <ellipse cx="110" cy="180" rx="120" ry="14" fill="#7b6cd9" opacity="0.35" filter="url(#s2-strong)"/>
+        <ellipse class="crate-glow crate-glow-3" cx="110" cy="180" rx="120" ry="14" fill="#7b6cd9" opacity="0.6" filter="url(#s2-strong)"/>
         <text x="110" y="92" text-anchor="middle" font-family="ui-rounded, system-ui, sans-serif" font-weight="700" font-size="34" fill="#fff">PHP</text>
         <text x="110" y="132" text-anchor="middle" font-family="ui-monospace, monospace" font-size="20" fill="#ffd9a0" opacity="0.8">v8.3</text>
         <rect x="0" y="0" width="220" height="14" fill="#7b6cd9"/>
@@ -109,22 +129,20 @@
 
     <g transform="translate(1150,320)">
       <rect x="-10" y="180" width="290" height="14" fill="#1a0c00"/>
-      <!-- crate 4: MySQL (teal) -->
       <g transform="translate(0,0)">
         <rect width="220" height="180" rx="6" fill="#003a4a"/>
-        <ellipse cx="110" cy="180" rx="120" ry="14" fill="#00758f" opacity="0.35" filter="url(#s2-strong)"/>
+        <ellipse class="crate-glow" cx="110" cy="180" rx="120" ry="14" fill="#00758f" opacity="0.6" filter="url(#s2-strong)"/>
         <text x="110" y="92" text-anchor="middle" font-family="ui-rounded, system-ui, sans-serif" font-weight="700" font-size="34" fill="#fff">MySQL</text>
         <text x="110" y="132" text-anchor="middle" font-family="ui-monospace, monospace" font-size="20" fill="#ffd9a0" opacity="0.8">v8.0</text>
         <rect x="0" y="0" width="220" height="14" fill="#00758f"/>
       </g>
     </g>
 
-    <!-- Row 2: Git · VS Code · Composer · GitHub (lower shelf) -->
     <g transform="translate(320,580)">
       <rect x="-10" y="180" width="290" height="14" fill="#1a0c00"/>
       <g transform="translate(0,0)">
         <rect width="220" height="180" rx="6" fill="#4a1500"/>
-        <ellipse cx="110" cy="180" rx="120" ry="14" fill="#f1502f" opacity="0.35" filter="url(#s2-strong)"/>
+        <ellipse class="crate-glow crate-glow-2" cx="110" cy="180" rx="120" ry="14" fill="#f1502f" opacity="0.6" filter="url(#s2-strong)"/>
         <text x="110" y="92" text-anchor="middle" font-family="ui-rounded, system-ui, sans-serif" font-weight="700" font-size="34" fill="#fff">Git</text>
         <text x="110" y="132" text-anchor="middle" font-family="ui-monospace, monospace" font-size="20" fill="#ffd9a0" opacity="0.8">v2.51</text>
         <rect x="0" y="0" width="220" height="14" fill="#f1502f"/>
@@ -135,7 +153,7 @@
       <rect x="-10" y="180" width="290" height="14" fill="#1a0c00"/>
       <g transform="translate(0,0)">
         <rect width="220" height="180" rx="6" fill="#003355"/>
-        <ellipse cx="110" cy="180" rx="120" ry="14" fill="#3c99d4" opacity="0.35" filter="url(#s2-strong)"/>
+        <ellipse class="crate-glow crate-glow-3" cx="110" cy="180" rx="120" ry="14" fill="#3c99d4" opacity="0.6" filter="url(#s2-strong)"/>
         <text x="110" y="92" text-anchor="middle" font-family="ui-rounded, system-ui, sans-serif" font-weight="700" font-size="34" fill="#fff">VS Code</text>
         <text x="110" y="132" text-anchor="middle" font-family="ui-monospace, monospace" font-size="20" fill="#ffd9a0" opacity="0.8">.ts · .js · .php</text>
         <rect x="0" y="0" width="220" height="14" fill="#3c99d4"/>
@@ -146,7 +164,7 @@
       <rect x="-10" y="180" width="290" height="14" fill="#1a0c00"/>
       <g transform="translate(0,0)">
         <rect width="220" height="180" rx="6" fill="#003319"/>
-        <ellipse cx="110" cy="180" rx="120" ry="14" fill="#65b349" opacity="0.35" filter="url(#s2-strong)"/>
+        <ellipse class="crate-glow" cx="110" cy="180" rx="120" ry="14" fill="#65b349" opacity="0.6" filter="url(#s2-strong)"/>
         <text x="110" y="92" text-anchor="middle" font-family="ui-rounded, system-ui, sans-serif" font-weight="700" font-size="34" fill="#fff">Composer</text>
         <text x="110" y="132" text-anchor="middle" font-family="ui-monospace, monospace" font-size="20" fill="#ffd9a0" opacity="0.8">v2.x</text>
         <rect x="0" y="0" width="220" height="14" fill="#65b349"/>
@@ -154,37 +172,33 @@
     </g>
   </g>
 
-  <!-- floating particle sparks -->
-  <g fill="#ffd9a0" opacity="0.65">
-    <circle cx="100"  cy="200" r="1.5"/>
-    <circle cx="320"  cy="180" r="1"/>
-    <circle cx="540"  cy="220" r="2"/>
-    <circle cx="800"  cy="160" r="1.5"/>
-    <circle cx="1100" cy="240" r="1"/>
-    <circle cx="1320" cy="180" r="2"/>
-    <circle cx="180"  cy="540" r="1.5"/>
-    <circle cx="480"  cy="520" r="1"/>
-    <circle cx="780"  cy="560" r="2"/>
-    <circle cx="1080" cy="500" r="1"/>
-    <circle cx="1380" cy="540" r="1.5"/>
-    <circle cx="80"   cy="900" r="2"/>
-    <circle cx="380"  cy="940" r="1"/>
-    <circle cx="780"  cy="900" r="1.5"/>
-    <circle cx="1180" cy="920" r="2"/>
-    <circle cx="1450" cy="900" r="1"/>
+  <!-- Rising particles -->
+  <g fill="#ffd9a0">
+    <circle class="particle"            cx="100"  cy="900" r="1.5"/>
+    <circle class="particle particle-b" cx="320"  cy="880" r="1"/>
+    <circle class="particle particle-c" cx="540"  cy="920" r="2"/>
+    <circle class="particle particle-d" cx="800"  cy="860" r="1.5"/>
+    <circle class="particle particle-b" cx="1100" cy="940" r="1"/>
+    <circle class="particle particle-c" cx="1320" cy="880" r="2"/>
+    <circle class="particle particle-d" cx="180"  cy="940" r="1.5"/>
+    <circle class="particle"            cx="480"  cy="920" r="1"/>
+    <circle class="particle particle-b" cx="780"  cy="960" r="2"/>
+    <circle class="particle particle-c" cx="1080" cy="900" r="1"/>
+    <circle class="particle particle-d" cx="1380" cy="940" r="1.5"/>
+    <circle class="particle"            cx="80"   cy="900" r="2"/>
+    <circle class="particle particle-b" cx="380"  cy="940" r="1"/>
+    <circle class="particle particle-c" cx="780"  cy="900" r="1.5"/>
+    <circle class="particle particle-d" cx="1180" cy="920" r="2"/>
+    <circle class="particle"            cx="1450" cy="900" r="1"/>
   </g>
 
-  <!-- Floor -->
   <rect x="0" y="800" width="1536" height="224" fill="url(#s2-floor)"/>
   <ellipse cx="768" cy="820" rx="600" ry="10" fill="#ffb347" opacity="0.18" filter="url(#s2-strong)"/>
 
-  <!-- Vignette -->
   <radialGradient id="s2-vig" cx="50%" cy="50%" r="70%">
     <stop offset="50%" stop-color="#000" stop-opacity="0"/>
     <stop offset="100%" stop-color="#000" stop-opacity="0.55"/>
   </radialGradient>
   <rect width="1536" height="1024" fill="url(#s2-vig)"/>
-
-  <!-- Grain -->
   <rect width="1536" height="1024" filter="url(#s2-grain)" opacity="0.5"/>
 </svg>
