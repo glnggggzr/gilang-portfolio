@@ -3,481 +3,1212 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#f5ede0" />
-  <title>Gilang — Web Developer · Scroll-Through Portfolio</title>
-  <meta name="description" content="Personal portfolio of Gilang — scroll through the worlds he's built: KlinikApp, KlikKode, and more." />
+  <meta name="theme-color" content="#1a1530" />
+  <title>Gilang — Web Developer · Laravel · CodeIgniter</title>
+  <meta name="description" content="Personal portfolio of Gilang — a web developer building with Laravel & CodeIgniter. Selected work, stack, and contact." />
   <meta name="author" content="Gilang" />
 
-  <!-- Fonts: serif display + sans body + mono labels -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" />
 
   <style>
-    /* ── Theme tokens ─────────────────────────────────────────────────── */
-    :root, .sw-root {
-      --sw-bg:           #f5ede0;
-      --sw-bg-deep:      #1a1530;
-      --sw-ink:          #241d2b;
-      --sw-ink-soft:     #6a6072;
-      --sw-accent:       #8a7bb5;
-      --sw-font-display: 'Fraunces', ui-serif, Georgia, serif;
-      --sw-font-body:    'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-      --sw-font-mono:    'JetBrains Mono', ui-monospace, Menlo, monospace;
-    }
+    /* ── Reset & tokens ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --bg:           #f4ecdf;
+      --bg-deep:      #14101e;
+      --ink:          #14101e;
+      --ink-2:        #4a4055;
+      --ink-soft:     #8a8295;
+      --accent:       #ff5b3a;
+      --accent-2:     #5b8def;
+      --accent-3:     #7dd3a8;
+      --accent-4:     #ec5b8e;
+      --line:         rgba(20,16,30,0.08);
+      --line-strong:  rgba(20,16,30,0.18);
+      --card-bg:      rgba(255,255,255,0.55);
+      --card-bd:      rgba(20,16,30,0.06);
+      --shadow-sm:    0 1px 2px rgba(20,16,30,0.06), 0 2px 8px rgba(20,16,30,0.04);
+      --shadow-md:    0 4px 16px rgba(20,16,30,0.08), 0 1px 4px rgba(20,16,30,0.04);
+      --shadow-lg:    0 24px 48px -16px rgba(20,16,30,0.18), 0 8px 16px -8px rgba(20,16,30,0.10);
 
-    /* ── Pre-engine atmosphere: mesh + grain + vignette ───────────────── */
-    html, body { margin: 0; padding: 0; }
-    body {
-      font-family: var(--sw-font-body);
-      color: var(--sw-ink);
-      background: var(--sw-bg);
+      --display: 'Fraunces', ui-serif, Georgia, serif;
+      --body:    'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --mono:    'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+      --gutter: clamp(1.25rem, 4vw, 3rem);
+      --max-w:  1180px;
+    }
+    html, body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 16px;
+      line-height: 1.55;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
     }
 
-    /* Page-level atmospheric mesh (visible while scroll-world loads) */
     body::before {
       content: '';
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background:
-        radial-gradient(60% 50% at 18% 14%, rgba(138,123,181,0.22), transparent 70%),
-        radial-gradient(50% 50% at 82% 30%, rgba(255,179,71,0.18),  transparent 70%),
-        radial-gradient(45% 45% at 12% 86%, rgba(236,91,142,0.16), transparent 70%),
-        radial-gradient(50% 55% at 90% 92%, rgba(91,141,239,0.18), transparent 70%);
-      animation: mesh-drift 22s ease-in-out infinite alternate;
+        radial-gradient(56% 44% at 14% 12%, rgba(255,91,58,0.06),  transparent 70%),
+        radial-gradient(50% 50% at 86% 22%, rgba(91,141,239,0.06), transparent 70%),
+        radial-gradient(45% 38% at 12% 88%, rgba(125,211,168,0.06), transparent 70%),
+        radial-gradient(50% 55% at 90% 90%, rgba(236,91,142,0.06), transparent 70%);
+      animation: mesh-drift 26s ease-in-out infinite alternate;
     }
-    @keyframes mesh-drift {
-      0%   { transform: translate(0,0)       scale(1);   }
-      50%  { transform: translate(-2%,1%)    scale(1.04);}
-      100% { transform: translate(1%,-1%)    scale(1);   }
-    }
-
-    /* Film-grain layer (SVG noise as data URI) */
     body::after {
       content: '';
-      position: fixed; inset: 0; z-index: 1; pointer-events: none;
-      opacity: 0.10;
-      mix-blend-mode: overlay;
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      opacity: 0.10; mix-blend-mode: overlay;
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
     }
+    @keyframes mesh-drift {
+      0%   { transform: translate(0,0)    scale(1);    }
+      100% { transform: translate(1%,-1%)  scale(1.04); }
+    }
 
-    /* ── Loading screen ─────────────────────────────────────────────── */
+    .wrap { position: relative; z-index: 1; max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); }
+    section { position: relative; z-index: 2; }
+    ::selection { background: var(--accent); color: var(--bg); }
+
+    /* ── Top nav ─────────────────────────────────────────────────────── */
+    .topnav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      background: rgba(244,236,223,0.74);
+      border-bottom: 1px solid var(--line);
+      transition: box-shadow .25s ease;
+    }
+    .topnav.scrolled { box-shadow: var(--shadow-sm); }
+    .topnav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .topnav .brand {
+      font-family: var(--display); font-weight: 700; font-size: 1.1rem;
+      letter-spacing: -0.01em; text-decoration: none; color: var(--ink);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .topnav .brand-mark {
+      width: 26px; height: 30px; border-radius: 7px 7px 10px 10px;
+      background: linear-gradient(160deg, var(--accent), #c93a20);
+      box-shadow: 0 6px 14px rgba(255,91,58,0.35);
+    }
+    .topnav nav { display: flex; gap: 4px; align-items: center; }
+    .topnav nav a {
+      font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
+      padding: 9px 14px; border-radius: 999px;
+      color: var(--ink-2); text-decoration: none;
+      transition: background .2s, color .2s;
+    }
+    .topnav nav a:hover { background: rgba(20,16,30,0.05); color: var(--ink); }
+    .topnav .cta {
+      font-family: var(--body); font-weight: 600; font-size: 0.88rem;
+      padding: 10px 18px; border-radius: 999px;
+      background: var(--ink); color: var(--bg);
+      text-decoration: none;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .topnav .cta:hover { transform: translateY(-1px); background: var(--accent); }
+
+    /* ── Page intro/loading ──────────────────────────────────────────── */
     #loader {
-      position: fixed; inset: 0; z-index: 9999;
+      position: fixed; inset: 0; z-index: 1000;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      background: var(--sw-bg);
-      transition: opacity .6s ease, visibility .6s ease;
+      background: var(--bg); color: var(--ink-2);
+      transition: opacity .5s ease, visibility .5s ease;
     }
     #loader.hidden { opacity: 0; visibility: hidden; }
     .loader-mark {
-      width: 56px; height: 64px; border-radius: 14px 14px 18px 18px;
-      background: linear-gradient(160deg, var(--sw-accent), #5a4a8a);
-      box-shadow: 0 18px 40px rgba(138,123,181,0.45);
+      width: 48px; height: 56px; border-radius: 12px 12px 16px 16px;
+      background: linear-gradient(160deg, var(--accent), #c93a20);
+      box-shadow: 0 14px 36px rgba(255,91,58,0.42);
       animation: loader-pulse 1.4s ease-in-out infinite;
     }
     .loader-text {
-      margin-top: 32px;
-      font-family: var(--sw-font-mono);
-      font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--sw-ink-soft);
+      margin-top: 26px;
+      font-family: var(--mono);
+      font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
     }
     @keyframes loader-pulse {
-      0%, 100% { transform: translateY(0)    scale(1);    }
-      50%      { transform: translateY(-8px) scale(1.05); }
+      0%, 100% { transform: translateY(0)   scale(1);    }
+      50%      { transform: translateY(-6px) scale(1.05); }
     }
 
-    /* ── Hero intro section (above the scroll-world) ─────────────────── */
-    .intro {
-      position: relative; z-index: 5;
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 0 24px;
-      text-align: center;
+    /* ── 1 · Hero ────────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh; min-height: 100svh;
+      display: flex; align-items: center;
+      padding: 120px 0 80px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: clamp(2rem, 5vw, 4.5rem);
+      align-items: center;
+    }
+    .hero-left { max-width: 720px; }
+    .hero-right { align-self: stretch; display: flex; align-items: center; justify-content: center; }
+    .hero-card {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-bd);
+      border-radius: 20px;
+      padding: 22px 22px 20px;
+      box-shadow: var(--shadow-md);
+    }
+    .hero-card .h {
+      display: flex; align-items: center; justify-content: space-between;
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.05em; color: var(--ink-soft);
+      margin-bottom: 16px;
+    }
+    .hero-card .h .live { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-2); }
+    .hero-card .h .live .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 0 rgba(255,91,58,0.6);
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(255,91,58,0.6); }
+      70%  { box-shadow: 0 0 0 8px rgba(255,91,58,0);  }
+      100% { box-shadow: 0 0 0 0 rgba(255,91,58,0);   }
+    }
+    .hero-card .now-title {
+      font-family: var(--display); font-weight: 700;
+      font-size: 1.3rem; letter-spacing: -0.02em; line-height: 1.15;
+      color: var(--ink);
+    }
+    .hero-card .now-sub {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--ink-soft); margin-top: 4px;
+    }
+    .hero-card .stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border-radius: 12px; overflow: hidden;
+      margin: 18px 0;
+    }
+    .hero-card .stat {
+      background: rgba(255,255,255,0.5); padding: 12px 8px; text-align: center;
+    }
+    .hero-card .stat .n {
+      font-family: var(--display); font-weight: 700;
+      font-size: 1.5rem; letter-spacing: -0.02em;
+      color: var(--ink); display: block; line-height: 1;
+    }
+    .hero-card .stat .l {
+      font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--ink-soft);
+      margin-top: 6px; display: block;
+    }
+    .hero-card .feed { display: flex; flex-direction: column; gap: 6px; }
+    .hero-card .feed .row {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--mono); font-size: 11px; color: var(--ink-2);
+      padding: 8px 10px; border-radius: 8px;
+      background: rgba(20,16,30,0.03);
+    }
+    .hero-card .feed .row .ico {
+      flex-shrink: 0; width: 22px; height: 22px; border-radius: 6px;
+      display: grid; place-items: center;
+      color: #fff; font-size: 11px; font-weight: 700;
+    }
+    .hero-card .feed .row .ico.k { background: linear-gradient(135deg,#ff4d4d,#c93838); }
+    .hero-card .feed .row .ico.l { background: linear-gradient(135deg,#ec5b8e,#99345e); }
+    .hero-card .feed .row .ico.c { background: linear-gradient(135deg,#ee6a36,#c45828); }
+    .hero-card .feed .row .ico.t { background: linear-gradient(135deg,#5b8def,#2c4ea5); }
+    .hero-card .feed .row strong { color: var(--ink); font-weight: 600; }
+    .hero-card .feed .row .ago { margin-left: auto; color: var(--ink-soft); font-size: 10px; }
+    @media (max-width: 860px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+    }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      padding: 6px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.5);
+    }
+    .hero-eyebrow .pulse {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 0 rgba(255,91,58,0.6);
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    .hero-title {
+      font-family: var(--display); font-weight: 700;
+      font-size: clamp(2.6rem, 7.4vw, 6.2rem);
+      line-height: 1.0; letter-spacing: -0.025em;
+      margin: 24px 0 0;
+      color: var(--ink);
+    }
+    .hero-title em { font-style: italic; font-weight: 300; color: var(--accent); }
+    .hero-sub {
+      margin-top: 28px;
+      max-width: 56ch;
+      font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+      color: var(--ink-2); line-height: 1.6;
+    }
+    .hero-actions { margin-top: 40px; display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-actions a {
+      font-family: var(--body); font-weight: 600; font-size: 0.95rem;
+      padding: 14px 22px; border-radius: 999px;
+      text-decoration: none;
+      transition: transform .2s ease, background .2s, color .2s, border-color .2s;
+    }
+    .hero-actions .primary { background: var(--ink); color: var(--bg); }
+    .hero-actions .primary:hover { transform: translateY(-2px); background: var(--accent); }
+    .hero-actions .secondary {
+      background: transparent; color: var(--ink);
+      border: 1.5px solid var(--line-strong);
+    }
+    .hero-actions .secondary:hover { transform: translateY(-2px); border-color: var(--ink); }
+    .hero-meta { margin-top: 36px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-meta span {
+      font-family: var(--mono); font-size: 11px;
+      padding: 6px 12px; border-radius: 999px;
+      background: rgba(20,16,30,0.05); color: var(--ink-2);
+    }
+    .hero-scroll {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .hero-scroll .line {
+      width: 1px; height: 50px;
+      background: linear-gradient(to bottom, var(--ink-2), transparent);
+      animation: scroll-stretch 2s ease-in-out infinite;
+    }
+    @keyframes scroll-stretch {
+      0%,100% { transform: scaleY(1);   }
+      50%     { transform: scaleY(0.4); }
+    }
+
+    /* ── Section header ──────────────────────────────────────────────── */
+    .sect-head { max-width: 720px; margin-bottom: 60px; }
+    .sect-eyebrow {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--ink-2); margin-bottom: 18px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .sect-eyebrow::before {
+      content: ''; display: inline-block; width: 24px; height: 1px;
+      background: currentColor;
+    }
+    .sect-title {
+      font-family: var(--display); font-weight: 700;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.05; letter-spacing: -0.025em;
+      margin: 0; color: var(--ink);
+    }
+    .sect-title em { font-style: italic; font-weight: 300; color: var(--accent); }
+    .sect-sub {
+      margin-top: 18px; font-size: clamp(1rem, 1.2vw, 1.12rem);
+      color: var(--ink-2); max-width: 56ch; line-height: 1.6;
+    }
+
+    /* ── 2 · Projects ────────────────────────────────────────────────── */
+    .projects { padding: 100px 0 60px; }
+    .proj-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .proj {
+      position: relative;
+      display: grid; grid-template-columns: 1.4fr 1fr;
+      gap: 0;
+      background: var(--card-bg);
+      border: 1px solid var(--card-bd);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .proj:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .proj .mock {
+      position: relative; min-height: 360px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 28px;
+    }
+    .proj .body {
+      padding: 36px 40px;
+      display: flex; flex-direction: column; justify-content: center;
+      gap: 16px;
+    }
+    .proj .num {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em;
+      color: var(--ink-soft);
+    }
+    .proj .name {
+      font-family: var(--display); font-weight: 700;
+      font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+      letter-spacing: -0.015em; line-height: 1.1;
+      color: var(--ink);
+    }
+    .proj .tagline {
+      font-size: 0.98rem; color: var(--ink-2); line-height: 1.55;
+    }
+    .proj .stack { display: flex; flex-wrap: wrap; gap: 6px; }
+    .proj .stack span {
+      font-family: var(--mono); font-size: 10.5px;
+      padding: 4px 10px; border-radius: 999px;
+      color: var(--ink); background: rgba(20,16,30,0.06);
+    }
+    .proj .meta {
+      display: flex; gap: 16px; align-items: center;
+      font-family: var(--mono); font-size: 11px;
+      color: var(--ink-soft);
+      letter-spacing: 0.04em;
+    }
+    .proj .meta a {
+      color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor;
+    }
+    .proj .meta a:hover { color: var(--accent); }
+    @media (max-width: 760px) {
+      .proj { grid-template-columns: 1fr; }
+      .proj .mock { min-height: 220px; padding: 28px; }
+      .proj .body { padding: 24px 28px; }
+    }
+    .proj[data-i="0"] .mock { background: linear-gradient(135deg, rgba(125,211,168,0.30), rgba(125,211,168,0.10)); }
+    .proj[data-i="1"] .mock { background: linear-gradient(135deg, rgba(236,91,142,0.30), rgba(236,91,142,0.10)); }
+    .proj[data-i="2"] .mock { background: linear-gradient(135deg, rgba(91,141,239,0.30), rgba(91,141,239,0.10));  }
+    .proj[data-i="3"] .mock { background: linear-gradient(135deg, rgba(255,179,71,0.30),  rgba(255,179,71,0.10));  }
+
+    /* ── 3 · About / Stack ───────────────────────────────────────────── */
+    .about { padding: 100px 0 60px; }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: start;
+    }
+    .about-bio p {
+      color: var(--ink-2);
+      font-size: 1.06rem;
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+    .about-bio p strong { color: var(--ink); font-weight: 600; }
+    .about-skills {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .skill {
+      padding: 18px 18px 16px;
+      border: 1px solid var(--card-bd);
+      background: var(--card-bg);
+      border-radius: 14px;
+      display: flex; align-items: flex-start; gap: 12px;
+    }
+    .skill .ico {
+      flex-shrink: 0;
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: grid; place-items: center;
+      font-family: var(--mono); font-weight: 700; font-size: 14px;
+      color: #fff;
+    }
+    .skill h4 {
+      font-family: var(--body);
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+      color: var(--ink);
+    }
+    .skill p {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: var(--ink-soft);
+      letter-spacing: 0.03em;
+    }
+    .ico.laravel { background: linear-gradient(135deg, #ff4d4d, #c93838); }
+    .ico.codeigniter { background: linear-gradient(135deg, #ee6a36, #c45828); }
+    .ico.php { background: linear-gradient(135deg, #7b6cd9, #5b4db3); }
+    .ico.mysql { background: linear-gradient(135deg, #00758f, #00576f); }
+    .ico.git { background: linear-gradient(135deg, #f1502f, #d23e1c); }
+    .ico.vscode { background: linear-gradient(135deg, #3c99d4, #2980b9); }
+    .ico.ai { background: linear-gradient(135deg, #ffb347, #e08a2d); }
+    .ico.compose { background: linear-gradient(135deg, #65b349, #4f9736); }
+    @media (max-width: 760px) {
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-skills { grid-template-columns: 1fr; }
+    }
+
+    /* ── 4 · Deeper (optional scroll-world) ─────────────────────────── */
+    .deeper { padding: 100px 0 60px; }
+    .deeper-card {
+      position: relative;
+      padding: 56px clamp(1.5rem, 4vw, 3rem);
+      background: linear-gradient(135deg, #14101e 0%, #1f1830 100%);
+      border-radius: 22px;
+      overflow: hidden;
+      color: #f5ede0;
+      box-shadow: var(--shadow-lg);
+      text-decoration: none;
+      display: block;
+    }
+    .deeper-card .deeper-inner {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: center;
+    }
+    .deeper-card .deeper-right {
+      display: flex; align-items: center; justify-content: center;
+    }
+    .deeper-card .deeper-thumb {
+      width: 100%; max-width: 320px;
+      aspect-ratio: 16/10;
+      border-radius: 14px;
+      background:
+        linear-gradient(135deg, rgba(125,211,168,0.30) 0%, transparent 50%),
+        linear-gradient(225deg, rgba(236,91,142,0.30) 0%, transparent 50%),
+        linear-gradient(315deg, rgba(91,141,239,0.30) 0%, transparent 50%),
+        #1a1530;
+      border: 1px solid rgba(245,237,224,0.10);
+      display: grid; place-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .deeper-card .deeper-thumb::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(2px 2px at 20% 30%, rgba(245,237,224,0.4), transparent 50%),
+        radial-gradient(2px 2px at 70% 40%, rgba(245,237,224,0.3), transparent 50%),
+        radial-gradient(2px 2px at 40% 70%, rgba(245,237,224,0.4), transparent 50%),
+        radial-gradient(2px 2px at 85% 80%, rgba(245,237,224,0.3), transparent 50%);
+    }
+    .deeper-card .deeper-thumb-label {
+      font-family: var(--display); font-style: italic;
+      font-weight: 300; font-size: 1.5rem; color: #f5ede0;
+      text-align: center; line-height: 1.15;
+      position: relative; z-index: 1;
+    }
+    .deeper-card .deeper-thumb-label em { color: var(--accent-4); font-style: italic; }
+    @media (max-width: 760px) {
+      .deeper-card .deeper-inner { grid-template-columns: 1fr; }
+      .deeper-card .deeper-right { display: none; }
+    }
+    .deeper-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(40% 60% at 16% 30%, rgba(125,211,168,0.30), transparent 60%),
+        radial-gradient(40% 60% at 84% 70%, rgba(236,91,142,0.30), transparent 60%),
+        radial-gradient(60% 60% at 50% 100%, rgba(91,141,239,0.20), transparent 60%);
       pointer-events: none;
     }
-    .intro-eyebrow {
-      font-family: var(--sw-font-mono);
-      font-size: 12px; letter-spacing: 0.4em; text-transform: uppercase;
-      color: var(--sw-accent);
-      margin-bottom: 24px;
-      opacity: 0; animation: fadeUp .9s .4s ease forwards;
+    .deeper-card .deeper-inner { position: relative; z-index: 1; }
+    .deeper-card .deeper-eyebrow {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.32em; text-transform: uppercase;
+      color: #b894e0; margin-bottom: 14px;
     }
-    .intro-title {
-      font-family: var(--sw-font-display);
-      font-weight: 900;
-      font-size: clamp(2.6rem, 7vw, 5.8rem);
-      line-height: 1.0;
-      letter-spacing: -0.02em;
-      color: var(--sw-ink);
-      margin: 0;
-      max-width: 12ch;
-      opacity: 0; animation: fadeUp 1s .6s ease forwards;
+    .deeper-card h2 {
+      font-family: var(--display); font-weight: 700;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      line-height: 1.1; letter-spacing: -0.025em;
+      margin: 0 0 18px;
+      max-width: 20ch;
     }
-    .intro-title em {
+    .deeper-card h2 em { font-style: italic; font-weight: 300; color: #ec5b8e; }
+    .deeper-card p {
+      font-size: 1.05rem; line-height: 1.6;
+      color: rgba(245,237,224,0.78);
+      max-width: 50ch; margin-bottom: 28px;
+    }
+    .deeper-card .deeper-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .deeper-card .deeper-actions a {
+      font-family: var(--body); font-weight: 600; font-size: 0.92rem;
+      padding: 13px 22px; border-radius: 999px;
+      text-decoration: none;
+      transition: transform .2s ease, background .2s, color .2s;
+    }
+    .deeper-card .deeper-actions .a-on { background: #f5ede0; color: #14101e; }
+    .deeper-card .deeper-actions .a-on:hover { transform: translateY(-2px); background: var(--accent); color: #fff; }
+
+    /* ── 5 · Contact ─────────────────────────────────────────────────── */
+    .contact { padding: 100px 0 80px; text-align: center; }
+    .contact .ct {
+      font-family: var(--display); font-weight: 700;
+      font-size: clamp(2.4rem, 6.4vw, 5rem);
+      line-height: 1.02; letter-spacing: -0.03em;
+      margin: 0 auto;
+      max-width: 16ch;
+      color: var(--ink);
+    }
+    .contact .ct em { font-style: italic; font-weight: 300; color: var(--accent); }
+    .contact .sub {
+      margin: 28px auto 0;
+      max-width: 50ch;
+      font-size: 1.06rem;
+      color: var(--ink-2);
+    }
+    .contact .mail-link {
+      display: inline-block;
+      margin-top: 40px;
+      font-family: var(--display);
       font-style: italic;
       font-weight: 300;
-      color: var(--sw-accent);
-    }
-    .intro-sub {
-      margin-top: 28px;
-      font-family: var(--sw-font-body);
-      font-size: clamp(0.98rem, 1.4vw, 1.2rem);
-      color: var(--sw-ink-soft);
-      max-width: 48ch;
-      line-height: 1.55;
-      opacity: 0; animation: fadeUp 1s .9s ease forwards;
-    }
-    .intro-meta {
-      margin-top: 40px;
-      display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
-      opacity: 0; animation: fadeUp 1s 1.2s ease forwards;
-    }
-    .intro-meta span {
-      font-family: var(--sw-font-mono);
-      font-size: 11px; font-weight: 500;
-      padding: 6px 12px; border-radius: 999px;
-      background: rgba(255,255,255,0.6);
-      border: 1px solid rgba(138,123,181,0.25);
-      color: var(--sw-ink);
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0);    }
-    }
-
-    /* scroll cue (separate from engine's hint) */
-    .intro-cue {
-      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 10px;
-      font-family: var(--sw-font-mono); font-size: 11px;
-      letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--sw-ink-soft);
-      opacity: 0; animation: fadeUp 1s 1.5s ease forwards;
-    }
-    .intro-cue::after {
-      content: '';
-      width: 1px; height: 50px;
-      background: linear-gradient(to bottom, var(--sw-accent), transparent);
-      animation: cue-stretch 1.8s ease-in-out infinite;
-    }
-    @keyframes cue-stretch {
-      0%, 100% { transform: scaleY(1);   transform-origin: top;    }
-      50%      { transform: scaleY(0.4); transform-origin: bottom; }
-    }
-
-    /* ── The scroll-world mount point ────────────────────────────────── */
-    #world {
-      position: relative;
-      z-index: 10;
-      /* offset top so the intro can fully breathe */
-      margin-top: -100vh;   /* engine still fixes everything, this just stacks under intro */
-    }
-
-    /* ── Stronger universal scrim — sits over any coloured background so
-          dark serif headlines read on every scene without conflict. ──────── */
-    .sw-root .sw-copylayer::before {
-      background:
-        linear-gradient(95deg,
-          rgba(20, 16, 30, 0.92) 0%,
-          rgba(20, 16, 30, 0.80) 20%,
-          rgba(20, 16, 30, 0.55) 44%,
-          rgba(20, 16, 30, 0.22) 70%,
-          transparent 100%) !important;
-      width: min(78vw, 1000px) !important;
-      backdrop-filter: blur(3px);
-      -webkit-backdrop-filter: blur(3px);
-    }
-    .sw-root .sw-copy {
-      color: #f5ede0;
-    }
-    .sw-root .sw-copy__num {
-      color: rgba(245, 237, 224, 0.6) !important;
-    }
-    .sw-root .sw-copy__title {
-      text-shadow: 0 4px 28px rgba(0,0,0,0.55) !important;
-    }
-    .sw-root .sw-copy__body {
-      text-shadow: 0 2px 16px rgba(0,0,0,0.55) !important;
-    }
-    .sw-root .sw-copy__tags li {
-      background: rgba(255,255,255,0.10) !important;
-      border-color: rgba(255,255,255,0.18) !important;
-      color: #f5ede0 !important;
-    }
-
-    /* ── Refined engine chrome (overrides injected engine CSS) ───────── */
-    .sw-root .sw-copy__title {
-      font-family: var(--sw-font-display);
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      line-height: 1.0;
-      color: #f5ede0 !important;
-    }
-    .sw-root .sw-copy__eyebrow {
-      font-family: var(--sw-font-mono);
-      letter-spacing: 0.25em;
-      font-weight: 500;
-      color: var(--sw-accent) !important;
-    }
-    .sw-root .sw-copy__body {
-      font-family: var(--sw-font-body);
-      letter-spacing: 0;
-      color: rgba(245, 237, 224, 0.88) !important;
-    }
-    .sw-root .sw-copy__tags li {
-      font-family: var(--sw-font-mono);
-      letter-spacing: 0.05em;
-    }
-    .sw-root .sw-btn {
-      font-family: var(--sw-font-body);
-      letter-spacing: 0.01em;
-    }
-    .sw-root .sw-brand__name {
-      font-family: var(--sw-font-display);
-      font-weight: 700;
-      letter-spacing: -0.01em;
-    }
-    .sw-root .sw-topcta {
-      font-family: var(--sw-font-body);
-      letter-spacing: 0.02em;
-    }
-    .sw-root .sw-route__label,
-    .sw-root .sw-nav__item,
-    .sw-root .sw-hint {
-      font-family: var(--sw-font-mono);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      font-size: 0.7rem;
-    }
-    .sw-root .sw-copy__num {
-      font-family: var(--sw-font-mono);
-      letter-spacing: 0.18em;
-      font-weight: 500;
-    }
-
-    /* ── Footer (after the scroll-world ends) ───────────────────────── */
-    footer.site-footer {
-      position: relative; z-index: 12;
-      background: var(--sw-bg);
-      padding: 80px 24px 60px;
-      text-align: center;
-      border-top: 1px solid rgba(138,123,181,0.18);
-    }
-    footer.site-footer .cta-line {
-      font-family: var(--sw-font-display);
-      font-weight: 700;
-      font-size: clamp(1.6rem, 3.4vw, 2.6rem);
-      line-height: 1.1;
-      max-width: 16ch; margin: 0 auto 28px;
-      color: var(--sw-ink);
-      letter-spacing: -0.02em;
-    }
-    footer.site-footer .cta-line em {
-      font-style: italic; color: var(--sw-accent); font-weight: 400;
-    }
-    footer.site-footer .links {
-      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
-      margin-bottom: 32px;
-    }
-    footer.site-footer .links a {
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      color: var(--accent);
       text-decoration: none;
-      font-family: var(--sw-font-body);
-      font-weight: 600; font-size: 0.95rem;
-      padding: 13px 24px; border-radius: 999px;
-      color: var(--sw-ink);
-      border: 1.5px solid rgba(36,29,43,0.25);
-      transition: transform .2s ease, background .2s ease;
+      border-bottom: 1.5px solid currentColor;
+      padding-bottom: 2px;
+      transition: transform .2s ease;
     }
-    footer.site-footer .links a:hover {
-      transform: translateY(-2px);
-      background: rgba(138,123,181,0.10);
+    .contact .mail-link:hover { transform: translateY(-2px); }
+    .contact .socials {
+      margin-top: 56px;
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
     }
-    footer.site-footer .links a.primary {
-      background: var(--sw-ink);
-      color: var(--sw-bg);
-      border-color: var(--sw-ink);
-    }
-    footer.site-footer .links a.primary:hover { background: var(--sw-accent); border-color: var(--sw-accent); }
-
-    footer.site-footer .meta {
-      font-family: var(--sw-font-mono);
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--sw-ink-soft);
-      opacity: 0.85;
-    }
-    footer.site-footer .meta a {
-      color: inherit;
+    .contact .socials a {
+      font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
+      padding: 10px 18px; border-radius: 999px;
+      color: var(--ink-2); background: var(--card-bg);
+      border: 1px solid var(--card-bd);
       text-decoration: none;
-      border-bottom: 1px dotted currentColor;
+      transition: transform .2s, background .2s, color .2s, border-color .2s;
     }
+    .contact .socials a:hover { transform: translateY(-2px); background: var(--ink); color: var(--bg); border-color: var(--ink); }
 
-    /* ── Scroll-world chrome tweaks: a thinner scrollbar ─────────────── */
-    .sw-root .sw-scrollbar { height: 2px; }
+    /* ── Footer ──────────────────────────────────────────────────────── */
+    footer.site-foot {
+      padding: 36px 0 48px;
+      border-top: 1px solid var(--line);
+      font-family: var(--mono); font-size: 11px;
+      color: var(--ink-soft);
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    footer.site-foot .foot-inner {
+      display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    footer.site-foot a { color: inherit; }
+
+    /* ── Scroll-fade reveal ──────────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.in  { opacity: 1; transform: none; }
+    .reveal.delay-1 { transition-delay: .12s; }
+    .reveal.delay-2 { transition-delay: .24s; }
+    .reveal.delay-3 { transition-delay: .36s; }
+
+    @media (max-width: 720px) {
+      .topnav nav { display: none; }
+      .topnav-inner { height: 56px; }
+      .topnav .brand { font-size: 1rem; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- ── Loading screen (kicked off JS-side) ──────────────────────── -->
   <div id="loader" aria-hidden="true">
     <div class="loader-mark"></div>
-    <div class="loader-text">preparing the world…</div>
+    <div class="loader-text">preparing the page…</div>
   </div>
 
-  <!-- ── Top-of-page intro (overlays before scroll-world takes over) ── -->
-  <section class="intro" id="top">
-    <p class="intro-eyebrow">PORTFOLIO · 2026</p>
-    <h1 class="intro-title">
-      I build web apps<br/>that <em>don’t suck</em>.
-    </h1>
-    <p class="intro-sub">
-      Gilang, a web developer shipping in Laravel &amp; CodeIgniter — and getting
-      a little too excited about gamification. Scroll to fly through five scenes.
-    </p>
-    <div class="intro-meta">
-      <span>Indonesia</span>
-      <span>PHP · Laravel · CodeIgniter</span>
-      <span>Open to work</span>
+  <header class="topnav" id="topnav">
+    <div class="wrap topnav-inner">
+      <a class="brand" href="#top">
+        <span class="brand-mark"></span>
+        <span>Gilang</span>
+      </a>
+      <nav aria-label="primary">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#deeper">Deeper</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="cta" href="mailto:gilangramdhani708@gmail.com">Hire me</a>
     </div>
-    <div class="intro-cue">scroll</div>
+  </header>
+
+  <section class="hero wrap" id="top">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <span class="hero-eyebrow reveal">
+          <span class="pulse"></span>
+          Open to work · Indonesia · GMT+7
+        </span>
+        <h1 class="hero-title reveal delay-1">
+          I build web apps<br/>
+          that <em>don&rsquo;t&nbsp;suck</em>.
+        </h1>
+        <p class="hero-sub reveal delay-2">
+          Hi, I&rsquo;m <strong>Gilang</strong> &mdash; a web developer who ships in Laravel and CodeIgniter.
+          I care about clean architecture, fast interfaces, and the kind of small details
+          that make a product feel finished.
+        </p>
+        <div class="hero-actions reveal delay-3">
+          <a class="primary" href="#work">See my work</a>
+          <a class="secondary" href="#contact">Get in touch &rarr;</a>
+        </div>
+        <div class="hero-meta reveal delay-3">
+          <span>PHP 8.3</span>
+          <span>Laravel 11</span>
+          <span>CodeIgniter 4</span>
+          <span>MySQL</span>
+          <span>Indonesia</span>
+        </div>
+      </div>
+
+      <aside class="hero-right reveal delay-2">
+        <div class="hero-card">
+          <div class="h">
+            <span class="live"><span class="dot"></span> Live status</span>
+            <span>WIB &middot; 01:33</span>
+          </div>
+          <div class="now-title">Currently building</div>
+          <div class="now-sub">KlikKode v2 &middot; gamified-quiz CI4 demo</div>
+
+          <div class="stats">
+            <div class="stat"><span class="n">4</span><span class="l">Public repos</span></div>
+            <div class="stat"><span class="n">2</span><span class="l">Frameworks</span></div>
+            <div class="stat"><span class="n">31d</span><span class="l">Streak</span></div>
+          </div>
+
+          <div class="feed">
+            <div class="row"><span class="ico k">K</span><span><strong>KlikKode</strong> &middot; pushed CI4 routes</span><span class="ago">2h</span></div>
+            <div class="row"><span class="ico c">C</span><span><strong>codeigniter-app</strong> &middot; scaffold</span><span class="ago">5h</span></div>
+            <div class="row"><span class="ico l">L</span><span><strong>KlinikApp</strong> &middot; patient CRUD</span><span class="ago">1d</span></div>
+            <div class="row"><span class="ico t">T</span><span><strong>tugas-crud-laravel</strong> &middot; sealed</span><span class="ago">30d</span></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <div class="hero-scroll">
+      <span>scroll</span>
+      <span class="line"></span>
+    </div>
   </section>
 
-  <!-- ── Scroll-world mount ───────────────────────────────────────── -->
-  <div id="world"></div>
-
-  <!-- ── Footer ───────────────────────────────────────────────────── -->
-  <footer class="site-footer">
-    <p class="cta-line">Got an idea? <em>Let’s build it.</em></p>
-    <div class="links">
-      <a class="primary" href="mailto:gilangramdhani708@gmail.com">Email me</a>
-      <a href="https://github.com/gilangg24" target="_blank" rel="noopener">GitHub →</a>
-      <a href="https://github.com/gilangg24/KlnikApp" target="_blank" rel="noopener">KlinikApp →</a>
-      <a href="https://github.com/gilangg24/klikkode" target="_blank" rel="noopener">KlikKode →</a>
+  <section class="projects wrap" id="work">
+    <div class="sect-head reveal">
+      <p class="sect-eyebrow">Selected work &middot; 2026</p>
+      <h2 class="sect-title">Real projects, <em>real&nbsp;code</em>.</h2>
+      <p class="sect-sub">
+        Four repos shipped this month. Each one is a learning arc &mdash;
+        real assignments, side projects, and the long-running
+        question of &ldquo;what can gamification do to a CRUD app?&rdquo;
+      </p>
     </div>
-    <p class="meta">
-      Built on
-      <a href="https://github.com/oso95/scroll-world" target="_blank" rel="noopener">oso95/scroll-world</a>
-      · MIT
-      · &copy; 2026 Gilang
-    </p>
+
+    <div class="proj-grid">
+
+      <article class="proj reveal" data-i="0" style="grid-column: 1 / -1;">
+        <div class="mock">
+          <div class="mock-dash">
+            <div class="dash-head">
+              <span></span><span></span><span></span>
+              <span class="dash-title">KlinikApp &middot; dashboard</span>
+            </div>
+            <div class="dash-body">
+              <div class="dash-stat"><span class="lbl">Pasien hari ini</span><span class="num">14</span></div>
+              <div class="dash-stat"><span class="lbl">Antrian</span><span class="num">7</span></div>
+              <div class="dash-stat"><span class="lbl">Selesai</span><span class="num">42</span></div>
+              <div class="dash-stat"><span class="lbl">Dokter aktif</span><span class="num">3</span></div>
+              <div class="dash-chart">
+                <span></span><span style="height:36%"></span><span style="height:62%"></span>
+                <span style="height:48%"></span><span style="height:78%"></span>
+                <span style="height:54%"></span><span style="height:90%"></span>
+                <span style="height:70%"></span><span style="height:80%"></span>
+              </div>
+              <div class="dash-row"><span>Rina &middot; 09:00</span><span>Dr. Anisa</span><span class="st ok">selesai</span></div>
+              <div class="dash-row"><span>Budi &middot; 09:30</span><span>Dr. Anisa</span><span class="st ok">selesai</span></div>
+              <div class="dash-row"><span>Sari &middot; 10:00</span><span>Dr. Hadi</span><span class="st live">live</span></div>
+              <div class="dash-row"><span>Wati &middot; 10:30</span><span>Dr. Hadi</span><span class="st wait">antri</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <span class="num">01 &middot; Featured</span>
+          <h3 class="name">A clinic app that feels calm.</h3>
+          <p class="tagline">
+            Laravel 11 &middot; MySQL &middot; appointments, patient records, dashboards.
+            Built end-to-end with migrations, seeders, and a clean CRUD baseline.
+          </p>
+          <div class="stack">
+            <span>Laravel 11</span><span>Blade</span><span>Tailwind</span><span>MySQL</span><span>Migrations</span>
+          </div>
+          <div class="meta">
+            <a href="https://github.com/gilangg24/KlnikApp" target="_blank" rel="noopener">github.com/gilangg24/KlnikApp &nearr;</a>
+            <span>&middot; Blade &middot; 2026</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="proj reveal delay-1" data-i="1">
+        <div class="mock">
+          <div class="mock-podium">
+            <div class="podium"><div class="block b2"><span>2</span></div><div class="stand s2"></div></div>
+            <div class="podium winner"><div class="block b1"><span>1</span></div><div class="stand s1"></div><div class="trophy">&star;</div></div>
+            <div class="podium"><div class="block b3"><span>3</span></div><div class="stand s3"></div></div>
+          </div>
+        </div>
+        <div class="body">
+          <span class="num">02 &middot; Featured</span>
+          <h3 class="name">A quiz that turns learning into XP.</h3>
+          <p class="tagline">
+            CodeIgniter 4 &middot; gamified quiz app with XP, leaderboards, and
+            topic paths. The kind of project that makes you forget you&rsquo;re studying.
+          </p>
+          <div class="stack">
+            <span>CodeIgniter 4</span><span>PHP 8.3</span><span>MySQL</span><span>XP &middot; Levels</span>
+          </div>
+          <div class="meta">
+            <a href="https://github.com/gilangg24/klikkode" target="_blank" rel="noopener">github.com/gilangg24/klikkode &nearr;</a>
+            <span>&middot; Blade &middot; 2026</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="proj reveal delay-2" data-i="2">
+        <div class="mock">
+          <div class="mock-terminal">
+            <span class="term-prompt">$</span> composer create-project codeigniter4/appstarter<br/>
+            <span class="term-info">&gt; installing v4.7.0&nbsp;&nbsp;&nbsp;... ok</span><br/>
+            <span class="term-prompt">$</span> php spark serve --port 8080<br/>
+            <span class="term-info">&gt; CodeIgniter &middot; localhost:8080&nbsp;&nbsp;... ready</span><br/>
+            <span class="term-prompt">$</span> <span class="cursor">&nbsp;</span>
+          </div>
+        </div>
+        <div class="body">
+          <span class="num">03 &middot; Scaffolding</span>
+          <h3 class="name">A clean CI4 starter, ready to build on.</h3>
+          <p class="tagline">
+            Fresh CodeIgniter 4 appstarter scaffold with the standard
+            directory layout, ready for the next feature. Hand-picked &mdash;
+            not auto-generated.
+          </p>
+          <div class="stack">
+            <span>CodeIgniter 4</span><span>Composer</span><span>PHP 8.2+</span><span>MVC</span>
+          </div>
+          <div class="meta">
+            <a href="https://github.com/gilangg24/codeigniter-app" target="_blank" rel="noopener">github.com/gilangg24/codeigniter-app &nearr;</a>
+            <span>&middot; PHP &middot; 2026</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="proj reveal delay-3" data-i="3">
+        <div class="mock">
+          <div class="mock-table">
+            <div class="tb-head"><span>#</span><span>Kategori</span><span>Produk</span><span>&nbsp;</span></div>
+            <div class="tb-row"><span>01</span><span>Minuman</span><span>Kopi &middot; Teh</span><span class="ok">&check;</span></div>
+            <div class="tb-row"><span>02</span><span>Makanan</span><span>Nasi &middot; Snack</span><span class="ok">&check;</span></div>
+            <div class="tb-row"><span>03</span><span>Elektronik</span><span>Laptop &middot; HP</span><span class="ok">&check;</span></div>
+            <div class="tb-row"><span>04</span><span>ATK</span><span>Pulpen &middot; Kertas</span><span class="ok">&check;</span></div>
+            <div class="tb-row"><span>05</span><span>Lainnya</span><span>Misc</span><span class="ok">&check;</span></div>
+          </div>
+        </div>
+        <div class="body">
+          <span class="num">04 &middot; Coursework</span>
+          <h3 class="name">Tugas CRUD &middot; Laravel edition.</h3>
+          <p class="tagline">
+            A clean Laravel CRUD module for the Kategori + Produk
+            tables. Compact, correct, and properly validated &mdash;
+            the kind of baseline most apps skip.
+          </p>
+          <div class="stack">
+            <span>PHP</span><span>Laravel</span><span>MySQL</span><span>Validation</span>
+          </div>
+          <div class="meta">
+            <a href="https://github.com/gilangg24/tugas-crud-laravel" target="_blank" rel="noopener">github.com/gilangg24/tugas-crud-laravel &nearr;</a>
+            <span>&middot; PHP &middot; 2026</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <style>
+    /* ── Project mockup variants ────────────────────────────────────── */
+    .mock-window, .mock-dash, .mock-podium, .mock-terminal, .mock-table {
+      width: 100%; max-width: 420px;
+      background: #fff; border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      transform: rotate(-1.2deg);
+      transition: transform .4s ease;
+    }
+    .proj:hover .mock-window,
+    .proj:hover .mock-dash,
+    .proj:hover .mock-podium,
+    .proj:hover .mock-terminal,
+    .proj:hover .mock-table { transform: rotate(0) scale(1.02); }
+
+    /* KlinikApp dashboard */
+    .mock-dash { padding: 0; max-width: 420px; }
+    .dash-head {
+      display: flex; gap: 6px; align-items: center;
+      padding: 10px 12px;
+      background: #f4ede0;
+      border-bottom: 1px solid rgba(20,16,30,0.06);
+    }
+    .dash-head > span:not(.dash-title) {
+      width: 9px; height: 9px; border-radius: 50%; background: #d1c8bb;
+    }
+    .dash-head > span:nth-child(1) { background: #ff6058; }
+    .dash-head > span:nth-child(2) { background: #ffbd2e; }
+    .dash-head > span:nth-child(3) { background: #28c941; }
+    .dash-title {
+      margin-left: 8px;
+      font-family: var(--mono); font-size: 10px;
+      color: var(--ink-2); letter-spacing: 0.04em;
+    }
+    .dash-body { padding: 14px 14px 18px; }
+    .dash-stat {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 6px 0;
+      border-bottom: 1px dashed rgba(20,16,30,0.08);
+      font-family: var(--mono); font-size: 10.5px;
+    }
+    .dash-stat:nth-child(-n+4) {
+      display: inline-block; width: 47%; margin: 2px 1%;
+      border-bottom: none;
+      padding: 8px 10px;
+      background: rgba(125,211,168,0.10);
+      border-radius: 8px;
+      vertical-align: top;
+    }
+    .dash-stat:nth-child(-n+4) .lbl {
+      display: block; color: var(--ink-soft); font-size: 9px;
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px;
+    }
+    .dash-stat:nth-child(-n+4) .num {
+      display: block; font-family: var(--display); font-size: 1.4rem;
+      font-weight: 700; color: var(--ink); line-height: 1;
+    }
+    .dash-chart {
+      display: flex; align-items: flex-end; gap: 4px;
+      height: 60px; margin: 14px 0 10px;
+      padding: 6px 0;
+      border-top: 1px dashed rgba(20,16,30,0.08);
+      border-bottom: 1px dashed rgba(20,16,30,0.08);
+    }
+    .dash-chart span {
+      flex: 1;
+      background: linear-gradient(to top, var(--accent-3), color-mix(in srgb, var(--accent-3) 60%, white));
+      border-radius: 3px 3px 0 0;
+      min-height: 8px;
+    }
+    .dash-chart span:first-child { background: var(--line); }
+    .dash-row {
+      display: grid; grid-template-columns: 1.3fr 1fr auto;
+      gap: 8px; align-items: center;
+      padding: 6px 0;
+      font-family: var(--mono); font-size: 10.5px;
+      color: var(--ink-2);
+      border-bottom: 1px solid rgba(20,16,30,0.04);
+    }
+    .dash-row:last-child { border-bottom: none; }
+    .dash-row .st {
+      padding: 2px 8px; border-radius: 99px; font-size: 9px;
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .dash-row .st.ok   { background: rgba(125,211,168,0.20); color: #2a6b4e; }
+    .dash-row .st.live { background: rgba(236,91,142,0.20); color: #99345e; }
+    .dash-row .st.wait { background: rgba(255,179,71,0.20); color: #8a5a1a; }
+
+    /* KlikKode podium */
+    .mock-podium {
+      padding: 22px 22px 18px;
+      background: linear-gradient(180deg, #fff, #f7e9ef);
+      height: 280px;
+      display: flex; align-items: flex-end; justify-content: center; gap: 8px;
+    }
+    .podium {
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+    }
+    .podium.winner { transform: translateY(-10px); }
+    .podium .block {
+      width: 70px; height: 56px; border-radius: 8px 8px 0 0;
+      display: grid; place-items: center;
+      font-family: var(--display); font-size: 1.6rem; font-weight: 700;
+      color: #fff;
+    }
+    .podium .b1 { background: linear-gradient(180deg, #ffc966, #c99210); width: 80px; height: 72px; font-size: 1.9rem; }
+    .podium .b2 { background: linear-gradient(180deg, #c4a4ff, #7e6db5); }
+    .podium .b3 { background: linear-gradient(180deg, #d4a87b, #8b5e30); width: 60px; height: 48px; font-size: 1.3rem; }
+    .podium .stand {
+      width: 80px;
+      background: rgba(20,16,30,0.06);
+      border-radius: 4px;
+    }
+    .podium .s1 { height: 26px; }
+    .podium .s2 { height: 36px; }
+    .podium .s3 { height: 32px; width: 60px; }
+    .podium .trophy {
+      font-size: 28px;
+      filter: drop-shadow(0 4px 8px rgba(201,146,16,0.4));
+      margin-bottom: -6px;
+    }
+
+    /* codeigniter-app terminal */
+    .mock-terminal {
+      padding: 18px 18px;
+      background: #14101e;
+      color: #f5ede0;
+      font-family: var(--mono); font-size: 12px; line-height: 1.6;
+    }
+    .mock-terminal .term-prompt { color: #ffb347; }
+    .mock-terminal .term-info   { color: #7dd3a8; }
+    .mock-terminal .cursor {
+      display: inline-block;
+      width: 8px; height: 14px;
+      background: #f5ede0;
+      animation: blink 1s steps(2, jump-none) infinite;
+      vertical-align: middle;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* Tugas CRUD table */
+    .mock-table {
+      padding: 0;
+    }
+    .tb-head, .tb-row {
+      display: grid; grid-template-columns: 30px 1fr 1.2fr 24px;
+      gap: 8px; align-items: center;
+      padding: 9px 14px;
+      font-family: var(--mono); font-size: 11px;
+      color: var(--ink-2);
+    }
+    .tb-head {
+      background: #f4ede0;
+      color: var(--ink-soft);
+      font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase;
+      border-bottom: 1px solid rgba(20,16,30,0.06);
+    }
+    .tb-row {
+      border-bottom: 1px solid rgba(20,16,30,0.04);
+    }
+    .tb-row:nth-child(odd) { background: rgba(20,16,30,0.02); }
+    .tb-row:last-child { border-bottom: none; }
+    .tb-row .ok {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: rgba(125,211,168,0.30);
+      color: #2a6b4e;
+      display: grid; place-items: center;
+      font-size: 12px;
+    }
+  </style>
+
+  <section class="about wrap" id="about">
+    <div class="sect-head reveal">
+      <p class="sect-eyebrow">About &middot; Stack</p>
+      <h2 class="sect-title">A small toolbox, <em>used&nbsp;well</em>.</h2>
+    </div>
+    <div class="about-grid">
+
+      <div class="about-bio reveal delay-1">
+        <p>
+          I&rsquo;m a web developer based in Indonesia, currently in the middle of
+          shipping <strong>four public repos in one month</strong> and getting
+          properly stuck into the part of the job that isn&rsquo;t coding &mdash;
+          naming things, planning migrations, deciding what <em>not</em> to build.
+        </p>
+        <p>
+          My stack is PHP &mdash; Laravel for projects where the package
+          ecosystem pays for itself, CodeIgniter 4 when I want every line
+          of the request to be readable. I&rsquo;m exploring AI-assisted
+          workflows this year (yes, this site is scaffolded by one),
+          with the goal of staying curious without losing the craft.
+        </p>
+        <p>
+          Outside the keyboard: coffee, late nights reading changelogs,
+          and a stubborn belief that gamification can fix almost any UI.
+        </p>
+      </div>
+
+      <div class="about-skills">
+        <div class="skill reveal"><span class="ico laravel">L</span><div><h4>Laravel 11</h4><p>v11 &middot; migrations &middot; blade</p></div></div>
+        <div class="skill reveal delay-1"><span class="ico codeigniter">C</span><div><h4>CodeIgniter 4</h4><p>v4.7 &middot; spark &middot; mvc</p></div></div>
+        <div class="skill reveal delay-2"><span class="ico php">P</span><div><h4>PHP</h4><p>v8.3 &middot; typed</p></div></div>
+        <div class="skill reveal delay-3"><span class="ico mysql">M</span><div><h4>MySQL</h4><p>v8 &middot; schema &middot; idx</p></div></div>
+        <div class="skill reveal delay-1"><span class="ico git">G</span><div><h4>Git &middot; GitHub</h4><p>rebase &middot; ci &middot; pages</p></div></div>
+        <div class="skill reveal delay-2"><span class="ico vscode">V</span><div><h4>VS Code</h4><p>ts &middot; js &middot; php</p></div></div>
+        <div class="skill reveal delay-3"><span class="ico compose">Co</span><div><h4>Composer</h4><p>v2 &middot; autoload</p></div></div>
+        <div class="skill reveal"><span class="ico ai">Ai</span><div><h4>AI-assisted</h4><p>learning &middot; shipping</p></div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="deeper wrap" id="deeper">
+    <div class="sect-head reveal">
+      <p class="sect-eyebrow">Going deeper</p>
+      <h2 class="sect-title">For the curious, <em>a&nbsp;slow&nbsp;look</em>.</h2>
+      <p class="sect-sub">
+        Want to see how this site was actually built &mdash; including the
+        scroll-through 3D world scaffold? The deeper view continues into a
+        five-scene cinematic where the assets are placeholder stills
+        you can regenerate with Higgsfield or the Codex CLI.
+      </p>
+    </div>
+    <a class="deeper-card reveal" href="#world">
+      <div class="deeper-inner">
+        <div>
+          <div class="deeper-eyebrow">Deeper &middot; 5 scenes &middot; scroll-world</div>
+          <h2>Fly through<br/>the worlds I&nbsp;<em>build</em>.</h2>
+          <p>
+            Scroll to traverse five scenes &mdash; workshop, armory, clinic,
+            trophy hall, open door. When the project is finished this becomes
+            the most expressive part of the site.
+          </p>
+          <div class="deeper-actions">
+            <span class="a-on">Enter the deeper view &rarr;</span>
+          </div>
+        </div>
+        <div class="deeper-right">
+          <div class="deeper-thumb">
+            <span class="deeper-thumb-label">fly through<br/><em>5 little worlds</em></span>
+          </div>
+        </div>
+      </div>
+    </a>
+  </section>
+
+  <section class="contact wrap" id="contact">
+    <div class="sect-head reveal" style="margin: 0 auto 32px;">
+      <p class="sect-eyebrow" style="justify-content: center;">Contact</p>
+      <h2 class="ct">Got an idea? <em>Let&rsquo;s build it.</em></h2>
+      <p class="sub">
+        Open for freelance and full-time roles. Send a few lines about
+        what you&rsquo;re working on, and I&rsquo;ll get back to you within a day.
+      </p>
+    </div>
+    <a class="mail-link reveal" href="mailto:gilangramdhani708@gmail.com">
+      gilangramdhani708@gmail.com &rarr;
+    </a>
+    <div class="socials reveal">
+      <a href="https://github.com/gilangg24" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/gilangg24/KlnikApp" target="_blank" rel="noopener">KlinikApp &nearr;</a>
+      <a href="https://github.com/gilangg24/klikkode" target="_blank" rel="noopener">KlikKode &nearr;</a>
+      <a href="https://github.com/gilangg24/codeigniter-app" target="_blank" rel="noopener">codeigniter-app &nearr;</a>
+      <a href="https://github.com/gilangg24/tugas-crud-laravel" target="_blank" rel="noopener">tugas-crud-laravel &nearr;</a>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <div class="wrap foot-inner">
+      <span>&copy; 2026 Gilang &middot; Built in Indonesia</span>
+      <span>
+        Engine by <a href="https://github.com/oso95/scroll-world" target="_blank" rel="noopener">oso95/scroll-world</a>
+        &middot; MIT
+      </span>
+    </div>
   </footer>
 
-  <script src="js/scrub-engine.js"></script>
   <script>
-    // ── Loader fade-out (waits for fonts to be ready so first paint is correct) ──
     (function () {
-      function hide() {
-        const el = document.getElementById('loader');
-        if (el) el.classList.add('hidden');
+      function hide() { var el = document.getElementById('loader'); if (el) el.classList.add('hidden'); }
+      function ready() {
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(function () { setTimeout(hide, 240); });
+        } else {
+          window.addEventListener('load', function () { setTimeout(hide, 240); });
+        }
       }
-      if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(function () { setTimeout(hide, 220); });
-      } else {
-        window.addEventListener('load', function () { setTimeout(hide, 220); });
-      }
+      ready();
     })();
 
-    // ── The 5-scene scroll-through world ────────────────────────────
-    mountScrollWorld(document.getElementById('world'), {
-      brand:  { name: 'Gilang',     href: '#top' },
-      cta:    { label: 'Hire me →', href: '#contact' },
-      hint:   'scroll to fly in',
-      nav:    true,
-      atmosphere: true,
-      diveScroll: 1.4,
-      connScroll: 0.9,
+    (function () {
+      var nav = document.getElementById('topnav');
+      function onScroll() {
+        if (window.scrollY > 12) nav.classList.add('scrolled');
+        else                     nav.classList.remove('scrolled');
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
 
-      sections: [
-        {
-          id:      'hero',
-          label:   'Workshop',
-          still:   'assets/scenes/1-hero.svg',
-          clip:    'assets/vid/1-hero.mp4',
-          accent:  '#8a7bb5',
-          scroll:  1.6,
-          linger:  0.45,
-          eyebrow: 'Hi, I’m',
-          title:   'I build web apps that don’t suck.',
-          body:    'I’m Gilang — a web developer who ships in Laravel & CodeIgniter, and gets a little too excited about gamification.',
-          tags:    ['Indonesia', 'PHP · Laravel · CodeIgniter', 'Open to work'],
-        },
-        {
-          id:      'about',
-          label:   'About',
-          still:   'assets/scenes/2-about.svg',
-          clip:    'assets/vid/2-about.mp4',
-          accent:  '#ffb347',
-          scroll:  1.3,
-          linger:  0.40,
-          eyebrow: 'About',
-          title:   'Stack, story, and what I’m learning next.',
-          body:    'Four repos shipped this month, a Laravel clinic in production, and a CodeIgniter sidekick on standby. Currently exploring AI tooling.',
-          tags:    ['Laravel 11', 'CodeIgniter 4', 'PHP 8.3', 'MySQL', 'Git · GitHub', 'AI-assisted workflows'],
-        },
-        {
-          id:      'klinik',
-          label:   'KlinikApp',
-          still:   'assets/scenes/3-klinik.svg',
-          clip:    'assets/vid/3-klinik.mp4',
-          accent:  '#7dd3a8',
-          scroll:  1.5,
-          linger:  0.45,
-          eyebrow: 'Project 01',
-          title:   'A clinic app that feels calm.',
-          body:    'Laravel 11 · MySQL · appointments, patient records, dashboards. Built end-to-end with migrations, seeders, and a clean CRUD baseline.',
-          tags:    ['github.com/gilangg24/KlnikApp', 'Laravel 11', 'Blade · Tailwind'],
-        },
-        {
-          id:      'klikkode',
-          label:   'KlikKode',
-          still:   'assets/scenes/4-klikkode.svg',
-          clip:    'assets/vid/4-klikkode.mp4',
-          accent:  '#ec5b8e',
-          scroll:  1.5,
-          linger:  0.45,
-          eyebrow: 'Project 02',
-          title:   'A quiz that turns learning into XP.',
-          body:    'CodeIgniter 4 · gamified quiz app — XP, leaderboards, topic paths. The kind of project that makes you forget you’re studying.',
-          tags:    ['github.com/gilangg24/klikkode', 'CodeIgniter 4', 'Gamification'],
-        },
-        {
-          id:      'contact',
-          label:   'Contact',
-          still:   'assets/scenes/5-contact.svg',
-          clip:    'assets/vid/5-contact.mp4',
-          accent:  '#5b8def',
-          scroll:  1.4,
-          linger:  0.50,
-          eyebrow: 'Let’s build something',
-          title:   'Open for freelance & full-time roles.',
-          body:    'Got an idea, a project, or a position in mind? I’m one email or one DM away.',
-          tags:    ['gilangramdhani708@gmail.com', 'GitHub: @gilangg24', 'Based in Indonesia'],
-          cta: {
-            primary:   { label: 'Email me', href: 'mailto:gilangramdhani708@gmail.com' },
-            secondary: { label: 'GitHub',   href: 'https://github.com/gilangg24' },
-          },
-        },
-      ],
+    (function () {
+      if (!('IntersectionObserver' in window)) {
+        document.querySelectorAll('.reveal').forEach(function (e) { e.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) {
+            en.target.classList.add('in');
+            io.unobserve(en.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      document.querySelectorAll('.reveal').forEach(function (e) { io.observe(e); });
+    })();
+  </script>
 
-      connectors: [
-        // 'assets/vid/conn-1-2.mp4',
-        // 'assets/vid/conn-2-3.mp4',
-        // 'assets/vid/conn-3-4.mp4',
-        // 'assets/vid/conn-4-5.mp4',
-      ],
-      connectorsMobile: [
-        // 'assets/vid/conn-1-2-m.mp4',
-        // 'assets/vid/conn-2-3-m.mp4',
-        // 'assets/vid/conn-3-4-m.mp4',
-        // 'assets/vid/conn-4-5-m.mp4',
-      ],
-    });
+  <div id="world" hidden></div>
+  <script src="js/scrub-engine.js"></script>
+  <script>
+    (function () {
+      var world = document.getElementById('world');
+      if (!world) return;
+      function mount() {
+        mountScrollWorld(world, {
+          brand:  { name: 'Gilang', href: '#top' },
+          hint:   'scroll to fly in',
+          nav:    false,
+          atmosphere: true,
+          diveScroll: 1.4,
+          connScroll: 0.9,
+          sections: [
+            { id:'hero', label:'Workshop', still:'assets/scenes/1-hero.svg', accent:'#8a7bb5', scroll:1.6, linger:0.45,
+              eyebrow:'Hi, I’m', title:'I build web apps that don’t suck.',
+              body:'I’m Gilang — a web developer who ships in Laravel & CodeIgniter.',
+              tags:['Indonesia','PHP · Laravel · CodeIgniter'] },
+            { id:'about', label:'About', still:'assets/scenes/2-about.svg', accent:'#ffb347', scroll:1.3, linger:0.4,
+              eyebrow:'About', title:'Stack, story, and what I’m learning next.',
+              body:'Laravel · CodeIgniter · PHP · MySQL · Git · AI workflows.',
+              tags:['Laravel 11','CodeIgniter 4','PHP 8.3'] },
+            { id:'klinik', label:'KlinikApp', still:'assets/scenes/3-klinik.svg', accent:'#7dd3a8', scroll:1.5, linger:0.45,
+              eyebrow:'Project 01', title:'A clinic app that feels calm.',
+              body:'Laravel 11 · MySQL · appointments, records, dashboards.',
+              tags:['github.com/gilangg24/KlnikApp'] },
+            { id:'klikkode', label:'KlikKode', still:'assets/scenes/4-klikkode.svg', accent:'#ec5b8e', scroll:1.5, linger:0.45,
+              eyebrow:'Project 02', title:'A quiz that turns learning into XP.',
+              body:'CodeIgniter 4 · XP · leaderboards · topic paths.',
+              tags:['github.com/gilangg24/klikkode'] },
+            { id:'contact', label:'Contact', still:'assets/scenes/5-contact.svg', accent:'#5b8def', scroll:1.4, linger:0.5,
+              eyebrow:'Let’s build something', title:'Open for freelance & full-time roles.',
+              body:'gilangramdhani708@gmail.com · GitHub: @gilangg24',
+              tags:['Based in Indonesia'],
+              cta: { primary:{label:'Email me', href:'mailto:gilangramdhani708@gmail.com'},
+                     secondary:{label:'GitHub', href:'https://github.com/gilangg24'} } }
+          ],
+          connectors: [],
+          connectorsMobile: []
+        });
+        world.hidden = false;
+      }
+      function maybeMount() {
+        var deeper = document.getElementById('deeper');
+        if (!deeper) return mount();
+        var rect = deeper.getBoundingClientRect();
+        if (rect.top < window.innerHeight) mount();
+      }
+      window.addEventListener('scroll', maybeMount, { passive: true, once: true });
+      window.addEventListener('click',  maybeMount, { once: true });
+      if (location.hash === '#deeper' || location.hash === '#world') maybeMount();
+    })();
   </script>
 </body>
 </html>
