@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  SCENE 05 · CONTACT — "Open Door"
-  Animated: floating icons bob, daylight pulse, sparkles twinkle.
--->
+<!-- SCENE 05 · CONTACT — "Open Door" (v2: dramatic motion) -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" preserveAspectRatio="xMidYMid slice">
   <defs>
     <style>
-      .icon-bob   { animation: bob 4.0s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
-      .icon-bob-2 { animation: bob 4.6s ease-in-out infinite; animation-delay: -1.5s; transform-origin: center; transform-box: fill-box; }
-      .daylight-pulse { animation: daylight 5.5s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
-      .star { animation: twinkle 2.6s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
-      .star-b { animation-delay: -1.0s; }
-      .star-c { animation-delay: -2.0s; }
-      .path-glow { animation: pulse-light 4s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
-      .particle   { animation: rise 7s linear infinite; transform-origin: center; transform-box: fill-box; }
-      .particle-b { animation-delay: -2.0s; }
-      .particle-c { animation-delay: -4.0s; }
+      .icon-bob   { animation: bob 3.0s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+      .icon-bob-2 { animation: bob 3.6s ease-in-out infinite; animation-delay: -1.2s; transform-origin: center; transform-box: fill-box; }
+      .daylight-pulse { animation: daylight 4.5s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+      .star { animation: twinkle 2.0s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+      .star-b { animation-delay: -.7s; }
+      .star-c { animation-delay: -1.4s; }
+      .path-glow { animation: pulse-light 3.5s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+      .particle   { animation: rise 4.5s linear infinite; transform-origin: center; transform-box: fill-box; }
+      .particle-b { animation-delay: -1.0s; }
+      .particle-c { animation-delay: -2.5s; }
+      .halo-orb   { animation: orb-pulse 4.5s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+      .halo-orb-b { animation-delay: -1.5s; }
+      .halo-orb-c { animation-delay: -3.0s; }
       @keyframes bob {
         0%,100% { transform: translateY(0); }
-        50%     { transform: translateY(-14px); }
+        50%     { transform: translateY(-22px); }
       }
       @keyframes daylight {
         0%,100% { opacity: 0.85; transform: scale(1); }
-        50%     { opacity: 1.00; transform: scale(1.05); }
-      }
-      @keyframes twilight {
-        0%,100% { opacity: 0.85; transform: scale(0.85); }
-        50%     { opacity: 1.00; transform: scale(1.15); }
+        50%     { opacity: 1.00; transform: scale(1.07); }
       }
       @keyframes twinkle {
         0%,100% { opacity: 0.40; transform: scale(0.85); }
-        50%     { opacity: 1.00; transform: scale(1.15); }
+        50%     { opacity: 1.00; transform: scale(1.20); }
       }
       @keyframes pulse-light {
         0%,100% { opacity: 0.75; }
         50%     { opacity: 1.00; }
       }
       @keyframes rise {
-        0%   { transform: translate(0,0); opacity: 0; }
-        15%  { opacity: 0.85; }
-        85%  { opacity: 0.55; }
-        100% { transform: translate(0,-60px); opacity: 0; }
+        0%   { transform: translate(0,0);     opacity: 0; }
+        12%  { opacity: 1; }
+        88%  { opacity: 0.85; }
+        100% { transform: translate(0,-80px); opacity: 0; }
+      }
+      @keyframes orb-pulse {
+        0%,100% { opacity: 0.40; transform: scale(0.85); }
+        50%     { opacity: 0.90; transform: scale(1.20); }
       }
     </style>
     <linearGradient id="s5-bg" x1="0" y1="0" x2="0" y2="1">
@@ -61,7 +61,12 @@
       <stop offset="0%"  stop-color="#5b8def"/>
       <stop offset="100%" stop-color="#5b8def" stop-opacity="0"/>
     </linearGradient>
-    <filter id="s5-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <radialGradient id="s5-orb-blue" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"  stop-color="#fff7d8" stop-opacity="0.95"/>
+      <stop offset="60%" stop-color="#cee2ff" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#cee2ff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="s5-soft"   x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
     <filter id="s5-strong" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40"/></filter>
     <filter id="s5-grain" x="0" y="0" width="100%" height="100%">
       <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="23"/>
@@ -71,7 +76,6 @@
 
   <rect width="1536" height="1024" fill="url(#s5-bg)"/>
 
-  <!-- Bright daylight streaming (pulsing) -->
   <ellipse class="daylight-pulse" cx="768" cy="540" rx="780" ry="540" fill="url(#s5-daylight)" filter="url(#s5-soft)"/>
   <ellipse class="daylight-pulse" cx="768" cy="540" rx="320" ry="320" fill="url(#s5-daylight)" opacity="0.85"/>
 
@@ -113,38 +117,48 @@
     <polygon points="-40,0 40,0 140,500 -140,500" fill="#fff7d8" opacity="0.4"/>
   </g>
 
-  <!-- Floating @ symbol (bobs) -->
+  <!-- Halo orbs near door -->
+  <g>
+    <circle class="halo-orb"           cx="330"  cy="360" r="80" fill="url(#s5-orb-blue)" filter="url(#s5-soft)"/>
+    <circle class="halo-orb halo-orb-b" cx="1180" cy="360" r="80" fill="url(#s5-orb-blue)" filter="url(#s5-soft)"/>
+    <circle class="halo-orb halo-orb-c" cx="768"  cy="120" r="60" fill="url(#s5-orb-blue)" filter="url(#s5-soft)"/>
+  </g>
+
   <g class="icon-bob" transform="translate(330,360)">
     <circle cx="0" cy="0" r="80" fill="#fff" opacity="0.95" filter="url(#s5-soft)"/>
     <circle cx="0" cy="0" r="56" fill="#241d2b"/>
     <text x="0" y="20" text-anchor="middle" font-family="ui-rounded, system-ui, sans-serif" font-weight="700" font-size="64" fill="#fff">@</text>
   </g>
-  <!-- Floating <> symbol (bobs) -->
   <g class="icon-bob-2" transform="translate(1180,360)">
     <circle cx="0" cy="0" r="80" fill="#fff" opacity="0.95" filter="url(#s5-soft)"/>
     <circle cx="0" cy="0" r="56" fill="#241d2b"/>
     <text x="0" y="22" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-weight="700" font-size="50" fill="#fff">&lt;/&gt;</text>
   </g>
 
-  <!-- Sparkle particles -->
+  <!-- Sparkle particles (more, brighter) -->
   <g>
-    <circle class="star"            cx="220" cy="180" r="3" fill="#fff7d8"/>
+    <circle class="star"          cx="220"  cy="180" r="3" fill="#fff7d8"/>
     <circle class="star star-b" cx="1380" cy="180" r="3" fill="#fff7d8"/>
-    <circle class="star star-c" cx="120" cy="380" r="2" fill="#fff7d8"/>
-    <circle class="star"            cx="1420" cy="380" r="2" fill="#fff7d8"/>
-    <circle class="star star-b" cx="100" cy="700" r="2" fill="#fff7d8"/>
+    <circle class="star star-c" cx="120"  cy="380" r="2" fill="#fff7d8"/>
+    <circle class="star"          cx="1420" cy="380" r="2" fill="#fff7d8"/>
+    <circle class="star star-b" cx="100"  cy="700" r="2" fill="#fff7d8"/>
     <circle class="star star-c" cx="1450" cy="700" r="2" fill="#fff7d8"/>
-    <circle class="star"            cx="500" cy="120" r="2" fill="#fff7d8"/>
-    <circle class="star star-b" cx="900" cy="120" r="2" fill="#fff7d8"/>
-    <circle class="star star-c" cx="640" cy="800" r="3" fill="#fff7d8"/>
-    <circle class="star"            cx="900" cy="820" r="2" fill="#fff7d8"/>
+    <circle class="star"          cx="500"  cy="120" r="2" fill="#fff7d8"/>
+    <circle class="star star-b" cx="900"  cy="120" r="2" fill="#fff7d8"/>
+    <circle class="star star-c" cx="640"  cy="800" r="3" fill="#fff7d8"/>
+    <circle class="star"          cx="900"  cy="820" r="2" fill="#fff7d8"/>
+    <circle class="star star-b" cx="380"  cy="900" r="2" fill="#fff7d8"/>
+    <circle class="star star-c" cx="1100" cy="940" r="2" fill="#fff7d8"/>
   </g>
 
   <g>
-    <circle class="particle"            cx="400" cy="900" r="2" fill="#fff7d8"/>
-    <circle class="particle particle-b" cx="640" cy="940" r="2" fill="#fff7d8"/>
-    <circle class="particle particle-c" cx="900" cy="900" r="2" fill="#fff7d8"/>
-    <circle class="particle"            cx="1100" cy="920" r="2" fill="#fff7d8"/>
+    <circle class="particle"            cx="400"  cy="900" r="3" fill="#fff7d8"/>
+    <circle class="particle particle-b" cx="640"  cy="940" r="2.5" fill="#fff7d8"/>
+    <circle class="particle particle-c" cx="900"  cy="900" r="3" fill="#fff7d8"/>
+    <circle class="particle"            cx="1100" cy="920" r="3" fill="#fff7d8"/>
+    <circle class="particle particle-b" cx="200"  cy="940" r="2.5" fill="#fff7d8"/>
+    <circle class="particle particle-c" cx="1340" cy="900" r="2.5" fill="#fff7d8"/>
+    <circle class="particle particle-d" cx="800"  cy="940" r="2" fill="#fff7d8"/>
   </g>
 
   <rect x="0" y="850" width="1536" height="174" fill="url(#s5-floor)"/>

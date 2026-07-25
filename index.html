@@ -1,11 +1,11 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#1a1530" />
-  <title>Gilang — Web Developer · Laravel · CodeIgniter</title>
-  <meta name="description" content="Personal portfolio of Gilang — a web developer building with Laravel & CodeIgniter. Selected work, stack, and contact." />
+  <title>Gilang â€” Web Developer Â· Laravel Â· CodeIgniter</title>
+  <meta name="description" content="Personal portfolio of Gilang â€” a web developer building with Laravel & CodeIgniter. Selected work, stack, and contact." />
   <meta name="author" content="Gilang" />
 
   <!-- Fonts -->
@@ -15,7 +15,7 @@
         href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" />
 
   <style>
-    /* ── Reset & tokens ──────────────────────────────────────────────── */
+    /* â”€â”€ Reset & tokens â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     :root {
@@ -79,45 +79,100 @@
     section { position: relative; z-index: 2; }
     ::selection { background: var(--accent); color: var(--bg); }
 
-    /* ── Top nav ─────────────────────────────────────────────────────── */
+    /* â”€â”€ Top nav â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* â”€â”€ Top nav (v2: sliding pill indicator + tighter type) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .topnav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      backdrop-filter: blur(14px) saturate(140%);
-      -webkit-backdrop-filter: blur(14px) saturate(140%);
-      background: rgba(244,236,223,0.74);
-      border-bottom: 1px solid var(--line);
-      transition: box-shadow .25s ease;
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      background: rgba(244,236,223,0.62);
+      border-bottom: 1px solid transparent;
+      transition: box-shadow .3s ease, border-color .3s ease, background .3s ease;
     }
-    .topnav.scrolled { box-shadow: var(--shadow-sm); }
-    .topnav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .topnav.scrolled {
+      background: rgba(244,236,223,0.88);
+      border-bottom-color: var(--line);
+      box-shadow: 0 1px 0 rgba(20,16,30,0.04), 0 8px 24px -12px rgba(20,16,30,0.10);
+    }
+    .topnav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+      transition: height .3s ease;
+    }
+    .topnav.scrolled .topnav-inner { height: 58px; }
     .topnav .brand {
-      font-family: var(--display); font-weight: 700; font-size: 1.1rem;
-      letter-spacing: -0.01em; text-decoration: none; color: var(--ink);
+      font-family: var(--display); font-weight: 700; font-size: 1.05rem;
+      letter-spacing: -0.015em; text-decoration: none; color: var(--ink);
       display: flex; align-items: center; gap: 10px;
+      transition: opacity .2s ease;
     }
+    .topnav .brand:hover { opacity: 0.7; }
     .topnav .brand-mark {
       width: 26px; height: 30px; border-radius: 7px 7px 10px 10px;
       background: linear-gradient(160deg, var(--accent), #c93a20);
       box-shadow: 0 6px 14px rgba(255,91,58,0.35);
+      transition: transform .4s ease;
     }
-    .topnav nav { display: flex; gap: 4px; align-items: center; }
+    .topnav .brand:hover .brand-mark { transform: rotate(-8deg) scale(1.05); }
+    .topnav nav {
+      position: relative;
+      display: flex; gap: 0; align-items: center;
+      padding: 5px;
+      background: rgba(20,16,30,0.04);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+    }
     .topnav nav a {
-      font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
-      padding: 9px 14px; border-radius: 999px;
+      position: relative; z-index: 2;
+      font-family: var(--mono); font-size: 0.74rem; font-weight: 500;
+      letter-spacing: 0.06em;
+      padding: 8px 16px;
+      border-radius: 999px;
       color: var(--ink-2); text-decoration: none;
-      transition: background .2s, color .2s;
+      transition: color .25s ease;
     }
-    .topnav nav a:hover { background: rgba(20,16,30,0.05); color: var(--ink); }
+    .topnav nav a:hover { color: var(--ink); }
+    .topnav nav a.active { color: var(--bg); }
+    .topnav nav .pill {
+      position: absolute; z-index: 1;
+      top: 5px; left: 5px;
+      height: calc(100% - 10px);
+      width: var(--pill-w, 0px);
+      transform: translateX(var(--pill-x, 0px));
+      background: var(--ink);
+      border-radius: 999px;
+      transition: transform .38s cubic-bezier(.4,.0,.2,1), width .38s cubic-bezier(.4,.0,.2,1);
+    }
     .topnav .cta {
-      font-family: var(--body); font-weight: 600; font-size: 0.88rem;
-      padding: 10px 18px; border-radius: 999px;
+      font-family: var(--body); font-weight: 600; font-size: 0.86rem;
+      padding: 11px 20px; border-radius: 999px;
       background: var(--ink); color: var(--bg);
       text-decoration: none;
       transition: transform .2s ease, background .2s ease;
+      letter-spacing: -0.005em;
     }
     .topnav .cta:hover { transform: translateY(-1px); background: var(--accent); }
-
-    /* ── Page intro/loading ──────────────────────────────────────────── */
+    .topnav .ghost-link {
+      font-family: var(--mono); font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      color: var(--ink-soft);
+      text-decoration: none;
+      padding: 7px 12px; border-radius: 999px;
+      border: 1px dashed var(--line-strong);
+      transition: color .25s, border-color .25s, background .25s;
+    }
+    .topnav .ghost-link:hover {
+      color: var(--ink); border-color: var(--ink-soft);
+      background: rgba(20,16,30,0.04);
+    }
+    .topnav .nav-tail { display: flex; gap: 10px; align-items: center; }
+    @media (max-width: 720px) {
+      .topnav nav { display: none; }
+      .topnav .ghost-link { display: none; }
+      .topnav-inner { height: 56px; }
+      .topnav .brand { font-size: 1rem; }
+      .topnav .cta { padding: 9px 14px; font-size: 0.78rem; }
+    }
     #loader {
       position: fixed; inset: 0; z-index: 1000;
       display: flex; flex-direction: column;
@@ -142,7 +197,7 @@
       50%      { transform: translateY(-6px) scale(1.05); }
     }
 
-    /* ── 1 · Hero ────────────────────────────────────────────────────── */
+    /* â”€â”€ 1 Â· Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .hero {
       min-height: 100vh; min-height: 100svh;
       display: flex; align-items: center;
@@ -156,6 +211,7 @@
     }
     .hero-left { max-width: 720px; }
     .hero-right { align-self: stretch; display: flex; align-items: center; justify-content: center; }
+    .hero-card {
     .hero-card {
       width: 100%;
       background: var(--card-bg);
@@ -301,7 +357,7 @@
       50%     { transform: scaleY(0.4); }
     }
 
-    /* ── Section header ──────────────────────────────────────────────── */
+    /* â”€â”€ Section header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .sect-head { max-width: 720px; margin-bottom: 60px; }
     .sect-eyebrow {
       font-family: var(--mono); font-size: 11px;
@@ -325,7 +381,7 @@
       color: var(--ink-2); max-width: 56ch; line-height: 1.6;
     }
 
-    /* ── 2 · Projects ────────────────────────────────────────────────── */
+    /* â”€â”€ 2 Â· Projects â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .projects { padding: 100px 0 60px; }
     .proj-grid {
       display: grid;
@@ -393,7 +449,7 @@
     .proj[data-i="2"] .mock { background: linear-gradient(135deg, rgba(91,141,239,0.30), rgba(91,141,239,0.10));  }
     .proj[data-i="3"] .mock { background: linear-gradient(135deg, rgba(255,179,71,0.30),  rgba(255,179,71,0.10));  }
 
-    /* ── 3 · About / Stack ───────────────────────────────────────────── */
+    /* â”€â”€ 3 Â· About / Stack â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .about { padding: 100px 0 60px; }
     .about-grid {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -451,7 +507,7 @@
       .about-skills { grid-template-columns: 1fr; }
     }
 
-    /* ── 4 · Deeper (optional scroll-world) ─────────────────────────── */
+    /* â”€â”€ 4 Â· Deeper (optional scroll-world) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .deeper { padding: 100px 0 60px; }
     .deeper-card {
       position: relative;
@@ -543,7 +599,7 @@
     .deeper-card .deeper-actions .a-on { background: #f5ede0; color: #14101e; }
     .deeper-card .deeper-actions .a-on:hover { transform: translateY(-2px); background: var(--accent); color: #fff; }
 
-    /* ── 5 · Contact ─────────────────────────────────────────────────── */
+    /* â”€â”€ 5 Â· Contact â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .contact { padding: 100px 0 80px; text-align: center; }
     .contact .ct {
       font-family: var(--display); font-weight: 700;
@@ -588,7 +644,7 @@
     }
     .contact .socials a:hover { transform: translateY(-2px); background: var(--ink); color: var(--bg); border-color: var(--ink); }
 
-    /* ── Footer ──────────────────────────────────────────────────────── */
+    /* â”€â”€ Footer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     footer.site-foot {
       padding: 36px 0 48px;
       border-top: 1px solid var(--line);
@@ -601,7 +657,7 @@
     }
     footer.site-foot a { color: inherit; }
 
-    /* ── Scroll-fade reveal ──────────────────────────────────────────── */
+    /* â”€â”€ Scroll-fade reveal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s ease; }
     .reveal.in  { opacity: 1; transform: none; }
     .reveal.delay-1 { transition-delay: .12s; }
@@ -619,7 +675,7 @@
 
   <div id="loader" aria-hidden="true">
     <div class="loader-mark"></div>
-    <div class="loader-text">preparing the page…</div>
+    <div class="loader-text">preparing the pageâ€¦</div>
   </div>
 
   <header class="topnav" id="topnav">
@@ -628,13 +684,16 @@
         <span class="brand-mark"></span>
         <span>Gilang</span>
       </a>
-      <nav aria-label="primary">
-        <a href="#work">Work</a>
-        <a href="#about">About</a>
-        <a href="#deeper">Deeper</a>
-        <a href="#contact">Contact</a>
+      <nav aria-label="primary" id="primary-nav">
+        <span class="pill" aria-hidden="true"></span>
+        <a href="#work"  data-section="work">Work</a>
+        <a href="#about" data-section="about">About</a>
+        <a href="#contact" data-section="contact">Contact</a>
       </nav>
-      <a class="cta" href="mailto:gilangramdhani708@gmail.com">Hire me</a>
+      <div class="nav-tail">
+        <a class="ghost-link" href="#deeper" title="Optional scroll-through 3D world">deeper &rarr;</a>
+        <a class="cta" href="mailto:gilangramdhani708@gmail.com">Hire me</a>
+      </div>
     </div>
   </header>
 
@@ -643,7 +702,7 @@
       <div class="hero-left">
         <span class="hero-eyebrow reveal">
           <span class="pulse"></span>
-          Open to work · Indonesia · GMT+7
+          Open to work Â· Indonesia Â· GMT+7
         </span>
         <h1 class="hero-title reveal delay-1">
           I build web apps<br/>
@@ -838,7 +897,7 @@
   </section>
 
   <style>
-    /* ── Project mockup variants ────────────────────────────────────── */
+    /* â”€â”€ Project mockup variants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .mock-window, .mock-dash, .mock-podium, .mock-terminal, .mock-table {
       width: 100%; max-width: 420px;
       background: #fff; border-radius: 12px;
@@ -1153,6 +1212,59 @@
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
       document.querySelectorAll('.reveal').forEach(function (e) { io.observe(e); });
+
+      // ── Nav active section + sliding pill ───────────────────────
+      var nav = document.getElementById('primary-nav');
+      if (!nav) return;
+      var pill = nav.querySelector('.pill');
+      var links = nav.querySelectorAll('a[data-section]');
+      var targets = [];
+      links.forEach(function (a) {
+        var id = a.getAttribute('data-section');
+        var sec = document.getElementById(id);
+        if (sec) targets.push({ a: a, sec: sec, id: id });
+      });
+      function setActive(idx) {
+        if (idx < 0) idx = 0;
+        if (idx >= targets.length) idx = targets.length - 1;
+        var t = targets[idx];
+        if (!t) return;
+        links.forEach(function (a) { a.classList.remove('active'); });
+        t.a.classList.add('active');
+        // Measure link, position pill
+        var nr = nav.getBoundingClientRect();
+        var ar = t.a.getBoundingClientRect();
+        var x = ar.left - nr.left - 5;  // offset by 5px (the nav padding)
+        pill.style.setProperty('--pill-w', ar.width + 'px');
+        pill.style.setProperty('--pill-x', x + 'px');
+      }
+      function measure() {
+        // Recompute on resize so the pill stays aligned.
+        var activeIdx = 0;
+        var bestDist = Infinity;
+        targets.forEach(function (t, i) {
+          if (t.a.classList.contains('active')) activeIdx = i;
+        });
+        setActive(activeIdx);
+      }
+      // Watch sections with another observer
+      var navIO = new IntersectionObserver(function (entries) {
+        var best = null;
+        entries.forEach(function (en) {
+          if (en.isIntersecting && (!best || en.intersectionRatio > best.intersectionRatio)) {
+            best = en;
+          }
+        });
+        if (!best) return;
+        var id = best.target.id;
+        targets.forEach(function (t, i) {
+          if (t.id === id) setActive(i);
+        });
+      }, { threshold: [0.15, 0.4, 0.7] });
+      targets.forEach(function (t) { navIO.observe(t.sec); });
+      // Init: position pill on first section
+      setActive(0);
+      window.addEventListener('resize', measure, { passive: true });
     })();
   </script>
 
@@ -1172,24 +1284,24 @@
           connScroll: 0.9,
           sections: [
             { id:'hero', label:'Workshop', still:'assets/scenes/1-hero.svg', accent:'#8a7bb5', scroll:1.6, linger:0.45,
-              eyebrow:'Hi, I’m', title:'I build web apps that don’t suck.',
-              body:'I’m Gilang — a web developer who ships in Laravel & CodeIgniter.',
-              tags:['Indonesia','PHP · Laravel · CodeIgniter'] },
+              eyebrow:'Hi, Iâ€™m', title:'I build web apps that donâ€™t suck.',
+              body:'Iâ€™m Gilang â€” a web developer who ships in Laravel & CodeIgniter.',
+              tags:['Indonesia','PHP Â· Laravel Â· CodeIgniter'] },
             { id:'about', label:'About', still:'assets/scenes/2-about.svg', accent:'#ffb347', scroll:1.3, linger:0.4,
-              eyebrow:'About', title:'Stack, story, and what I’m learning next.',
-              body:'Laravel · CodeIgniter · PHP · MySQL · Git · AI workflows.',
+              eyebrow:'About', title:'Stack, story, and what Iâ€™m learning next.',
+              body:'Laravel Â· CodeIgniter Â· PHP Â· MySQL Â· Git Â· AI workflows.',
               tags:['Laravel 11','CodeIgniter 4','PHP 8.3'] },
             { id:'klinik', label:'KlinikApp', still:'assets/scenes/3-klinik.svg', accent:'#7dd3a8', scroll:1.5, linger:0.45,
               eyebrow:'Project 01', title:'A clinic app that feels calm.',
-              body:'Laravel 11 · MySQL · appointments, records, dashboards.',
+              body:'Laravel 11 Â· MySQL Â· appointments, records, dashboards.',
               tags:['github.com/gilangg24/KlnikApp'] },
             { id:'klikkode', label:'KlikKode', still:'assets/scenes/4-klikkode.svg', accent:'#ec5b8e', scroll:1.5, linger:0.45,
               eyebrow:'Project 02', title:'A quiz that turns learning into XP.',
-              body:'CodeIgniter 4 · XP · leaderboards · topic paths.',
+              body:'CodeIgniter 4 Â· XP Â· leaderboards Â· topic paths.',
               tags:['github.com/gilangg24/klikkode'] },
             { id:'contact', label:'Contact', still:'assets/scenes/5-contact.svg', accent:'#5b8def', scroll:1.4, linger:0.5,
-              eyebrow:'Let’s build something', title:'Open for freelance & full-time roles.',
-              body:'gilangramdhani708@gmail.com · GitHub: @gilangg24',
+              eyebrow:'Letâ€™s build something', title:'Open for freelance & full-time roles.',
+              body:'gilangramdhani708@gmail.com Â· GitHub: @gilangg24',
               tags:['Based in Indonesia'],
               cta: { primary:{label:'Email me', href:'mailto:gilangramdhani708@gmail.com'},
                      secondary:{label:'GitHub', href:'https://github.com/gilangg24'} } }

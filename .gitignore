@@ -37,9 +37,11 @@ package-lock.json
 # ── Local preview server / visual verification ─────────────────────────────
 test-preview.js
 screenshot.js
+verify-svg.js
 preview-stdout.log
 preview-stderr.log
 screenshots/
+verify-svg/
 
 # ── Build / deploy output ──────────────────────────────────────────────────
 dist/

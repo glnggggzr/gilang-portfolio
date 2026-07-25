@@ -1,44 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  SCENE 03 · KLINIKAPP — "The Clinic"
-  Animated: cross sign pulses, building gentle parallax, particles rise.
--->
+<!-- SCENE 03 · KLINIKAPP — "The Clinic" (v2: dramatic motion) -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" preserveAspectRatio="xMidYMid slice">
   <defs>
     <style>
-      .cross-pulse { animation: cross-pulse 2.8s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
-      .cross-glow  { animation: cross-glow  2.8s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
-      .building-bg { animation: parallax-bg 11s ease-in-out infinite alternate; }
-      .interior-glow { animation: interior-pulse 5.5s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
-      .particle   { animation: rise 7s linear infinite; transform-origin: center; transform-box: fill-box; }
-      .particle-b { animation-delay: -2.0s; }
-      .particle-c { animation-delay: -4.5s; }
-      .cross-mark { animation: cross-spin 24s linear infinite; transform-origin: center; transform-box: fill-box; }
+      .cross-pulse { animation: cross-pulse 1.8s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+      .cross-glow  { animation: cross-glow  1.8s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+      .building-bg { animation: parallax-bg 12s ease-in-out infinite alternate; }
+      .building-fg { animation: parallax-fg 7s  ease-in-out infinite alternate; }
+      .interior-glow { animation: interior-pulse 4.0s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+      .particle   { animation: rise 4.5s linear infinite; transform-origin: center; transform-box: fill-box; }
+      .particle-b { animation-delay: -1.0s; }
+      .particle-c { animation-delay: -2.5s; }
+      .particle-d { animation-delay: -3.5s; }
+      .cross-mark { animation: cross-spin 18s linear infinite; transform-origin: center; transform-box: fill-box; }
+      .halo-orb   { animation: orb-pulse 4.5s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+      .halo-orb-b { animation-delay: -1.5s; }
+      .halo-orb-c { animation-delay: -3.0s; }
       @keyframes cross-pulse {
         0%,100% { transform: scale(1); }
-        50%     { transform: scale(1.08); }
+        50%     { transform: scale(1.14); }
       }
       @keyframes cross-glow {
-        0%,100% { opacity: 0.55; }
-        50%     { opacity: 0.95; }
+        0%,100% { opacity: 0.65; }
+        50%     { opacity: 1.00; }
       }
       @keyframes cross-spin {
         0%   { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
       }
-      @keyframes parallax-bg {
-        0%   { transform: translate(0,0); }
-        100% { transform: translate(-3px,2px); }
-      }
-      @keyframes interior-pulse {
-        0%,100% { opacity: 0.75; }
-        50%     { opacity: 0.95; }
-      }
+      @keyframes parallax-bg { 0% { transform: translate(0,0); }        100% { transform: translate(-6px,3px); } }
+      @keyframes parallax-fg { 0% { transform: translate(0,0); }        100% { transform: translate(10px,-4px); } }
+      @keyframes interior-pulse { 0%,100% { opacity: 0.70; }       50%     { opacity: 1.00; } }
       @keyframes rise {
         0%   { transform: translate(0,0);     opacity: 0; }
-        15%  { opacity: 0.85; }
-        85%  { opacity: 0.55; }
-        100% { transform: translate(0,-60px); opacity: 0; }
+        12%  { opacity: 1; }
+        88%  { opacity: 0.85; }
+        100% { transform: translate(0,-80px); opacity: 0; }
+      }
+      @keyframes orb-pulse {
+        0%,100% { opacity: 0.40; transform: scale(0.85); }
+        50%     { opacity: 0.85; transform: scale(1.20); }
       }
     </style>
     <linearGradient id="s3-bg" x1="0" y1="0" x2="0" y2="1">
@@ -62,7 +63,11 @@
       <stop offset="0%" stop-color="#a7e8ca" stop-opacity="0.95"/>
       <stop offset="100%" stop-color="#a7e8ca" stop-opacity="0"/>
     </radialGradient>
-    <filter id="s3-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12"/></filter>
+    <radialGradient id="s3-orb-mint" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7dd3a8" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#7dd3a8" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="s3-soft"   x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12"/></filter>
     <filter id="s3-strong" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="36"/></filter>
     <filter id="s3-grain" x="0" y="0" width="100%" height="100%">
       <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="11"/>
@@ -96,26 +101,24 @@
     <rect x="1500" y="580" width="10" height="14"/>
   </g>
 
-  <ellipse cx="768" cy="540" rx="500" ry="280" fill="url(#s3-cross)" opacity="0.5" filter="url(#s3-strong)"/>
+  <ellipse cx="768" cy="540" rx="540" ry="320" fill="url(#s3-cross)" opacity="0.55" filter="url(#s3-strong)"/>
 
-  <g transform="translate(540,300)">
+  <g class="building-fg" transform="translate(540,300)">
     <ellipse cx="250" cy="450" rx="300" ry="20" fill="#000" opacity="0.5" filter="url(#s3-strong)"/>
     <rect x="0" y="0" width="500" height="380" fill="#f7fff8"/>
     <polygon points="500,0 580,-50 580,330 500,380" fill="#cfeee0"/>
     <polygon points="0,0 250,-90 580,-50 500,0" fill="#3a9472"/>
     <polygon points="250,-90 580,-50 580,-30 250,-70" fill="#5cb38a"/>
 
-    <!-- Big cross sign on front (pulsing) -->
     <g class="cross-pulse">
       <rect x="60" y="40" width="100" height="100" fill="#ec5b8e"/>
       <rect x="90" y="60" width="40" height="60" fill="#f7fff8"/>
       <rect x="80" y="70" width="60" height="40" fill="#f7fff8"/>
     </g>
-    <circle class="cross-glow" cx="110" cy="90" r="80" fill="url(#s3-cross)" filter="url(#s3-soft)"/>
+    <circle class="cross-glow" cx="110" cy="90" r="100" fill="url(#s3-cross)" filter="url(#s3-soft)"/>
 
-    <!-- Big window -->
     <rect x="200" y="60" width="240" height="160" fill="#a7e8ca"/>
-    <g class="interior-glow"><circle cx="320" cy="140" r="120" fill="url(#s3-interior)" opacity="0.85"/></g>
+    <g class="interior-glow"><circle cx="320" cy="140" r="140" fill="url(#s3-interior)" opacity="0.95"/></g>
     <line x1="320" y1="60" x2="320" y2="220" stroke="#3a9472" stroke-width="4"/>
     <line x1="200" y1="140" x2="440" y2="140" stroke="#3a9472" stroke-width="4"/>
 
@@ -137,22 +140,32 @@
     <circle cx="430" cy="332" r="3" fill="#241d2b"/>
   </g>
 
+  <!-- Halo orbs -->
+  <g>
+    <circle class="halo-orb"           cx="280"  cy="780" r="38" fill="url(#s3-orb-mint)" filter="url(#s3-soft)"/>
+    <circle class="halo-orb halo-orb-b" cx="1320" cy="820" r="44" fill="url(#s3-orb-mint)" filter="url(#s3-soft)"/>
+    <circle class="halo-orb halo-orb-c" cx="900"  cy="940" r="34" fill="url(#s3-orb-mint)" filter="url(#s3-soft)"/>
+    <circle class="halo-orb"           cx="220"  cy="940" r="28" fill="url(#s3-orb-mint)" filter="url(#s3-soft)"/>
+  </g>
+
   <!-- Floating particles -->
   <g fill="#a7e8ca">
-    <circle class="particle"            cx="180"  cy="900" r="1.5"/>
-    <circle class="particle particle-b" cx="280"  cy="880" r="1"/>
-    <circle class="particle particle-c" cx="1380" cy="900" r="2"/>
-    <circle class="particle"            cx="120"  cy="900" r="1.5"/>
-    <circle class="particle particle-b" cx="1420" cy="900" r="1"/>
-    <circle class="particle particle-c" cx="200"  cy="900" r="2"/>
-    <circle class="particle particle-d" cx="1340" cy="880" r="1.5"/>
-    <circle class="particle"            cx="780"  cy="940" r="1"/>
+    <circle class="particle"            cx="180"  cy="950" r="3"/>
+    <circle class="particle particle-b" cx="280"  cy="900" r="2.5"/>
+    <circle class="particle particle-c" cx="1380" cy="940" r="3"/>
+    <circle class="particle particle-d" cx="120"  cy="900" r="2.5"/>
+    <circle class="particle"            cx="1420" cy="930" r="2.5"/>
+    <circle class="particle particle-b" cx="200"  cy="900" r="3"/>
+    <circle class="particle particle-c" cx="1340" cy="900" r="2"/>
+    <circle class="particle particle-d" cx="780"  cy="940" r="2.5"/>
+    <circle class="particle"            cx="1080" cy="900" r="2"/>
+    <circle class="particle particle-b" cx="380"  cy="940" r="2.5"/>
   </g>
   <g fill="#ec5b8e" font-family="ui-rounded, system-ui, sans-serif" font-weight="900">
     <text class="cross-mark" x="220" y="160" font-size="22">+</text>
-    <text class="cross-mark" x="1280" y="160" font-size="28" style="animation-delay:-12s">+</text>
-    <text class="cross-mark" x="140" y="660" font-size="32" style="animation-delay:-6s">+</text>
-    <text class="cross-mark" x="1380" y="640" font-size="20" style="animation-delay:-18s">+</text>
+    <text class="cross-mark" x="1280" y="160" font-size="28" style="animation-delay:-9s">+</text>
+    <text class="cross-mark" x="140" y="660" font-size="32" style="animation-delay:-5s">+</text>
+    <text class="cross-mark" x="1380" y="640" font-size="20" style="animation-delay:-13s">+</text>
   </g>
 
   <rect x="0" y="800" width="1536" height="224" fill="url(#s3-floor)"/>
