@@ -77,10 +77,25 @@
       border-bottom-color: var(--line);
     }
     .topnav-inner {
-      display: flex; align-items: center; justify-content: space-between;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       height: 72px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
     }
     @media (max-width: 720px) { .topnav-inner { height: 60px; } }
+    .topnav > .brand {
+      position: absolute;
+      left: var(--gutter);
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .topnav-inner > .nav-links {
+      /* Default flex child, centered by parent justify-content. */
+    }
 
     /* Brand area: tucked cleanly to the top-left corner. */
     .brand {
@@ -140,18 +155,8 @@
       transition: color .2s;
     }
     .nav-links a:hover { color: var(--ink); }
-    .nav-cta {
-      font-family: var(--body); font-weight: 600; font-size: 0.88rem;
-      padding: 11px 20px; border-radius: 999px;
-      background: var(--ink); color: var(--bg);
-      text-decoration: none;
-      transition: transform .2s ease, background .2s ease;
-      letter-spacing: -0.005em;
-    }
-    .nav-cta:hover { transform: translateY(-1px); background: var(--accent); }
     @media (max-width: 720px) {
       .nav-links { display: none; }
-      .nav-cta { padding: 9px 14px; font-size: 0.78rem; }
     }
 
     /* ── Loading ───────────────────────────────────────────────────── */
@@ -604,21 +609,46 @@
       font-size: 1.06rem;
       color: var(--ink-2);
     }
+    .contact-cta-row {
+      margin-top: 44px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 20px; flex-wrap: wrap;
+    }
     .contact-mail {
       display: inline-block;
-      margin-top: 44px;
-      font-family: var(--display); font-style: italic; font-weight: 300;
-      font-size: clamp(1.2rem, 2.2vw, 1.65rem);
-      color: var(--accent);
+      font-family: var(--body); font-weight: 600; font-size: 1.05rem;
+      padding: 16px 32px; border-radius: 999px;
+      background: var(--ink); color: var(--bg);
       text-decoration: none;
-      border-bottom: 1.5px solid currentColor;
-      padding-bottom: 4px;
-      transition: transform .2s ease;
+      transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
+      box-shadow: 0 8px 24px rgba(20,16,48,0.18);
+      letter-spacing: -0.005em;
     }
-    .contact-mail:hover { transform: translateY(-2px); }
+    .contact-mail:hover {
+      transform: translateY(-2px);
+      background: var(--accent);
+      box-shadow: 0 14px 32px rgba(255,91,58,0.32);
+    }
+    .contact-mail-secondary {
+      font-family: var(--display); font-style: italic; font-weight: 300;
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      color: var(--ink-2);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line-strong);
+      padding-bottom: 2px;
+      transition: color .2s, border-color .2s;
+    }
+    .contact-mail-secondary:hover { color: var(--accent); border-color: var(--accent); }
     .contact-pills {
-      margin-top: 64px;
+      margin-top: 56px;
       display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+      align-items: center;
+    }
+    .contact-pills .contact-pills-label {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-right: 4px;
     }
     .contact-pills a {
       font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
@@ -663,21 +693,20 @@
   </div>
 
   <header class="topnav" id="topnav">
-    <div class="wrap topnav-inner">
-      <a class="brand" href="#top" aria-label="Gilang — home">
-        <span class="brand-mark"><span class="g-letter">G</span></span>
-        <span class="brand-name">
-          <span class="name">Gilang</span>
-          <span class="sep">·</span>
-          <span class="port">portfolio</span>
-        </span>
-      </a>
+    <a class="brand" href="#top" aria-label="Gilang — home">
+      <span class="brand-mark"><span class="g-letter">G</span></span>
+      <span class="brand-name">
+        <span class="name">Gilang</span>
+        <span class="sep">·</span>
+        <span class="port">portfolio</span>
+      </span>
+    </a>
+    <div class="topnav-inner">
       <nav class="nav-links" aria-label="primary">
         <a href="#work">Work</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
-      <a class="nav-cta" href="mailto:gilangramdhani708@gmail.com">Hire me</a>
     </div>
   </header>
 
@@ -699,7 +728,7 @@
     </p>
     <div class="hero-actions reveal d3">
       <a class="primary" href="#work">See the work</a>
-      <a class="secondary" href="mailto:gilangramdhani708@gmail.com">Hire me →</a>
+      <a class="secondary" href="#contact">Get in touch →</a>
     </div>
     <div class="hero-meta reveal d3">
       <span>PHP <em>8.3</em></span>
@@ -911,10 +940,12 @@
         Open for freelance and full-time roles. Send a few lines about
         what you&rsquo;re working on, and I&rsquo;ll get back to you within a day.
       </p>
-      <a class="contact-mail reveal d3" href="mailto:gilangramdhani708@gmail.com">
-        gilangramdhani708@gmail.com &nbsp;→
-      </a>
+      <div class="contact-cta-row reveal d3">
+        <a class="contact-mail" href="mailto:gilangramdhani708@gmail.com">Hire me →</a>
+        <a class="contact-mail-secondary" href="mailto:gilangramdhani708@gmail.com">gilangramdhani708@gmail.com</a>
+      </div>
       <div class="contact-pills reveal d3">
+        <span class="contact-pills-label">elsewhere</span>
         <a href="https://github.com/gilangg24" target="_blank" rel="noopener">GitHub</a>
         <a href="https://github.com/gilangg24/KlnikApp" target="_blank" rel="noopener">KlinikApp ↗</a>
         <a href="https://github.com/gilangg24/klikkode" target="_blank" rel="noopener">KlikKode ↗</a>
