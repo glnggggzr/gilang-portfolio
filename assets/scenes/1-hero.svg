@@ -1,50 +1,169 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Placeholder still for Scene 1 · Hero — replace with a 3:2 rendered diorama.
-  See references/prompts.md §scene-1 and references/runbook.md "How to generate".
+  SCENE 01 · HERO — "Workshop at dusk"
+  Cinematic placeholder still. Composition:
+    - Deep dusk sky with stars and atmospheric haze
+    - Workshop building with glowing warm window
+    - Foreground: isometric desk with glowing monitors
+    - Floating code symbols at varying scales (parallax depth)
+  Replace with a 3:2 generated clip (runbook.md) when ready.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" preserveAspectRatio="xMidYMid slice">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%"  stop-color="#d9c9f0"/>
-      <stop offset="60%" stop-color="#a994d4"/>
-      <stop offset="100%" stop-color="#7864a4"/>
+    <!-- Sky: deep dusk -->
+    <linearGradient id="s1-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#1a1530"/>
+      <stop offset="55%" stop-color="#2d2350"/>
+      <stop offset="100%" stop-color="#4a3678"/>
     </linearGradient>
-    <radialGradient id="glow" cx="74%" cy="22%" r="62%">
-      <stop offset="0%"  stop-color="#ffffff" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+
+    <!-- Floor / ground reflection -->
+    <linearGradient id="s1-ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#2d2350"/>
+      <stop offset="100%" stop-color="#0e0a1c"/>
+    </linearGradient>
+
+    <!-- Window warm glow -->
+    <radialGradient id="s1-window" cx="50%" cy="50%" r="55%">
+      <stop offset="0%"  stop-color="#ffd9a0" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#ffb347" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#ffb347" stop-opacity="0"/>
     </radialGradient>
-    <pattern id="iso" width="64" height="56" patternUnits="userSpaceOnUse" patternTransform="translate(0,0) scale(1.2)">
-      <path d="M0,28 L32,0 L64,28 L32,56 Z" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
-    </pattern>
+
+    <!-- Monitor glow on desk -->
+    <radialGradient id="s1-monitor" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"  stop-color="#c4a4ff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#c4a4ff" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Atmospheric haze (mid) -->
+    <radialGradient id="s1-haze" cx="50%" cy="60%" r="70%">
+      <stop offset="0%"  stop-color="#ffb347" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#ffb347" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Soft glow filter -->
+    <filter id="s1-soft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <filter id="s1-strong" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="40"/>
+    </filter>
+
+    <!-- Subtle film grain -->
+    <filter id="s1-grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="3"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0"/>
+    </filter>
   </defs>
 
-  <rect width="1536" height="1024" fill="url(#bg)"/>
-  <rect width="1536" height="1024" fill="url(#iso)"/>
-  <rect width="1536" height="1024" fill="url(#glow)"/>
+  <!-- Sky -->
+  <rect width="1536" height="1024" fill="url(#s1-sky)"/>
 
-  <!-- floating dots like distant stars/code symbols -->
-  <g fill="#ffffff" fill-opacity="0.45">
-    <circle cx="180"  cy="180" r="3"/>
-    <circle cx="260"  cy="320" r="2"/>
-    <circle cx="120"  cy="520" r="4"/>
-    <circle cx="380"  cy="760" r="2"/>
-    <circle cx="1200" cy="170" r="3"/>
-    <circle cx="1380" cy="420" r="2"/>
-    <circle cx="1100" cy="820" r="4"/>
-    <circle cx="1450" cy="700" r="2"/>
+  <!-- Stars -->
+  <g fill="#fff" opacity="0.85">
+    <circle cx="120"  cy="80"  r="1.5"/>
+    <circle cx="280"  cy="160" r="1"/>
+    <circle cx="420"  cy="60"  r="2"/>
+    <circle cx="640"  cy="120" r="1"/>
+    <circle cx="820"  cy="40"  r="1.5"/>
+    <circle cx="1080" cy="100" r="1"/>
+    <circle cx="1240" cy="200" r="2"/>
+    <circle cx="1380" cy="80"  r="1"/>
+    <circle cx="180"  cy="280" r="1"/>
+    <circle cx="1480" cy="320" r="1.5"/>
+    <circle cx="940"  cy="220" r="1"/>
+    <circle cx="60"   cy="180" r="1"/>
   </g>
 
-  <!-- central card -->
-  <g transform="translate(768,512)">
-    <rect x="-360" y="-180" width="720" height="360" rx="28" fill="#241d2b" fill-opacity="0.78"/>
-    <text x="-310" y="-90" font-family="ui-rounded, system-ui, sans-serif" font-size="22"
-          letter-spacing="4" fill="#b894e0" font-weight="700">SCENE 01 · 05</text>
-    <text x="-310" y="-20" font-family="ui-rounded, system-ui, sans-serif" font-size="56"
-          font-weight="700" fill="#f5ede0">Hi, I’m Gilang.</text>
-    <text x="-310" y="40"  font-family="-apple-system, system-ui, sans-serif" font-size="22"
-          fill="#cdbedf">Web dev · Laravel / CodeIgniter · Indonesia</text>
-    <text x="-310" y="120" font-family="-apple-system, system-ui, sans-serif" font-size="18"
-          fill="#ffffff" fill-opacity="0.55">[ placeholder still — replace with generated clip ]</text>
+  <!-- Far background building silhouettes -->
+  <g fill="#1a1530" opacity="0.85">
+    <rect x="60"   y="380" width="160" height="320"/>
+    <rect x="240"  y="320" width="120" height="380"/>
+    <rect x="380"  y="440" width="200" height="260"/>
+    <rect x="1080" y="360" width="180" height="340"/>
+    <rect x="1280" y="420" width="200" height="280"/>
   </g>
+  <!-- Distant window lights -->
+  <g fill="#ffb347" opacity="0.65">
+    <rect x="80"   y="430" width="14" height="20"/>
+    <rect x="120"  y="450" width="14" height="20"/>
+    <rect x="180"  y="430" width="14" height="20"/>
+    <rect x="1100" y="400" width="14" height="20"/>
+    <rect x="1140" y="430" width="14" height="20"/>
+    <rect x="1180" y="410" width="14" height="20"/>
+    <rect x="1300" y="450" width="14" height="20"/>
+    <rect x="1340" y="470" width="14" height="20"/>
+    <rect x="1380" y="460" width="14" height="20"/>
+    <rect x="1420" y="490" width="14" height="20"/>
+  </g>
+
+  <!-- Workshop building (the hero subject) -->
+  <g transform="translate(540,420)">
+    <!-- shadow under building -->
+    <ellipse cx="250" cy="340" rx="280" ry="22" fill="#000" opacity="0.5" filter="url(#s1-strong)"/>
+    <!-- front wall -->
+    <rect x="0" y="0" width="500" height="320" fill="#241d2b"/>
+    <!-- side wall (right) -->
+    <polygon points="500,0 580,-50 580,270 500,320" fill="#3a2f4a"/>
+    <!-- roof -->
+    <polygon points="0,0 250,-110 580,-50 500,0" fill="#1a1530"/>
+    <polygon points="250,-110 580,-50 580,-30 250,-90" fill="#2d2350"/>
+    <!-- warm window with glow -->
+    <rect x="180" y="80" width="140" height="160" fill="#ffd9a0"/>
+    <g opacity="0.9"><circle cx="250" cy="160" r="120" fill="url(#s1-window)" filter="url(#s1-soft)"/></g>
+    <!-- window mullions -->
+    <line x1="250" y1="80" x2="250" y2="240" stroke="#241d2b" stroke-width="4"/>
+    <line x1="180" y1="160" x2="320" y2="160" stroke="#241d2b" stroke-width="4"/>
+    <!-- small side window -->
+    <rect x="50" y="100" width="80" height="60" fill="#ffb347" opacity="0.5"/>
+    <rect x="370" y="100" width="80" height="60" fill="#ffb347" opacity="0.5"/>
+    <!-- door -->
+    <rect x="220" y="180" width="60" height="140" fill="#1a1530"/>
+    <circle cx="270" cy="250" r="3" fill="#ffb347"/>
+  </g>
+
+  <!-- Atmospheric haze behind workshop -->
+  <rect width="1536" height="1024" fill="url(#s1-haze)"/>
+
+  <!-- Foreground: floating code symbols (parallax via size) -->
+  <g font-family="ui-monospace, Menlo, monospace" font-weight="700" fill="#c4a4ff">
+    <text x="180"  y="180" font-size="22" opacity="0.55">&lt;/&gt;</text>
+    <text x="1380" y="200" font-size="28" opacity="0.6">{ }</text>
+    <text x="140"  y="780" font-size="40" opacity="0.85">&lt;?php</text>
+    <text x="1280" y="760" font-size="34" opacity="0.75">=&gt;</text>
+    <text x="1100" y="160" font-size="20" opacity="0.5">[ ]</text>
+    <text x="380"  y="120" font-size="24" opacity="0.6">+50 XP</text>
+    <text x="80"   y="540" font-size="48" opacity="0.8" font-weight="900">git push</text>
+    <text x="60"   y="600" font-size="20" opacity="0.5">↑</text>
+  </g>
+
+  <!-- Floating particles -->
+  <g fill="#ffb347">
+    <circle cx="220"  cy="320" r="2" opacity="0.7"/>
+    <circle cx="340"  cy="180" r="1.5" opacity="0.5"/>
+    <circle cx="440"  cy="240" r="2" opacity="0.6"/>
+    <circle cx="980"  cy="380" r="1.5" opacity="0.6"/>
+    <circle cx="1080" cy="200" r="2" opacity="0.7"/>
+    <circle cx="1180" cy="320" r="1" opacity="0.5"/>
+    <circle cx="1280" cy="480" r="2" opacity="0.7"/>
+    <circle cx="1380" cy="640" r="1.5" opacity="0.5"/>
+    <circle cx="120"  cy="640" r="1.5" opacity="0.6"/>
+    <circle cx="200"  cy="900" r="2" opacity="0.6"/>
+    <circle cx="1340" cy="900" r="1.5" opacity="0.5"/>
+  </g>
+
+  <!-- Ground reflection / floor -->
+  <rect x="0" y="800" width="1536" height="224" fill="url(#s1-ground)"/>
+  <ellipse cx="768" cy="830" rx="380" ry="14" fill="#ffb347" opacity="0.18" filter="url(#s1-strong)"/>
+
+  <!-- Vignette darkening -->
+  <radialGradient id="s1-vig" cx="50%" cy="50%" r="70%">
+    <stop offset="55%" stop-color="#000" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#000" stop-opacity="0.55"/>
+  </radialGradient>
+  <rect width="1536" height="1024" fill="url(#s1-vig)"/>
+
+  <!-- Subtle film grain overlay -->
+  <rect width="1536" height="1024" filter="url(#s1-grain)" opacity="0.45"/>
 </svg>

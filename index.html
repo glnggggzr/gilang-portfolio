@@ -3,55 +3,402 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Gilang — Web Developer · Laravel / CodeIgniter / 3D Scroll Portfolio</title>
+  <meta name="theme-color" content="#f5ede0" />
+  <title>Gilang — Web Developer · Scroll-Through Portfolio</title>
   <meta name="description" content="Personal portfolio of Gilang — scroll through the worlds he's built: KlinikApp, KlikKode, and more." />
   <meta name="author" content="Gilang" />
 
-  <!-- Theme tokens — these win over the engine's defaults (no specificity hacks needed,
-       the engine CSS is wrapped in @layer sw so :root rules win). -->
+  <!-- Fonts: serif display + sans body + mono labels -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+
   <style>
+    /* ── Theme tokens ─────────────────────────────────────────────────── */
     :root, .sw-root {
-      --sw-bg:        #F5EDE0;   /* scene background — match the generated clips' bg    */
-      --sw-ink:       #241d2b;   /* primary text colour                                */
-      --sw-ink-soft:  #6a6072;   /* secondary text                                     */
-      --sw-accent:    #8a7bb5;   /* default accent (overridden per section by config) */
-      --sw-font-display: ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif;
-      --sw-font-body:    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+      --sw-bg:           #f5ede0;
+      --sw-bg-deep:      #1a1530;
+      --sw-ink:          #241d2b;
+      --sw-ink-soft:     #6a6072;
+      --sw-accent:       #8a7bb5;
+      --sw-font-display: 'Fraunces', ui-serif, Georgia, serif;
+      --sw-font-body:    'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --sw-font-mono:    'JetBrains Mono', ui-monospace, Menlo, monospace;
     }
+
+    /* ── Pre-engine atmosphere: mesh + grain + vignette ───────────────── */
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--sw-font-body);
+      color: var(--sw-ink);
+      background: var(--sw-bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* Page-level atmospheric mesh (visible while scroll-world loads) */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(60% 50% at 18% 14%, rgba(138,123,181,0.22), transparent 70%),
+        radial-gradient(50% 50% at 82% 30%, rgba(255,179,71,0.18),  transparent 70%),
+        radial-gradient(45% 45% at 12% 86%, rgba(236,91,142,0.16), transparent 70%),
+        radial-gradient(50% 55% at 90% 92%, rgba(91,141,239,0.18), transparent 70%);
+      animation: mesh-drift 22s ease-in-out infinite alternate;
+    }
+    @keyframes mesh-drift {
+      0%   { transform: translate(0,0)       scale(1);   }
+      50%  { transform: translate(-2%,1%)    scale(1.04);}
+      100% { transform: translate(1%,-1%)    scale(1);   }
+    }
+
+    /* Film-grain layer (SVG noise as data URI) */
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      opacity: 0.10;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    }
+
+    /* ── Loading screen ─────────────────────────────────────────────── */
+    #loader {
+      position: fixed; inset: 0; z-index: 9999;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: var(--sw-bg);
+      transition: opacity .6s ease, visibility .6s ease;
+    }
+    #loader.hidden { opacity: 0; visibility: hidden; }
+    .loader-mark {
+      width: 56px; height: 64px; border-radius: 14px 14px 18px 18px;
+      background: linear-gradient(160deg, var(--sw-accent), #5a4a8a);
+      box-shadow: 0 18px 40px rgba(138,123,181,0.45);
+      animation: loader-pulse 1.4s ease-in-out infinite;
+    }
+    .loader-text {
+      margin-top: 32px;
+      font-family: var(--sw-font-mono);
+      font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--sw-ink-soft);
+    }
+    @keyframes loader-pulse {
+      0%, 100% { transform: translateY(0)    scale(1);    }
+      50%      { transform: translateY(-8px) scale(1.05); }
+    }
+
+    /* ── Hero intro section (above the scroll-world) ─────────────────── */
+    .intro {
+      position: relative; z-index: 5;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 0 24px;
+      text-align: center;
+      pointer-events: none;
+    }
+    .intro-eyebrow {
+      font-family: var(--sw-font-mono);
+      font-size: 12px; letter-spacing: 0.4em; text-transform: uppercase;
+      color: var(--sw-accent);
+      margin-bottom: 24px;
+      opacity: 0; animation: fadeUp .9s .4s ease forwards;
+    }
+    .intro-title {
+      font-family: var(--sw-font-display);
+      font-weight: 900;
+      font-size: clamp(2.6rem, 7vw, 5.8rem);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: var(--sw-ink);
+      margin: 0;
+      max-width: 12ch;
+      opacity: 0; animation: fadeUp 1s .6s ease forwards;
+    }
+    .intro-title em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--sw-accent);
+    }
+    .intro-sub {
+      margin-top: 28px;
+      font-family: var(--sw-font-body);
+      font-size: clamp(0.98rem, 1.4vw, 1.2rem);
+      color: var(--sw-ink-soft);
+      max-width: 48ch;
+      line-height: 1.55;
+      opacity: 0; animation: fadeUp 1s .9s ease forwards;
+    }
+    .intro-meta {
+      margin-top: 40px;
+      display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+      opacity: 0; animation: fadeUp 1s 1.2s ease forwards;
+    }
+    .intro-meta span {
+      font-family: var(--sw-font-mono);
+      font-size: 11px; font-weight: 500;
+      padding: 6px 12px; border-radius: 999px;
+      background: rgba(255,255,255,0.6);
+      border: 1px solid rgba(138,123,181,0.25);
+      color: var(--sw-ink);
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    /* scroll cue (separate from engine's hint) */
+    .intro-cue {
+      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      font-family: var(--sw-font-mono); font-size: 11px;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--sw-ink-soft);
+      opacity: 0; animation: fadeUp 1s 1.5s ease forwards;
+    }
+    .intro-cue::after {
+      content: '';
+      width: 1px; height: 50px;
+      background: linear-gradient(to bottom, var(--sw-accent), transparent);
+      animation: cue-stretch 1.8s ease-in-out infinite;
+    }
+    @keyframes cue-stretch {
+      0%, 100% { transform: scaleY(1);   transform-origin: top;    }
+      50%      { transform: scaleY(0.4); transform-origin: bottom; }
+    }
+
+    /* ── The scroll-world mount point ────────────────────────────────── */
+    #world {
+      position: relative;
+      z-index: 10;
+      /* offset top so the intro can fully breathe */
+      margin-top: -100vh;   /* engine still fixes everything, this just stacks under intro */
+    }
+
+    /* ── Stronger universal scrim — sits over any coloured background so
+          dark serif headlines read on every scene without conflict. ──────── */
+    .sw-root .sw-copylayer::before {
+      background:
+        linear-gradient(95deg,
+          rgba(20, 16, 30, 0.92) 0%,
+          rgba(20, 16, 30, 0.80) 20%,
+          rgba(20, 16, 30, 0.55) 44%,
+          rgba(20, 16, 30, 0.22) 70%,
+          transparent 100%) !important;
+      width: min(78vw, 1000px) !important;
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+    }
+    .sw-root .sw-copy {
+      color: #f5ede0;
+    }
+    .sw-root .sw-copy__num {
+      color: rgba(245, 237, 224, 0.6) !important;
+    }
+    .sw-root .sw-copy__title {
+      text-shadow: 0 4px 28px rgba(0,0,0,0.55) !important;
+    }
+    .sw-root .sw-copy__body {
+      text-shadow: 0 2px 16px rgba(0,0,0,0.55) !important;
+    }
+    .sw-root .sw-copy__tags li {
+      background: rgba(255,255,255,0.10) !important;
+      border-color: rgba(255,255,255,0.18) !important;
+      color: #f5ede0 !important;
+    }
+
+    /* ── Refined engine chrome (overrides injected engine CSS) ───────── */
+    .sw-root .sw-copy__title {
+      font-family: var(--sw-font-display);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.0;
+      color: #f5ede0 !important;
+    }
+    .sw-root .sw-copy__eyebrow {
+      font-family: var(--sw-font-mono);
+      letter-spacing: 0.25em;
+      font-weight: 500;
+      color: var(--sw-accent) !important;
+    }
+    .sw-root .sw-copy__body {
+      font-family: var(--sw-font-body);
+      letter-spacing: 0;
+      color: rgba(245, 237, 224, 0.88) !important;
+    }
+    .sw-root .sw-copy__tags li {
+      font-family: var(--sw-font-mono);
+      letter-spacing: 0.05em;
+    }
+    .sw-root .sw-btn {
+      font-family: var(--sw-font-body);
+      letter-spacing: 0.01em;
+    }
+    .sw-root .sw-brand__name {
+      font-family: var(--sw-font-display);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .sw-root .sw-topcta {
+      font-family: var(--sw-font-body);
+      letter-spacing: 0.02em;
+    }
+    .sw-root .sw-route__label,
+    .sw-root .sw-nav__item,
+    .sw-root .sw-hint {
+      font-family: var(--sw-font-mono);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+    }
+    .sw-root .sw-copy__num {
+      font-family: var(--sw-font-mono);
+      letter-spacing: 0.18em;
+      font-weight: 500;
+    }
+
+    /* ── Footer (after the scroll-world ends) ───────────────────────── */
+    footer.site-footer {
+      position: relative; z-index: 12;
+      background: var(--sw-bg);
+      padding: 80px 24px 60px;
+      text-align: center;
+      border-top: 1px solid rgba(138,123,181,0.18);
+    }
+    footer.site-footer .cta-line {
+      font-family: var(--sw-font-display);
+      font-weight: 700;
+      font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+      line-height: 1.1;
+      max-width: 16ch; margin: 0 auto 28px;
+      color: var(--sw-ink);
+      letter-spacing: -0.02em;
+    }
+    footer.site-footer .cta-line em {
+      font-style: italic; color: var(--sw-accent); font-weight: 400;
+    }
+    footer.site-footer .links {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    footer.site-footer .links a {
+      text-decoration: none;
+      font-family: var(--sw-font-body);
+      font-weight: 600; font-size: 0.95rem;
+      padding: 13px 24px; border-radius: 999px;
+      color: var(--sw-ink);
+      border: 1.5px solid rgba(36,29,43,0.25);
+      transition: transform .2s ease, background .2s ease;
+    }
+    footer.site-footer .links a:hover {
+      transform: translateY(-2px);
+      background: rgba(138,123,181,0.10);
+    }
+    footer.site-footer .links a.primary {
+      background: var(--sw-ink);
+      color: var(--sw-bg);
+      border-color: var(--sw-ink);
+    }
+    footer.site-footer .links a.primary:hover { background: var(--sw-accent); border-color: var(--sw-accent); }
+
+    footer.site-footer .meta {
+      font-family: var(--sw-font-mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sw-ink-soft);
+      opacity: 0.85;
+    }
+    footer.site-footer .meta a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px dotted currentColor;
+    }
+
+    /* ── Scroll-world chrome tweaks: a thinner scrollbar ─────────────── */
+    .sw-root .sw-scrollbar { height: 2px; }
   </style>
 </head>
 <body>
-  <div id="top"></div>
+
+  <!-- ── Loading screen (kicked off JS-side) ──────────────────────── -->
+  <div id="loader" aria-hidden="true">
+    <div class="loader-mark"></div>
+    <div class="loader-text">preparing the world…</div>
+  </div>
+
+  <!-- ── Top-of-page intro (overlays before scroll-world takes over) ── -->
+  <section class="intro" id="top">
+    <p class="intro-eyebrow">PORTFOLIO · 2026</p>
+    <h1 class="intro-title">
+      I build web apps<br/>that <em>don’t suck</em>.
+    </h1>
+    <p class="intro-sub">
+      Gilang, a web developer shipping in Laravel &amp; CodeIgniter — and getting
+      a little too excited about gamification. Scroll to fly through five scenes.
+    </p>
+    <div class="intro-meta">
+      <span>Indonesia</span>
+      <span>PHP · Laravel · CodeIgniter</span>
+      <span>Open to work</span>
+    </div>
+    <div class="intro-cue">scroll</div>
+  </section>
+
+  <!-- ── Scroll-world mount ───────────────────────────────────────── -->
   <div id="world"></div>
+
+  <!-- ── Footer ───────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p class="cta-line">Got an idea? <em>Let’s build it.</em></p>
+    <div class="links">
+      <a class="primary" href="mailto:gilangramdhani708@gmail.com">Email me</a>
+      <a href="https://github.com/gilangg24" target="_blank" rel="noopener">GitHub →</a>
+      <a href="https://github.com/gilangg24/KlnikApp" target="_blank" rel="noopener">KlinikApp →</a>
+      <a href="https://github.com/gilangg24/klikkode" target="_blank" rel="noopener">KlikKode →</a>
+    </div>
+    <p class="meta">
+      Built on
+      <a href="https://github.com/oso95/scroll-world" target="_blank" rel="noopener">oso95/scroll-world</a>
+      · MIT
+      · &copy; 2026 Gilang
+    </p>
+  </footer>
 
   <script src="js/scrub-engine.js"></script>
   <script>
-    // -----------------------------------------------------------------------
-    //  Gilang's portfolio — 5-scene scroll-through world.
-    //  Engine: scroll-world v1 (oso95/scroll-world — MIT).
-    //  Until the real 3D assets are generated, this config falls back to
-    //  the SVG placeholders in assets/scenes/ — stills + copy work, but the
-    //  camera doesn't fly between scenes (only the still crossfade plays).
-    //  See references/runbook.md for the asset-generation pipeline.
-    // -----------------------------------------------------------------------
+    // ── Loader fade-out (waits for fonts to be ready so first paint is correct) ──
+    (function () {
+      function hide() {
+        const el = document.getElementById('loader');
+        if (el) el.classList.add('hidden');
+      }
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () { setTimeout(hide, 220); });
+      } else {
+        window.addEventListener('load', function () { setTimeout(hide, 220); });
+      }
+    })();
+
+    // ── The 5-scene scroll-through world ────────────────────────────
     mountScrollWorld(document.getElementById('world'), {
-      brand:  { name: 'Gilang', href: '#top' },
-      cta:    { label: 'Get in touch', href: '#contact' },
+      brand:  { name: 'Gilang',     href: '#top' },
+      cta:    { label: 'Hire me →', href: '#contact' },
       hint:   'scroll to fly in',
       nav:    true,
       atmosphere: true,
-      diveScroll: 1.4,           // viewport-heights of scroll per dive clip
-      connScroll: 0.9,           // ...per connector
+      diveScroll: 1.4,
+      connScroll: 0.9,
 
       sections: [
-        // ── 1 · HERO ──────────────────────────────────────────────────────
         {
           id:      'hero',
           label:   'Workshop',
           still:   'assets/scenes/1-hero.svg',
           clip:    'assets/vid/1-hero.mp4',
-          stillMobile: 'assets/scenes/1-hero-m.svg',
-          clipMobile:  'assets/vid/1-hero-m.mp4',
           accent:  '#8a7bb5',
           scroll:  1.6,
           linger:  0.45,
@@ -60,32 +407,24 @@
           body:    'I’m Gilang — a web developer who ships in Laravel & CodeIgniter, and gets a little too excited about gamification.',
           tags:    ['Indonesia', 'PHP · Laravel · CodeIgniter', 'Open to work'],
         },
-
-        // ── 2 · ABOUT ─────────────────────────────────────────────────────
         {
           id:      'about',
           label:   'About',
           still:   'assets/scenes/2-about.svg',
           clip:    'assets/vid/2-about.mp4',
-          stillMobile: 'assets/scenes/2-about-m.svg',
-          clipMobile:  'assets/vid/2-about-m.mp4',
           accent:  '#ffb347',
           scroll:  1.3,
           linger:  0.40,
           eyebrow: 'About',
           title:   'Stack, story, and what I’m learning next.',
-          body:    'Four repos shipped this month, a Laravel clinic in production, and a CodeIgniter sidekick on standby. Currently exploring AI tooling (yes, this very page was scaffolded by one).',
-          tags:    ['Laravel 11', 'CodeIgniter 4', 'PHP 8.3', 'MySQL', 'Git · GitHub', 'Higgsfield-powered scenes'],
+          body:    'Four repos shipped this month, a Laravel clinic in production, and a CodeIgniter sidekick on standby. Currently exploring AI tooling.',
+          tags:    ['Laravel 11', 'CodeIgniter 4', 'PHP 8.3', 'MySQL', 'Git · GitHub', 'AI-assisted workflows'],
         },
-
-        // ── 3 · KLINIK APP ────────────────────────────────────────────────
         {
           id:      'klinik',
           label:   'KlinikApp',
           still:   'assets/scenes/3-klinik.svg',
           clip:    'assets/vid/3-klinik.mp4',
-          stillMobile: 'assets/scenes/3-klinik-m.svg',
-          clipMobile:  'assets/vid/3-klinik-m.mp4',
           accent:  '#7dd3a8',
           scroll:  1.5,
           linger:  0.45,
@@ -94,15 +433,11 @@
           body:    'Laravel 11 · MySQL · appointments, patient records, dashboards. Built end-to-end with migrations, seeders, and a clean CRUD baseline.',
           tags:    ['github.com/gilangg24/KlnikApp', 'Laravel 11', 'Blade · Tailwind'],
         },
-
-        // ── 4 · KLIKKODE ─────────────────────────────────────────────────
         {
           id:      'klikkode',
           label:   'KlikKode',
           still:   'assets/scenes/4-klikkode.svg',
           clip:    'assets/vid/4-klikkode.mp4',
-          stillMobile: 'assets/scenes/4-klikkode-m.svg',
-          clipMobile:  'assets/vid/4-klikkode-m.mp4',
           accent:  '#ec5b8e',
           scroll:  1.5,
           linger:  0.45,
@@ -111,37 +446,30 @@
           body:    'CodeIgniter 4 · gamified quiz app — XP, leaderboards, topic paths. The kind of project that makes you forget you’re studying.',
           tags:    ['github.com/gilangg24/klikkode', 'CodeIgniter 4', 'Gamification'],
         },
-
-        // ── 5 · CONTACT ───────────────────────────────────────────────────
         {
           id:      'contact',
           label:   'Contact',
           still:   'assets/scenes/5-contact.svg',
           clip:    'assets/vid/5-contact.mp4',
-          stillMobile: 'assets/scenes/5-contact-m.svg',
-          clipMobile:  'assets/vid/5-contact-m.mp4',
           accent:  '#5b8def',
           scroll:  1.4,
           linger:  0.50,
           eyebrow: 'Let’s build something',
           title:   'Open for freelance & full-time roles.',
-          body:    'Got an idea, a project, or a position in mind? I’m one email or one DM away. Let me know what you’re building.',
+          body:    'Got an idea, a project, or a position in mind? I’m one email or one DM away.',
           tags:    ['gilangramdhani708@gmail.com', 'GitHub: @gilangg24', 'Based in Indonesia'],
           cta: {
-            primary:   { label: 'Email me',  href: 'mailto:gilangramdhani708@gmail.com' },
-            secondary: { label: 'GitHub',    href: 'https://github.com/gilangg24' },
+            primary:   { label: 'Email me', href: 'mailto:gilangramdhani708@gmail.com' },
+            secondary: { label: 'GitHub',   href: 'https://github.com/gilangg24' },
           },
         },
       ],
 
-      // length === sections.length - 1, in order.
-      // Generated per the runbook when ready (references/pipeline.md §6).
-      // Leaving these as commented paths makes it easy to drop in the encodes.
       connectors: [
-        // 'assets/vid/conn-1-2.mp4',   // hero  → about
-        // 'assets/vid/conn-2-3.mp4',   // about → klinik
-        // 'assets/vid/conn-3-4.mp4',   // klinik → klikkode
-        // 'assets/vid/conn-4-5.mp4',   // klikkode → contact
+        // 'assets/vid/conn-1-2.mp4',
+        // 'assets/vid/conn-2-3.mp4',
+        // 'assets/vid/conn-3-4.mp4',
+        // 'assets/vid/conn-4-5.mp4',
       ],
       connectorsMobile: [
         // 'assets/vid/conn-1-2-m.mp4',

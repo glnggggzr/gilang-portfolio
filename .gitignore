@@ -34,6 +34,13 @@ ffmpeg-*.txt
 node_modules/
 package-lock.json
 
+# ── Local preview server / visual verification ─────────────────────────────
+test-preview.js
+screenshot.js
+preview-stdout.log
+preview-stderr.log
+screenshots/
+
 # ── Build / deploy output ──────────────────────────────────────────────────
 dist/
 build/

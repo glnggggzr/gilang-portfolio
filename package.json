@@ -1,0 +1,16 @@
+{
+  "name": "gilang-portfolio",
+  "version": "1.0.0",
+  "description": "> Personal portfolio of Gilang — a web developer building with Laravel & CodeIgniter. > Rendered as a **scroll-scrubbed 3D world**: as you scroll, the camera flies between > five diorama scenes (Hero → About → KlinikApp → KlikKode → Contact).",
+  "main": "test-preview.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "playwright": "^1.62.0"
+  }
+}
