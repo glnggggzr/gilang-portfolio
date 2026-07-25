@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Placeholder still for Scene 4 · KlikKode -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stop-color="#ffd8e8"/>
+      <stop offset="55%" stop-color="#ec5b8e"/>
+      <stop offset="100%" stop-color="#99345e"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1536" height="1024" fill="url(#bg4)"/>
+
+  <!-- leaderboard podium -->
+  <g transform="translate(420,520)">
+    <rect x="0"   y="80"  width="120" height="180" fill="#b894e0"/>
+    <rect x="140" y="40"  width="120" height="220" fill="#ffb347"/>
+    <rect x="280" y="120" width="120" height="140" fill="#7dd3a8"/>
+    <!-- trophy -->
+    <g transform="translate(180,-110)">
+      <circle cx="0" cy="0" r="46" fill="#ffe082"/>
+      <rect x="-6" y="40"  width="12" height="36" fill="#cc9930"/>
+      <text x="0" y="14" text-anchor="middle" font-size="44" fill="#cc9930" font-weight="700">★</text>
+    </g>
+    <!-- rank numbers -->
+    <text x="60"  y="290" text-anchor="middle" font-size="36" font-weight="700" fill="#241d2b" font-family="ui-rounded, system-ui, sans-serif">2</text>
+    <text x="200" y="290" text-anchor="middle" font-size="36" font-weight="700" fill="#241d2b" font-family="ui-rounded, system-ui, sans-serif">1</text>
+    <text x="340" y="290" text-anchor="middle" font-size="36" font-weight="700" fill="#241d2b" font-family="ui-rounded, system-ui, sans-serif">3</text>
+  </g>
+
+  <!-- XP badges -->
+  <g transform="translate(900,330)">
+    <text x="0" y="0"   font-family="ui-rounded, system-ui, sans-serif" font-weight="700" letter-spacing="4" font-size="22" fill="#241d2b" fill-opacity="0.7">SCENE 04 · 05</text>
+    <text x="0" y="80"  font-family="ui-rounded, system-ui, sans-serif" font-size="64" font-weight="700" fill="#241d2b">KlikKode</text>
+    <text x="0" y="140" font-family="-apple-system, system-ui, sans-serif" font-size="22" fill="#241d2b" fill-opacity="0.85">Gamified quizzes · XP · leaderboards</text>
+    <text x="0" y="220" font-family="-apple-system, system-ui, sans-serif" font-size="14" fill="#241d2b" fill-opacity="0.5">[ placeholder still — replace ]</text>
+
+    <!-- XP chips -->
+    <g transform="translate(0,260)" font-family="ui-rounded, system-ui, sans-serif" font-weight="700" fill="#241d2b">
+      <g transform="translate(0,0)">  <rect width="80" height="44" rx="22" fill="#f5ede0"/><text x="40" y="30" text-anchor="middle" font-size="18">+50XP</text></g>
+      <g transform="translate(96,0)"> <rect width="80" height="44" rx="22" fill="#f5ede0"/><text x="40" y="30" text-anchor="middle" font-size="18">+200</text></g>
+      <g transform="translate(192,0)"><rect width="80" height="44" rx="22" fill="#f5ede0"/><text x="40" y="30" text-anchor="middle" font-size="18">LVL 3</text></g>
+    </g>
+  </g>
+</svg>

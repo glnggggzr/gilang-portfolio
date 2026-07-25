@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Placeholder still for Scene 2 · About -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stop-color="#ffe7c2"/>
+      <stop offset="60%" stop-color="#ffb347"/>
+      <stop offset="100%" stop-color="#c97d20"/>
+    </linearGradient>
+    <radialGradient id="glow2" cx="50%" cy="36%" r="55%">
+      <stop offset="0%"  stop-color="#ffffff" stop-opacity="0.40"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1536" height="1024" fill="url(#bg2)"/>
+  <rect width="1536" height="1024" fill="url(#glow2)"/>
+
+  <!-- tool grid: Laravel, CI4, PHP, MySQL, Git, VS Code -->
+  <g transform="translate(220,400)" font-family="ui-rounded, system-ui, sans-serif" font-weight="700" fill="#241d2b">
+    <g transform="translate(0,0)">  <circle r="56" fill="#ff4d4d"/><text font-size="22" y="8" text-anchor="middle">L</text></g>
+    <g transform="translate(160,0)"><circle r="56" fill="#ee6a36"/><text font-size="22" y="8" text-anchor="middle">C</text></g>
+    <g transform="translate(320,0)"><circle r="56" fill="#7b6cd9"/><text font-size="22" y="8" text-anchor="middle">P</text></g>
+    <g transform="translate(480,0)"><circle r="56" fill="#00758f"/><text font-size="22" y="8" text-anchor="middle">M</text></g>
+    <g transform="translate(0,160)">  <circle r="56" fill="#f1502f"/><text font-size="22" y="8" text-anchor="middle">G</text></g>
+    <g transform="translate(160,160)"><circle r="56" fill="#3c99d4"/><text font-size="22" y="8" text-anchor="middle">V</text></g>
+    <g transform="translate(320,160)"><circle r="56" fill="#ffb300"/><text font-size="22" y="8" text-anchor="middle">JS</text></g>
+    <g transform="translate(480,160)"><circle r="56" fill="#65b349"/><text font-size="22" y="8" text-anchor="middle">N</text></g>
+  </g>
+
+  <!-- caption block -->
+  <g transform="translate(820,330)">
+    <text x="0" y="0" font-family="ui-rounded, system-ui, sans-serif" font-weight="700"
+          letter-spacing="4" font-size="22" fill="#241d2b" fill-opacity="0.7">SCENE 02 · 05</text>
+    <text x="0" y="80"  font-family="ui-rounded, system-ui, sans-serif" font-size="64" font-weight="700" fill="#241d2b">The toolbox.</text>
+    <text x="0" y="140" font-family="-apple-system, system-ui, sans-serif" font-size="22" fill="#241d2b" fill-opacity="0.85">Laravel · CodeIgniter · PHP · MySQL · Git · VS Code</text>
+    <text x="0" y="220" font-family="-apple-system, system-ui, sans-serif" font-size="16" fill="#241d2b" fill-opacity="0.5">[ placeholder still — replace ]</text>
+  </g>
+</svg>

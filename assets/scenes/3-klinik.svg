@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Placeholder still for Scene 3 · KlinikApp -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stop-color="#d8f3df"/>
+      <stop offset="60%" stop-color="#7dd3a8"/>
+      <stop offset="100%" stop-color="#3a9472"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1536" height="1024" fill="url(#bg3)"/>
+
+  <!-- isometric clinic building -->
+  <g transform="translate(540,420)" stroke="#241d2b" stroke-opacity="0.18" stroke-width="2">
+    <!-- building -->
+    <rect x="0" y="0" width="500" height="280" rx="12" fill="#f7fff8"/>
+    <!-- roof slope -->
+    <polygon points="0,0 250,-110 500,0" fill="#e0f5e9"/>
+    <!-- door -->
+    <rect x="220" y="150" width="60" height="130" fill="#5b8def"/>
+    <!-- cross sign -->
+    <g transform="translate(60,60)">
+      <rect x="-30" y="-10" width="60" height="20" fill="#ec5b8e"/>
+      <rect x="-10" y="-30" width="20" height="60" fill="#ec5b8e"/>
+    </g>
+    <!-- window blocks -->
+    <rect x="320" y="50" width="60" height="60" fill="#a7e8ca"/>
+    <rect x="400" y="50" width="60" height="60" fill="#a7e8ca"/>
+    <rect x="320" y="140" width="60" height="60" fill="#a7e8ca"/>
+    <rect x="400" y="140" width="60" height="60" fill="#a7e8ca"/>
+  </g>
+
+  <!-- caption -->
+  <g transform="translate(1100,330)">
+    <text x="0" y="0"  font-family="ui-rounded, system-ui, sans-serif" font-weight="700" letter-spacing="4" font-size="22"
+          fill="#241d2b" fill-opacity="0.7">SCENE 03 · 05</text>
+    <text x="0" y="80"  font-family="ui-rounded, system-ui, sans-serif" font-size="58" font-weight="700" fill="#241d2b">KlinikApp</text>
+    <text x="0" y="140" font-family="-apple-system, system-ui, sans-serif" font-size="22" fill="#241d2b" fill-opacity="0.85">Laravel · appointments &amp; records</text>
+    <text x="0" y="220" font-family="-apple-system, system-ui, sans-serif" font-size="14" fill="#241d2b" fill-opacity="0.5">[ placeholder still — replace ]</text>
+  </g>
+</svg>

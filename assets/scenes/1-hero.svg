@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Placeholder still for Scene 1 · Hero — replace with a 3:2 rendered diorama.
+  See references/prompts.md §scene-1 and references/runbook.md "How to generate".
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stop-color="#d9c9f0"/>
+      <stop offset="60%" stop-color="#a994d4"/>
+      <stop offset="100%" stop-color="#7864a4"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="74%" cy="22%" r="62%">
+      <stop offset="0%"  stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="iso" width="64" height="56" patternUnits="userSpaceOnUse" patternTransform="translate(0,0) scale(1.2)">
+      <path d="M0,28 L32,0 L64,28 L32,56 Z" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1536" height="1024" fill="url(#bg)"/>
+  <rect width="1536" height="1024" fill="url(#iso)"/>
+  <rect width="1536" height="1024" fill="url(#glow)"/>
+
+  <!-- floating dots like distant stars/code symbols -->
+  <g fill="#ffffff" fill-opacity="0.45">
+    <circle cx="180"  cy="180" r="3"/>
+    <circle cx="260"  cy="320" r="2"/>
+    <circle cx="120"  cy="520" r="4"/>
+    <circle cx="380"  cy="760" r="2"/>
+    <circle cx="1200" cy="170" r="3"/>
+    <circle cx="1380" cy="420" r="2"/>
+    <circle cx="1100" cy="820" r="4"/>
+    <circle cx="1450" cy="700" r="2"/>
+  </g>
+
+  <!-- central card -->
+  <g transform="translate(768,512)">
+    <rect x="-360" y="-180" width="720" height="360" rx="28" fill="#241d2b" fill-opacity="0.78"/>
+    <text x="-310" y="-90" font-family="ui-rounded, system-ui, sans-serif" font-size="22"
+          letter-spacing="4" fill="#b894e0" font-weight="700">SCENE 01 · 05</text>
+    <text x="-310" y="-20" font-family="ui-rounded, system-ui, sans-serif" font-size="56"
+          font-weight="700" fill="#f5ede0">Hi, I’m Gilang.</text>
+    <text x="-310" y="40"  font-family="-apple-system, system-ui, sans-serif" font-size="22"
+          fill="#cdbedf">Web dev · Laravel / CodeIgniter · Indonesia</text>
+    <text x="-310" y="120" font-family="-apple-system, system-ui, sans-serif" font-size="18"
+          fill="#ffffff" fill-opacity="0.55">[ placeholder still — replace with generated clip ]</text>
+  </g>
+</svg>

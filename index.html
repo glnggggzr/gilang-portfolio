@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Gilang — Web Developer · Laravel / CodeIgniter / 3D Scroll Portfolio</title>
+  <meta name="description" content="Personal portfolio of Gilang — scroll through the worlds he's built: KlinikApp, KlikKode, and more." />
+  <meta name="author" content="Gilang" />
+
+  <!-- Theme tokens — these win over the engine's defaults (no specificity hacks needed,
+       the engine CSS is wrapped in @layer sw so :root rules win). -->
+  <style>
+    :root, .sw-root {
+      --sw-bg:        #F5EDE0;   /* scene background — match the generated clips' bg    */
+      --sw-ink:       #241d2b;   /* primary text colour                                */
+      --sw-ink-soft:  #6a6072;   /* secondary text                                     */
+      --sw-accent:    #8a7bb5;   /* default accent (overridden per section by config) */
+      --sw-font-display: ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif;
+      --sw-font-body:    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div id="top"></div>
+  <div id="world"></div>
+
+  <script src="js/scrub-engine.js"></script>
+  <script>
+    // -----------------------------------------------------------------------
+    //  Gilang's portfolio — 5-scene scroll-through world.
+    //  Engine: scroll-world v1 (oso95/scroll-world — MIT).
+    //  Until the real 3D assets are generated, this config falls back to
+    //  the SVG placeholders in assets/scenes/ — stills + copy work, but the
+    //  camera doesn't fly between scenes (only the still crossfade plays).
+    //  See references/runbook.md for the asset-generation pipeline.
+    // -----------------------------------------------------------------------
+    mountScrollWorld(document.getElementById('world'), {
+      brand:  { name: 'Gilang', href: '#top' },
+      cta:    { label: 'Get in touch', href: '#contact' },
+      hint:   'scroll to fly in',
+      nav:    true,
+      atmosphere: true,
+      diveScroll: 1.4,           // viewport-heights of scroll per dive clip
+      connScroll: 0.9,           // ...per connector
+
+      sections: [
+        // ── 1 · HERO ──────────────────────────────────────────────────────
+        {
+          id:      'hero',
+          label:   'Workshop',
+          still:   'assets/scenes/1-hero.svg',
+          clip:    'assets/vid/1-hero.mp4',
+          stillMobile: 'assets/scenes/1-hero-m.svg',
+          clipMobile:  'assets/vid/1-hero-m.mp4',
+          accent:  '#8a7bb5',
+          scroll:  1.6,
+          linger:  0.45,
+          eyebrow: 'Hi, I’m',
+          title:   'I build web apps that don’t suck.',
+          body:    'I’m Gilang — a web developer who ships in Laravel & CodeIgniter, and gets a little too excited about gamification.',
+          tags:    ['Indonesia', 'PHP · Laravel · CodeIgniter', 'Open to work'],
+        },
+
+        // ── 2 · ABOUT ─────────────────────────────────────────────────────
+        {
+          id:      'about',
+          label:   'About',
+          still:   'assets/scenes/2-about.svg',
+          clip:    'assets/vid/2-about.mp4',
+          stillMobile: 'assets/scenes/2-about-m.svg',
+          clipMobile:  'assets/vid/2-about-m.mp4',
+          accent:  '#ffb347',
+          scroll:  1.3,
+          linger:  0.40,
+          eyebrow: 'About',
+          title:   'Stack, story, and what I’m learning next.',
+          body:    'Four repos shipped this month, a Laravel clinic in production, and a CodeIgniter sidekick on standby. Currently exploring AI tooling (yes, this very page was scaffolded by one).',
+          tags:    ['Laravel 11', 'CodeIgniter 4', 'PHP 8.3', 'MySQL', 'Git · GitHub', 'Higgsfield-powered scenes'],
+        },
+
+        // ── 3 · KLINIK APP ────────────────────────────────────────────────
+        {
+          id:      'klinik',
+          label:   'KlinikApp',
+          still:   'assets/scenes/3-klinik.svg',
+          clip:    'assets/vid/3-klinik.mp4',
+          stillMobile: 'assets/scenes/3-klinik-m.svg',
+          clipMobile:  'assets/vid/3-klinik-m.mp4',
+          accent:  '#7dd3a8',
+          scroll:  1.5,
+          linger:  0.45,
+          eyebrow: 'Project 01',
+          title:   'A clinic app that feels calm.',
+          body:    'Laravel 11 · MySQL · appointments, patient records, dashboards. Built end-to-end with migrations, seeders, and a clean CRUD baseline.',
+          tags:    ['github.com/gilangg24/KlnikApp', 'Laravel 11', 'Blade · Tailwind'],
+        },
+
+        // ── 4 · KLIKKODE ─────────────────────────────────────────────────
+        {
+          id:      'klikkode',
+          label:   'KlikKode',
+          still:   'assets/scenes/4-klikkode.svg',
+          clip:    'assets/vid/4-klikkode.mp4',
+          stillMobile: 'assets/scenes/4-klikkode-m.svg',
+          clipMobile:  'assets/vid/4-klikkode-m.mp4',
+          accent:  '#ec5b8e',
+          scroll:  1.5,
+          linger:  0.45,
+          eyebrow: 'Project 02',
+          title:   'A quiz that turns learning into XP.',
+          body:    'CodeIgniter 4 · gamified quiz app — XP, leaderboards, topic paths. The kind of project that makes you forget you’re studying.',
+          tags:    ['github.com/gilangg24/klikkode', 'CodeIgniter 4', 'Gamification'],
+        },
+
+        // ── 5 · CONTACT ───────────────────────────────────────────────────
+        {
+          id:      'contact',
+          label:   'Contact',
+          still:   'assets/scenes/5-contact.svg',
+          clip:    'assets/vid/5-contact.mp4',
+          stillMobile: 'assets/scenes/5-contact-m.svg',
+          clipMobile:  'assets/vid/5-contact-m.mp4',
+          accent:  '#5b8def',
+          scroll:  1.4,
+          linger:  0.50,
+          eyebrow: 'Let’s build something',
+          title:   'Open for freelance & full-time roles.',
+          body:    'Got an idea, a project, or a position in mind? I’m one email or one DM away. Let me know what you’re building.',
+          tags:    ['gilangramdhani708@gmail.com', 'GitHub: @gilangg24', 'Based in Indonesia'],
+          cta: {
+            primary:   { label: 'Email me',  href: 'mailto:gilangramdhani708@gmail.com' },
+            secondary: { label: 'GitHub',    href: 'https://github.com/gilangg24' },
+          },
+        },
+      ],
+
+      // length === sections.length - 1, in order.
+      // Generated per the runbook when ready (references/pipeline.md §6).
+      // Leaving these as commented paths makes it easy to drop in the encodes.
+      connectors: [
+        // 'assets/vid/conn-1-2.mp4',   // hero  → about
+        // 'assets/vid/conn-2-3.mp4',   // about → klinik
+        // 'assets/vid/conn-3-4.mp4',   // klinik → klikkode
+        // 'assets/vid/conn-4-5.mp4',   // klikkode → contact
+      ],
+      connectorsMobile: [
+        // 'assets/vid/conn-1-2-m.mp4',
+        // 'assets/vid/conn-2-3-m.mp4',
+        // 'assets/vid/conn-3-4-m.mp4',
+        // 'assets/vid/conn-4-5-m.mp4',
+      ],
+    });
+  </script>
+</body>
+</html>

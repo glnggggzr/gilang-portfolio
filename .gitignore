@@ -1,0 +1,49 @@
+# ── Engine junk ────────────────────────────────────────────────────────────
+*.log
+.DS_Store
+Thumbs.db
+.env
+.env.*
+!.env.example
+
+# ── Editor / IDE ───────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Local scripts / scratch ────────────────────────────────────────────────
+*.bak
+*.tmp
+*~
+local_main.txt
+main_backup.txt
+new_main_test.txt
+
+# ── Assets: master / source files (too big for git; re-generate via runbook) ──
+assets/src/
+assets/stills/
+assets/renders/
+assets/drafts/
+*.mov
+*.wav
+*.png.tmp
+ffmpeg-*.txt
+
+# ── Node (if/when added) ───────────────────────────────────────────────────
+node_modules/
+package-lock.json
+
+# ── Build / deploy output ──────────────────────────────────────────────────
+dist/
+build/
+.cache/
+.vercel/
+.netlify/
+
+# ── OS ────────────────────────────────────────────────────────────────────
+$RECYCLE.BIN/
+.Trash-*/
+
+# ── Vendor / deps (if any are ever vendored) ───────────────────────────────
+vendor/

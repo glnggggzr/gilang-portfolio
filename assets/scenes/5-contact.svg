@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Placeholder still for Scene 5 · Contact -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stop-color="#cee2ff"/>
+      <stop offset="60%" stop-color="#5b8def"/>
+      <stop offset="100%" stop-color="#2c4ea5"/>
+    </linearGradient>
+    <radialGradient id="glow5" cx="50%" cy="50%" r="60%">
+      <stop offset="0%"  stop-color="#ffffff" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1536" height="1024" fill="url(#bg5)"/>
+  <rect width="1536" height="1024" fill="url(#glow5)"/>
+
+  <!-- envelope -->
+  <g transform="translate(768,512)">
+    <rect x="-280" y="-160" width="560" height="320" rx="14" fill="#f5ede0" stroke="#241d2b" stroke-opacity="0.15" stroke-width="3"/>
+    <polygon points="-280,-160 0,40 280,-160" fill="#241d2b" fill-opacity="0.08"/>
+    <g transform="translate(-220,-80)" fill="#241d2b" font-family="ui-rounded, system-ui, sans-serif" font-weight="700">
+      <text font-size="22" letter-spacing="3" fill-opacity="0.6">SCENE 05 · 05</text>
+      <text y="60"  font-size="56">Let’s build</text>
+      <text y="120" font-size="56">something.</text>
+      <text y="180" font-size="18" font-weight="500" fill-opacity="0.7">gilangramdhani708@gmail.com · github.com/gilangg24</text>
+      <text y="220" font-size="14" font-weight="500" fill-opacity="0.45">[ placeholder still — replace ]</text>
+    </g>
+  </g>
+</svg>
