@@ -1,21 +1,19 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#f4ecdf" />
-  <title>Gilang â€” Web Developer Â· Laravel Â· CodeIgniter</title>
-  <meta name="description" content="Personal portfolio of Gilang â€” a web developer building with Laravel & CodeIgniter. Selected work, stack, and contact." />
+  <meta name="theme-color" content="#f5ede0" />
+  <title>Gilang — Web Developer · Laravel · CodeIgniter</title>
+  <meta name="description" content="Personal portfolio of Gilang — a web developer building with Laravel & CodeIgniter. Selected work, stack, and contact." />
   <meta name="author" content="Gilang" />
 
-  <!-- Fonts: serif display + sans body + mono. Loading display in 3 weights. -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" />
 
   <style>
-    /* â”€â”€ Reset & tokens â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     :root {
@@ -23,18 +21,16 @@
       --ink:          #1a1530;
       --ink-2:        #574c66;
       --ink-soft:     #948aa3;
-      --accent:       #ff5b3a;          /* coral â€” the only saturated color */
+      --accent:       #ff5b3a;
       --accent-ink:   #b5371a;
       --line:         rgba(26,21,48,0.10);
       --line-strong:  rgba(26,21,48,0.20);
       --card-bd:      rgba(26,21,48,0.06);
       --shadow-sm:    0 1px 2px rgba(26,21,48,0.06), 0 2px 8px rgba(26,21,48,0.04);
       --shadow-md:    0 4px 16px rgba(26,21,48,0.08), 0 1px 4px rgba(26,21,48,0.04);
-
       --display: 'Fraunces', ui-serif, Georgia, serif;
       --body:    'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
       --mono:    'JetBrains Mono', ui-monospace, Menlo, monospace;
-
       --gutter: clamp(1.25rem, 4vw, 3rem);
       --max-w:  1200px;
     }
@@ -50,7 +46,6 @@
     }
     ::selection { background: var(--ink); color: var(--bg); }
 
-    /* Subtle atmosphere: radial corner glows + film grain. Keep it QUIET. */
     body::before {
       content: '';
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
@@ -65,11 +60,10 @@
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
     }
 
-    /* â”€â”€ Reusable container â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .wrap { position: relative; z-index: 1; max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); }
     section { position: relative; z-index: 2; }
 
-    /* â”€â”€ Top nav (minimal, no sliding pill) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── Top nav ─────────────────────────────────────────────────────── */
     .topnav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       backdrop-filter: blur(16px) saturate(150%);
@@ -88,37 +82,54 @@
     }
     @media (max-width: 720px) { .topnav-inner { height: 60px; } }
 
+    /* Brand area: tucked cleanly to the top-left corner. */
     .brand {
-      display: flex; align-items: center; gap: 12px;
+      display: flex; align-items: center; gap: 10px;
       text-decoration: none; color: var(--ink);
+      padding: 4px 0;
+      flex-shrink: 0;
     }
-    /* Monogram â€” a custom serif "G" in a coral square. Visual identity. */
     .brand-mark {
-      width: 36px; height: 44px;
+      width: 30px; height: 36px;
       background: var(--accent);
-      border-radius: 8px 8px 10px 10px;
+      border-radius: 6px 6px 8px 8px;
       display: grid; place-items: center;
-      box-shadow: 0 8px 20px rgba(255,91,58,0.30);
+      box-shadow: 0 6px 16px rgba(255,91,58,0.28);
       transition: transform .35s cubic-bezier(.4,0,.2,1);
+      flex-shrink: 0;
     }
     .brand-mark .g-letter {
       font-family: var(--display);
       font-weight: 700;
-      font-size: 24px;
+      font-size: 20px;
       color: var(--bg);
       line-height: 1;
-      margin-top: -3px;
+      margin-top: -2px;
     }
     .brand:hover .brand-mark { transform: rotate(-6deg); }
     .brand-name {
       font-family: var(--display);
-      font-weight: 700; font-size: 1.05rem;
-      letter-spacing: -0.01em;
+      font-weight: 700; font-size: 0.95rem;
+      letter-spacing: -0.015em;
+      line-height: 1;
+      white-space: nowrap;
+      display: inline-flex; align-items: baseline;
     }
-    .brand-name em {
+    .brand-name .name {
+      color: var(--ink);
+    }
+    .brand-name .sep {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 500;
+      margin: 0 4px;
+    }
+    .brand-name .port {
       font-style: italic; font-weight: 400;
       color: var(--ink-2);
+      letter-spacing: -0.01em;
     }
+
     .nav-links { display: flex; gap: 28px; align-items: center; }
     .nav-links a {
       font-family: var(--mono);
@@ -143,7 +154,7 @@
       .nav-cta { padding: 9px 14px; font-size: 0.78rem; }
     }
 
-    /* â”€â”€ Loading â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── Loading ───────────────────────────────────────────────────── */
     #loader {
       position: fixed; inset: 0; z-index: 1000;
       display: flex; align-items: center; justify-content: center;
@@ -165,7 +176,7 @@
       50%      { transform: translateY(-6px) scale(1.05); }
     }
 
-    /* â”€â”€ 1 Â· HERO â€” single column, big type + signature marquee â”€â”€â”€â”€â”€â”€ */
+    /* ── 1 · HERO ───────────────────────────────────────────────────── */
     .hero {
       min-height: 100vh; min-height: 100svh;
       display: flex; flex-direction: column;
@@ -189,11 +200,8 @@
       0%, 100% { box-shadow: 0 0 0 4px rgba(255,91,58,0.18); }
       50%      { box-shadow: 0 0 0 10px rgba(255,91,58,0);   }
     }
-
-    /* The big headline â€” single column, lots of room to breathe. */
     .hero-title {
-      font-family: var(--display);
-      font-weight: 700;
+      font-family: var(--display); font-weight: 700;
       font-size: clamp(3rem, 9vw, 8.5rem);
       line-height: 0.96;
       letter-spacing: -0.035em;
@@ -201,8 +209,7 @@
       color: var(--ink);
     }
     .hero-title em {
-      font-style: italic;
-      font-weight: 300;
+      font-style: italic; font-weight: 300;
       color: var(--accent);
     }
     .hero-title .strike {
@@ -219,7 +226,6 @@
       transform: rotate(-2deg);
       border-radius: 2px;
     }
-
     .hero-sub {
       margin-top: 40px;
       max-width: 60ch;
@@ -228,7 +234,6 @@
       line-height: 1.6;
     }
     .hero-sub strong { color: var(--ink); font-weight: 600; }
-
     .hero-actions {
       margin-top: 44px;
       display: flex; gap: 14px; flex-wrap: wrap;
@@ -246,7 +251,6 @@
       border: 1.5px solid var(--line-strong);
     }
     .hero-actions .secondary:hover { transform: translateY(-2px); border-color: var(--ink); }
-
     .hero-meta {
       margin-top: 56px;
       display: flex; gap: 16px; flex-wrap: wrap;
@@ -262,7 +266,7 @@
       font-weight: 700;
     }
 
-    /* â”€â”€ Marquee (signature element) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── Marquee (signature) ─────────────────────────────────────────── */
     .marquee {
       position: relative;
       overflow: hidden;
@@ -278,7 +282,7 @@
       position: absolute; top: 0; bottom: 0; width: 80px;
       pointer-events: none; z-index: 2;
     }
-    .marquee::before { left: 0;  background: linear-gradient(90deg, var(--bg), transparent); }
+    .marquee::before { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
     .marquee::after  { right: 0; background: linear-gradient(-90deg, var(--bg), transparent); }
     .marquee-track {
       display: flex;
@@ -293,8 +297,7 @@
       to   { transform: translate3d(-50%,0,0); }
     }
     .marquee-item {
-      font-family: var(--display);
-      font-weight: 700;
+      font-family: var(--display); font-weight: 700;
       font-size: clamp(1.3rem, 2vw, 1.9rem);
       letter-spacing: -0.02em;
       color: var(--ink);
@@ -311,9 +314,8 @@
       background: var(--accent);
       flex-shrink: 0;
     }
-    /* Repeat the items to allow seamless looping. JS-free. */
 
-    /* â”€â”€ Section header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── Section header ──────────────────────────────────────────────── */
     .sect-head { max-width: 720px; margin-bottom: 64px; }
     .sect-eyebrow {
       font-family: var(--mono); font-size: 11px;
@@ -327,8 +329,7 @@
       background: var(--accent);
     }
     .sect-title {
-      font-family: var(--display);
-      font-weight: 700;
+      font-family: var(--display); font-weight: 700;
       font-size: clamp(2rem, 4.4vw, 3.6rem);
       line-height: 1.04;
       letter-spacing: -0.025em;
@@ -346,7 +347,7 @@
       max-width: 56ch; line-height: 1.6;
     }
 
-    /* â”€â”€ 2 Â· PROJECTS â€” single column, big editorial cards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── 2 · PROJECTS ────────────────────────────────────────────────── */
     .projects { padding: 120px 0 80px; }
     .proj-list { display: flex; flex-direction: column; gap: 32px; }
     .proj {
@@ -369,7 +370,11 @@
       padding: 32px;
       background: var(--bg);
     }
-    .proj .body { padding: 40px 44px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+    .proj .body {
+      padding: 40px 44px;
+      display: flex; flex-direction: column; justify-content: center;
+      gap: 14px;
+    }
     .proj .num {
       font-family: var(--mono); font-size: 11px;
       letter-spacing: 0.18em; color: var(--ink-soft);
@@ -403,49 +408,122 @@
       transition: color .2s;
     }
     .proj .meta a:hover { color: var(--accent); border-color: var(--accent); }
-
     @media (max-width: 760px) {
       .proj { grid-template-columns: 1fr; }
       .proj .mock { min-height: 240px; padding: 24px; }
       .proj .body { padding: 28px; }
     }
 
-    /* — 2b · Project mockup styles — */
-    .m-dash, .m-podium, .m-terminal, .m-table { width: 100%; max-width: 460px; background: #fff; border-radius: 14px; box-shadow: var(--shadow-md); overflow: hidden; }
-    .m-dash-top { display: flex; gap: 6px; align-items: center; padding: 12px 14px; background: var(--bg); border-bottom: 1px solid var(--card-bd); }
-    .m-dash-top > span:not(.m-dash-title) { width: 10px; height: 10px; border-radius: 50%; background: var(--ink-soft); }
-    .m-dash-top > span:nth-child(1) { background: #ff6058; } .m-dash-top > span:nth-child(2) { background: #ffbd2e; } .m-dash-top > span:nth-child(3) { background: #28c941; }
-    .m-dash-title { margin-left: 10px; font-family: var(--mono); font-size: 11px; color: var(--ink-2); }
+    /* ── Project mockup styles ───────────────────────────────────────── */
+    .m-dash, .m-podium, .m-terminal, .m-table {
+      width: 100%; max-width: 460px;
+      background: #fff; border-radius: 14px;
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+    .m-dash-top {
+      display: flex; gap: 6px; align-items: center;
+      padding: 12px 14px; background: var(--bg);
+      border-bottom: 1px solid var(--card-bd);
+    }
+    .m-dash-top > span:not(.m-dash-title) {
+      width: 10px; height: 10px; border-radius: 50%; background: var(--ink-soft);
+    }
+    .m-dash-top > span:nth-child(1) { background: #ff6058; }
+    .m-dash-top > span:nth-child(2) { background: #ffbd2e; }
+    .m-dash-top > span:nth-child(3) { background: #28c941; }
+    .m-dash-title {
+      margin-left: 10px;
+      font-family: var(--mono); font-size: 11px;
+      color: var(--ink-2);
+    }
     .m-dash-body { padding: 16px 18px 20px; }
-    .m-stat { display: inline-block; width: 47%; margin: 2px 1%; padding: 10px 12px; background: rgba(255,91,58,0.06); border-radius: 10px; vertical-align: top; }
-    .m-stat .m-lbl { display: block; font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 4px; }
-    .m-stat .m-num { display: block; font-family: var(--display); font-size: 1.6rem; font-weight: 700; color: var(--ink); line-height: 1; }
-    .m-chart { display: flex; align-items: flex-end; gap: 5px; height: 64px; margin: 14px 0 12px; padding: 8px 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); }
-    .m-chart span { flex: 1; background: var(--accent); border-radius: 3px 3px 0 0; min-height: 6px; }
+    .m-stat {
+      display: inline-block; width: 47%;
+      margin: 2px 1%; padding: 10px 12px;
+      background: rgba(255,91,58,0.06); border-radius: 10px;
+      vertical-align: top;
+    }
+    .m-stat .m-lbl {
+      display: block; font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--ink-soft); margin-bottom: 4px;
+    }
+    .m-stat .m-num {
+      display: block; font-family: var(--display);
+      font-size: 1.6rem; font-weight: 700; color: var(--ink); line-height: 1;
+    }
+    .m-chart {
+      display: flex; align-items: flex-end; gap: 5px; height: 64px;
+      margin: 14px 0 12px; padding: 8px 0;
+      border-top: 1px dashed var(--line);
+      border-bottom: 1px dashed var(--line);
+    }
+    .m-chart span {
+      flex: 1;
+      background: var(--accent);
+      border-radius: 3px 3px 0 0;
+      min-height: 6px;
+    }
     .m-chart span:nth-child(1) { background: var(--ink-soft); opacity: 0.4; }
-    .m-row { display: grid; grid-template-columns: 1.3fr 1fr auto; gap: 10px; align-items: center; padding: 7px 0; font-family: var(--mono); font-size: 11px; color: var(--ink-2); border-bottom: 1px solid rgba(26,21,48,0.04); }
+    .m-row {
+      display: grid; grid-template-columns: 1.3fr 1fr auto;
+      gap: 10px; align-items: center;
+      padding: 7px 0;
+      font-family: var(--mono); font-size: 11px; color: var(--ink-2);
+      border-bottom: 1px solid rgba(26,21,48,0.04);
+    }
     .m-row:last-child { border-bottom: none; }
     .m-row .m-ok   { padding: 2px 8px; border-radius: 999px; background: rgba(125,211,168,0.20); color: #2a6b4e; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; }
     .m-row .m-live { padding: 2px 8px; border-radius: 999px; background: rgba(255,91,58,0.20); color: var(--accent-ink); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; }
     .m-row .m-wait { padding: 2px 8px; border-radius: 999px; background: rgba(140,120,200,0.20); color: #4a3a7a; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; }
-    .m-podium { padding: 32px; height: 320px; display: flex; align-items: flex-end; justify-content: center; gap: 12px; background: linear-gradient(180deg, #fff, #fff5f0); }
-    .m-block { width: 88px; border-radius: 12px 12px 0 0; display: grid; place-items: center; font-family: var(--display); font-size: 2rem; font-weight: 700; color: #fff; position: relative; box-shadow: 0 -10px 30px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06); }
+    .m-podium {
+      padding: 32px; height: 320px;
+      display: flex; align-items: flex-end; justify-content: center; gap: 12px;
+      background: linear-gradient(180deg, #fff, #fff5f0);
+    }
+    .m-block {
+      width: 88px; border-radius: 12px 12px 0 0;
+      display: grid; place-items: center;
+      font-family: var(--display); font-size: 2rem; font-weight: 700;
+      color: #fff;
+      position: relative;
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06);
+    }
     .m-1 { height: 220px; background: linear-gradient(180deg, #ffb347, #c99210); font-size: 2.4rem; }
     .m-2 { height: 170px; background: linear-gradient(180deg, #c4a4ff, #7e6db5); }
     .m-3 { height: 130px; background: linear-gradient(180deg, #d4a87b, #8b5e30); }
-    .m-block .m-trophy { position: absolute; top: -36px; font-size: 40px; filter: drop-shadow(0 6px 8px rgba(201,146,16,0.45)); }
-    .m-block.m-1 { transform: translateY(-26px); } .m-block.m-3 { transform: translateY(20px); }
-    .m-terminal { padding: 22px; background: var(--ink); color: #f5ede0; font-family: var(--mono); font-size: 12px; line-height: 1.7; }
+    .m-block .m-trophy {
+      position: absolute; top: -36px;
+      font-size: 40px;
+      filter: drop-shadow(0 6px 8px rgba(201,146,16,0.45));
+    }
+    .m-block.m-1 { transform: translateY(-26px); }
+    .m-block.m-3 { transform: translateY(20px); }
+    .m-terminal {
+      padding: 22px; background: var(--ink); color: #f5ede0;
+      font-family: var(--mono); font-size: 12px; line-height: 1.7;
+    }
     .m-terminal .m-prompt { color: var(--accent); font-weight: 700; }
-    .m-terminal .m-info { color: #7dd3a8; }
+    .m-terminal .m-info   { color: #7dd3a8; }
     .m-table { padding: 0; }
-    .m-row.m-head { background: var(--bg); padding: 11px 16px; border-bottom: 1px solid var(--card-bd); color: var(--ink-soft); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
+    .m-row.m-head {
+      background: var(--bg); padding: 11px 16px;
+      border-bottom: 1px solid var(--card-bd);
+      color: var(--ink-soft);
+      font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+      font-weight: 700;
+    }
     .m-table .m-row { padding: 11px 16px; border-bottom: 1px solid rgba(26,21,48,0.04); }
     .m-table .m-row:nth-child(odd) { background: rgba(26,21,48,0.02); }
     .m-table .m-row:last-child { border-bottom: none; }
-    .m-table .m-ok { width: 20px; height: 20px; border-radius: 50%; background: rgba(125,211,168,0.30); color: #2a6b4e; display: grid; place-items: center; font-size: 13px; }
+    .m-table .m-ok {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: rgba(125,211,168,0.30); color: #2a6b4e;
+      display: grid; place-items: center; font-size: 13px;
+    }
 
-    /* â”€â”€ 3 Â· ABOUT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── 3 · ABOUT ─────────────────────────────────────────────────── */
     .about { padding: 100px 0 80px; }
     .about-grid {
       display: grid;
@@ -462,11 +540,8 @@
     .about-bio p strong { color: var(--ink); font-weight: 600; }
     .about-bio .signature {
       margin-top: 28px;
-      font-family: var(--display);
-      font-style: italic;
-      font-weight: 300;
-      font-size: 1.6rem;
-      color: var(--accent);
+      font-family: var(--display); font-style: italic; font-weight: 300;
+      font-size: 1.6rem; color: var(--accent);
     }
     .skills-grid {
       display: grid; grid-template-columns: repeat(2, 1fr);
@@ -501,7 +576,7 @@
       .skills-grid { grid-template-columns: 1fr 1fr; }
     }
 
-    /* â”€â”€ 4 Â· CONTACT â€” bold serif CTA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── 4 · CONTACT ─────────────────────────────────────────────────── */
     .contact { padding: 120px 0 100px; text-align: center; }
     .contact-eyebrow {
       font-family: var(--mono); font-size: 11px;
@@ -509,10 +584,12 @@
       color: var(--ink-2);
       margin-bottom: 28px;
     }
-    .contact-eyebrow .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; }
+    .contact-eyebrow .dot {
+      display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); margin-right: 8px; vertical-align: middle;
+    }
     .contact-cta {
-      font-family: var(--display);
-      font-weight: 700;
+      font-family: var(--display); font-weight: 700;
       font-size: clamp(2.4rem, 7vw, 5.6rem);
       line-height: 1.0;
       letter-spacing: -0.03em;
@@ -520,11 +597,7 @@
       margin: 0 auto;
       color: var(--ink);
     }
-    .contact-cta em {
-      font-style: italic;
-      font-weight: 300;
-      color: var(--accent);
-    }
+    .contact-cta em { font-style: italic; font-weight: 300; color: var(--accent); }
     .contact-sub {
       margin: 28px auto 0;
       max-width: 50ch;
@@ -534,9 +607,7 @@
     .contact-mail {
       display: inline-block;
       margin-top: 44px;
-      font-family: var(--display);
-      font-style: italic;
-      font-weight: 300;
+      font-family: var(--display); font-style: italic; font-weight: 300;
       font-size: clamp(1.2rem, 2.2vw, 1.65rem);
       color: var(--accent);
       text-decoration: none;
@@ -562,7 +633,7 @@
       color: var(--bg); background: var(--ink); border-color: var(--ink);
     }
 
-    /* â”€â”€ Footer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── Footer ─────────────────────────────────────────────────────── */
     footer.foot {
       padding: 36px 0 56px;
       border-top: 1px solid var(--line);
@@ -576,7 +647,7 @@
     }
     footer.foot a { color: inherit; }
 
-    /* â”€â”€ Scroll-reveal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── Scroll-reveal ─────────────────────────────────────────────── */
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity .85s ease, transform .85s ease; }
     .reveal.in { opacity: 1; transform: none; }
     .reveal.d1 { transition-delay: .12s; }
@@ -593,9 +664,13 @@
 
   <header class="topnav" id="topnav">
     <div class="wrap topnav-inner">
-      <a class="brand" href="#top" aria-label="Gilang â€” home">
+      <a class="brand" href="#top" aria-label="Gilang — home">
         <span class="brand-mark"><span class="g-letter">G</span></span>
-        <span class="brand-name">Gilang <em>Â· portfolio</em></span>
+        <span class="brand-name">
+          <span class="name">Gilang</span>
+          <span class="sep">·</span>
+          <span class="port">portfolio</span>
+        </span>
       </a>
       <nav class="nav-links" aria-label="primary">
         <a href="#work">Work</a>
@@ -606,11 +681,10 @@
     </div>
   </header>
 
-  <!-- â”€â”€ 1 Â· HERO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
   <section class="hero wrap" id="top">
     <p class="hero-eyebrow reveal">
       <span class="dot"></span>
-      <span>Open to work Â· Indonesia Â· GMT+7</span>
+      <span>Open to work · Indonesia · GMT+7</span>
     </p>
     <h1 class="hero-title reveal d1">
       I build web apps<br/>
@@ -618,14 +692,14 @@
       <span class="strike">suck</span>.
     </h1>
     <p class="hero-sub reveal d2">
-      Hi, I&rsquo;m <strong>Gilang</strong> &mdash; a web developer shipping in
+      Hi, I&rsquo;m <strong>Gilang</strong> — a web developer shipping in
       <strong>Laravel</strong> &amp; <strong>CodeIgniter</strong>, and getting
       a little too excited about gamification. This is the portfolio, the work,
       and the contact.
     </p>
     <div class="hero-actions reveal d3">
       <a class="primary" href="#work">See the work</a>
-      <a class="secondary" href="mailto:gilangramdhani708@gmail.com">Hire me &rarr;</a>
+      <a class="secondary" href="mailto:gilangramdhani708@gmail.com">Hire me →</a>
     </div>
     <div class="hero-meta reveal d3">
       <span>PHP <em>8.3</em></span>
@@ -636,7 +710,6 @@
     </div>
   </section>
 
-  <!-- â”€â”€ Marquee (signature element) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track">
       <span class="marquee-item">
@@ -654,10 +727,9 @@
     </div>
   </div>
 
-  <!-- â”€â”€ 2 Â· WORK â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
   <section class="projects wrap" id="work">
     <div class="sect-head reveal">
-      <p class="sect-eyebrow">Selected work &middot; 2026</p>
+      <p class="sect-eyebrow">Selected work · 2026</p>
       <h2 class="sect-title">Four repos, <em>one month.</em></h2>
       <p class="sect-sub">
         Every public repo I shipped lately. Real assignments, side
@@ -666,9 +738,9 @@
     </div>
 
     <div class="proj-list">
+
       <article class="proj reveal" data-i="0">
         <div class="mock">
-          <!-- A clean dashboard mock â€” generic enough to read as "KlinikApp" -->
           <div class="m-dash">
             <div class="m-dash-top">
               <span></span><span></span><span></span>
@@ -701,8 +773,8 @@
             <span>Laravel 11</span><span>Blade</span><span>Tailwind</span><span>MySQL</span><span>Migrations</span>
           </div>
           <div class="meta">
-            <a href="https://github.com/gilangg24/KlnikApp" target="_blank" rel="noopener">github.com/gilangg24/KlnikApp &nearr;</a>
-            <span>&middot; 2026</span>
+            <a href="https://github.com/gilangg24/KlnikApp" target="_blank" rel="noopener">github.com/gilangg24/KlnikApp ↗</a>
+            <span>· 2026</span>
           </div>
         </div>
       </article>
@@ -716,24 +788,18 @@
             topic paths. The kind of project that makes you forget you&rsquo;re studying.
           </p>
           <div class="stack">
-            <span>CodeIgniter 4</span><span>PHP 8.3</span><span>MySQL</span><span>XP &middot; Levels</span>
+            <span>CodeIgniter 4</span><span>PHP 8.3</span><span>MySQL</span><span>XP · Levels</span>
           </div>
           <div class="meta">
-            <a href="https://github.com/gilangg24/klikkode" target="_blank" rel="noopener">github.com/gilangg24/klikkode &nearr;</a>
-            <span>&middot; 2026</span>
+            <a href="https://github.com/gilangg24/klikkode" target="_blank" rel="noopener">github.com/gilangg24/klikkode ↗</a>
+            <span>· 2026</span>
           </div>
         </div>
         <div class="mock">
-          <!-- KlikKode podium mock â€” much bigger visual this time -->
           <div class="m-podium">
             <div class="m-block m-2"><span>2</span></div>
-            <div class="m-block m-1"><span>1</span><span class="m-trophy">&starf;</span></div>
+            <div class="m-block m-1"><span>1</span><span class="m-trophy">★</span></div>
             <div class="m-block m-3"><span>3</span></div>
-            <div class="m-podium-floors">
-              <div class="m-floor m-floor-2"></div>
-              <div class="m-floor m-floor-1"></div>
-              <div class="m-floor m-floor-3"></div>
-            </div>
           </div>
         </div>
       </article>
@@ -741,63 +807,63 @@
       <article class="proj reveal d2" data-i="2">
         <div class="mock">
           <div class="m-terminal">
-            <span class="m-prompt">$</span> composer create-project codeigniter4/appstaller<br/>
-            <span class="m-info">&gt; installing v4.7.0&nbsp;&nbsp;&nbsp;&middot; ok</span><br/>
+            <span class="m-prompt">$</span> composer create-project codeigniter4/appstarter<br/>
+            <span class="m-info">&gt; installing v4.7.0&nbsp;&nbsp;&nbsp;· ok</span><br/>
             <span class="m-prompt">$</span> php spark serve --port 8080<br/>
-            <span class="m-info">&gt; localhost:8080&nbsp;&middot;&nbsp;&middot;&nbsp;ready</span>
+            <span class="m-info">&gt; localhost:8080&nbsp;&nbsp;·&nbsp;&nbsp;ready</span>
           </div>
         </div>
         <div class="body">
-          <span class="num">03 &middot; Scaffolding</span>
+          <span class="num">03 · Scaffolding</span>
           <h3 class="name">A clean CI4 starter, ready to build on.</h3>
           <p class="tagline">
             Fresh CodeIgniter 4 appstarter with the standard directory layout,
-            ready for the next feature. Hand-picked &mdash; not auto-generated.
+            ready for the next feature. Hand-picked — not auto-generated.
           </p>
           <div class="stack">
             <span>CodeIgniter 4</span><span>Composer</span><span>PHP 8.2+</span><span>MVC</span>
           </div>
           <div class="meta">
-            <a href="https://github.com/gilangg24/codeigniter-app" target="_blank" rel="noopener">github.com/gilangg24/codeigniter-app &nearr;</a>
-            <span>&middot; 2026</span>
+            <a href="https://github.com/gilangg24/codeigniter-app" target="_blank" rel="noopener">github.com/gilangg24/codeigniter-app ↗</a>
+            <span>· 2026</span>
           </div>
         </div>
       </article>
 
       <article class="proj reveal d3" data-i="3" style="grid-template-columns: 1fr 1.3fr;">
         <div class="body">
-          <span class="num">04 &middot; Coursework</span>
-          <h3 class="name">Tugas CRUD &middot; Laravel edition.</h3>
+          <span class="num">04 · Coursework</span>
+          <h3 class="name">Tugas CRUD · Laravel edition.</h3>
           <p class="tagline">
             A clean Laravel CRUD module for Kategori + Produk tables.
-            Compact, correct, properly validated &mdash; the baseline most apps skip.
+            Compact, correct, properly validated — the baseline most apps skip.
           </p>
           <div class="stack">
             <span>PHP</span><span>Laravel</span><span>MySQL</span><span>Validation</span>
           </div>
           <div class="meta">
-            <a href="https://github.com/gilangg24/tugas-crud-laravel" target="_blank" rel="noopener">github.com/gilangg24/tugas-crud-laravel &nearr;</a>
-            <span>&middot; 2026</span>
+            <a href="https://github.com/gilangg24/tugas-crud-laravel" target="_blank" rel="noopener">github.com/gilangg24/tugas-crud-laravel ↗</a>
+            <span>· 2026</span>
           </div>
         </div>
         <div class="mock">
           <div class="m-table">
             <div class="m-row m-head"><span>#</span><span>Kategori</span><span>Produk</span><span></span></div>
-            <div class="m-row"><span>01</span><span>Minuman</span><span>Kopi &middot; Teh</span><span class="m-ok">&check;</span></div>
-            <div class="m-row"><span>02</span><span>Makanan</span><span>Nasi &middot; Snack</span><span class="m-ok">&check;</span></div>
-            <div class="m-row"><span>03</span><span>Elektronik</span><span>Laptop &middot; HP</span><span class="m-ok">&check;</span></div>
-            <div class="m-row"><span>04</span><span>ATK</span><span>Pulpen &middot; Kertas</span><span class="m-ok">&check;</span></div>
-            <div class="m-row"><span>05</span><span>Lainnya</span><span>Misc</span><span class="m-ok">&check;</span></div>
+            <div class="m-row"><span>01</span><span>Minuman</span><span>Kopi · Teh</span><span class="m-ok">✓</span></div>
+            <div class="m-row"><span>02</span><span>Makanan</span><span>Nasi · Snack</span><span class="m-ok">✓</span></div>
+            <div class="m-row"><span>03</span><span>Elektronik</span><span>Laptop · HP</span><span class="m-ok">✓</span></div>
+            <div class="m-row"><span>04</span><span>ATK</span><span>Pulpen · Kertas</span><span class="m-ok">✓</span></div>
+            <div class="m-row"><span>05</span><span>Lainnya</span><span>Misc</span><span class="m-ok">✓</span></div>
           </div>
         </div>
       </article>
+
     </div>
   </section>
 
-  <!-- â”€â”€ 3 Â· ABOUT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
   <section class="about wrap" id="about">
     <div class="sect-head reveal">
-      <p class="sect-eyebrow">About &middot; Stack</p>
+      <p class="sect-eyebrow">About · Stack</p>
       <h2 class="sect-title">A small toolbox, <em>used&nbsp;well.</em></h2>
     </div>
     <div class="about-grid">
@@ -806,11 +872,11 @@
         <p>
           I&rsquo;m a web developer based in Indonesia, currently shipping
           <strong>four public repos in one month</strong>, and getting properly
-          stuck into the part of the job that isn&rsquo;t coding &mdash; naming things,
+          stuck into the part of the job that isn&rsquo;t coding — naming things,
           planning migrations, deciding what <em>not</em> to build.
         </p>
         <p>
-          My stack is PHP &mdash; <strong>Laravel</strong> when the package ecosystem
+          My stack is PHP — <strong>Laravel</strong> when the package ecosystem
           pays for itself, <strong>CodeIgniter 4</strong> when I want every line of
           the request to be readable. I&rsquo;m exploring AI-assisted workflows
           this year (yes, this page was scaffolded by one), with the goal of staying
@@ -820,24 +886,23 @@
           Outside the keyboard: coffee, late nights reading changelogs, and a
           stubborn belief that gamification can fix almost any UI.
         </p>
-        <p class="signature">&mdash; Gilang</p>
+        <p class="signature">— Gilang</p>
       </div>
 
       <div class="skills-grid">
-        <div class="skill reveal d1"><span class="ico laravel">L</span><div><h4>Laravel 11</h4><p>v11 &middot; migrations &middot; blade</p></div></div>
-        <div class="skill reveal d1"><span class="ico codeigniter">C</span><div><h4>CodeIgniter 4</h4><p>v4.7 &middot; spark &middot; mvc</p></div></div>
-        <div class="skill reveal d2"><span class="ico php">P</span><div><h4>PHP</h4><p>v8.3 &middot; typed</p></div></div>
-        <div class="skill reveal d2"><span class="ico mysql">M</span><div><h4>MySQL</h4><p>v8 &middot; schema &middot; idx</p></div></div>
-        <div class="skill reveal d3"><span class="ico git">G</span><div><h4>Git &middot; GitHub</h4><p>rebase &middot; ci &middot; pages</p></div></div>
-        <div class="skill reveal d3"><span class="ico vscode">V</span><div><h4>VS Code</h4><p>ts &middot; js &middot; php</p></div></div>
-        <div class="skill reveal d3"><span class="ico compose">Co</span><div><h4>Composer</h4><p>v2 &middot; autoload</p></div></div>
-        <div class="skill reveal d3"><span class="ico ai">Ai</span><div><h4>AI-assisted</h4><p>learning &middot; shipping</p></div></div>
+        <div class="skill reveal d1"><span class="ico laravel">L</span><div><h4>Laravel 11</h4><p>v11 · migrations · blade</p></div></div>
+        <div class="skill reveal d1"><span class="ico codeigniter">C</span><div><h4>CodeIgniter 4</h4><p>v4.7 · spark · mvc</p></div></div>
+        <div class="skill reveal d2"><span class="ico php">P</span><div><h4>PHP</h4><p>v8.3 · typed</p></div></div>
+        <div class="skill reveal d2"><span class="ico mysql">M</span><div><h4>MySQL</h4><p>v8 · schema · idx</p></div></div>
+        <div class="skill reveal d3"><span class="ico git">G</span><div><h4>Git · GitHub</h4><p>rebase · ci · pages</p></div></div>
+        <div class="skill reveal d3"><span class="ico vscode">V</span><div><h4>VS Code</h4><p>ts · js · php</p></div></div>
+        <div class="skill reveal d3"><span class="ico compose">Co</span><div><h4>Composer</h4><p>v2 · autoload</p></div></div>
+        <div class="skill reveal d3"><span class="ico ai">Ai</span><div><h4>AI-assisted</h4><p>learning · shipping</p></div></div>
       </div>
 
     </div>
   </section>
 
-  <!-- â”€â”€ 4 Â· CONTACT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
   <section class="contact" id="contact">
     <div class="wrap">
       <p class="contact-eyebrow reveal"><span class="dot"></span>Get in touch</p>
@@ -847,30 +912,29 @@
         what you&rsquo;re working on, and I&rsquo;ll get back to you within a day.
       </p>
       <a class="contact-mail reveal d3" href="mailto:gilangramdhani708@gmail.com">
-        gilangramdhani708@gmail.com &nbsp;&rarr;
+        gilangramdhani708@gmail.com &nbsp;→
       </a>
       <div class="contact-pills reveal d3">
         <a href="https://github.com/gilangg24" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://github.com/gilangg24/KlnikApp" target="_blank" rel="noopener">KlinikApp &nearr;</a>
-        <a href="https://github.com/gilangg24/klikkode" target="_blank" rel="noopener">KlikKode &nearr;</a>
-        <a href="https://github.com/gilangg24/codeigniter-app" target="_blank" rel="noopener">codeigniter-app &nearr;</a>
-        <a href="https://github.com/gilangg24/tugas-crud-laravel" target="_blank" rel="noopener">tugas-crud-laravel &nearr;</a>
+        <a href="https://github.com/gilangg24/KlnikApp" target="_blank" rel="noopener">KlinikApp ↗</a>
+        <a href="https://github.com/gilangg24/klikkode" target="_blank" rel="noopener">KlikKode ↗</a>
+        <a href="https://github.com/gilangg24/codeigniter-app" target="_blank" rel="noopener">codeigniter-app ↗</a>
+        <a href="https://github.com/gilangg24/tugas-crud-laravel" target="_blank" rel="noopener">tugas-crud-laravel ↗</a>
       </div>
     </div>
   </section>
 
   <footer class="foot">
     <div class="wrap foot-inner">
-      <span>&copy; 2026 Gilang &middot; Built in Indonesia</span>
+      <span>&copy; 2026 Gilang · Built in Indonesia</span>
       <span>
         Engine by <a href="https://github.com/oso95/scroll-world" target="_blank" rel="noopener">oso95/scroll-world</a>
-        &middot; MIT
+        · MIT
       </span>
     </div>
   </footer>
 
   <script>
-    // â”€â”€ Loader fade-out (waits for fonts) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     (function () {
       function hide() { var el = document.getElementById('loader'); if (el) el.classList.add('hidden'); }
       if (document.fonts && document.fonts.ready) {
@@ -880,7 +944,6 @@
       }
     })();
 
-    // â”€â”€ Top-nav shadow on scroll â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     (function () {
       var nav = document.getElementById('topnav');
       window.addEventListener('scroll', function () {
@@ -888,7 +951,6 @@
       }, { passive: true });
     })();
 
-    // â”€â”€ Scroll-triggered reveals â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     (function () {
       if (!('IntersectionObserver' in window)) {
         document.querySelectorAll('.reveal').forEach(function (e) { e.classList.add('in'); });
