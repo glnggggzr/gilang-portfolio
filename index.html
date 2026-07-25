@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -63,7 +63,7 @@
     .wrap { position: relative; z-index: 1; max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); }
     section { position: relative; z-index: 2; }
 
-    /* ── Top nav ─────────────────────────────────────────────────────── */
+    /* Top nav */
     .topnav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       backdrop-filter: blur(16px) saturate(150%);
@@ -159,7 +159,7 @@
       .nav-links { display: none; }
     }
 
-    /* ── Loading ───────────────────────────────────────────────────── */
+    /* Loading */
     #loader {
       position: fixed; inset: 0; z-index: 1000;
       display: flex; align-items: center; justify-content: center;
@@ -181,7 +181,7 @@
       50%      { transform: translateY(-6px) scale(1.05); }
     }
 
-    /* ── 1 · HERO ───────────────────────────────────────────────────── */
+    /* 1 · HERO */
     .hero {
       min-height: 100vh; min-height: 100svh;
       display: flex; flex-direction: column;
@@ -271,7 +271,7 @@
       font-weight: 700;
     }
 
-    /* ── Marquee (signature) ─────────────────────────────────────────── */
+    /* Marquee (signature) */
     .marquee {
       position: relative;
       overflow: hidden;
@@ -320,7 +320,7 @@
       flex-shrink: 0;
     }
 
-    /* ── Section header ──────────────────────────────────────────────── */
+    /* Section header */
     .sect-head { max-width: 720px; margin-bottom: 64px; }
     .sect-eyebrow {
       font-family: var(--mono); font-size: 11px;
@@ -352,7 +352,7 @@
       max-width: 56ch; line-height: 1.6;
     }
 
-    /* ── 2 · PROJECTS ────────────────────────────────────────────────── */
+    /* 2 · PROJECTS */
     .projects { padding: 120px 0 80px; }
     .proj-list { display: flex; flex-direction: column; gap: 32px; }
     .proj {
@@ -419,7 +419,7 @@
       .proj .body { padding: 28px; }
     }
 
-    /* ── Project mockup styles ───────────────────────────────────────── */
+    /* Project mockup styles */
     .m-dash, .m-podium, .m-terminal, .m-table {
       width: 100%; max-width: 460px;
       background: #fff; border-radius: 14px;
@@ -482,29 +482,90 @@
     .m-row .m-ok   { padding: 2px 8px; border-radius: 999px; background: rgba(125,211,168,0.20); color: #2a6b4e; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; }
     .m-row .m-live { padding: 2px 8px; border-radius: 999px; background: rgba(255,91,58,0.20); color: var(--accent-ink); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; }
     .m-row .m-wait { padding: 2px 8px; border-radius: 999px; background: rgba(140,120,200,0.20); color: #4a3a7a; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; }
-    .m-podium {
-      padding: 32px; height: 320px;
-      display: flex; align-items: flex-end; justify-content: center; gap: 12px;
-      background: linear-gradient(180deg, #fff, #fff5f0);
+    /* KlikKode: real quiz UI mock, not a podium */
+    .m-quiz {
+      width: 100%;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      font-family: var(--body);
     }
-    .m-block {
-      width: 88px; border-radius: 12px 12px 0 0;
+    .m-quiz-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 18px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--card-bd);
+      font-size: 12px;
+    }
+    .m-quiz-head .m-progress {
+      color: var(--ink-2); font-family: var(--mono);
+      letter-spacing: 0.04em;
+    }
+    .m-quiz-head .m-progress strong {
+      color: var(--ink); font-weight: 700;
+    }
+    .m-quiz-head .m-xp {
+      color: var(--accent); font-weight: 700;
+      font-family: var(--mono); font-size: 11px;
+      padding: 3px 10px; border-radius: 999px;
+      background: rgba(255,91,58,0.10);
+    }
+    .m-quiz-body { padding: 22px 22px 24px; }
+    .m-quiz-topic {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 10px;
+    }
+    .m-quiz-q {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 17px;
+      line-height: 1.3;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 18px;
+    }
+    .m-quiz-opts {
+      list-style: none; padding: 0; margin: 0;
+      display: grid; gap: 8px;
+    }
+    .m-quiz-opts li {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 14px;
+      border: 1px solid var(--card-bd);
+      border-radius: 10px;
+      font-size: 13px;
+      color: var(--ink);
+      background: rgba(20,16,48,0.02);
+    }
+    .m-quiz-opts li .m-key {
+      width: 22px; height: 22px;
       display: grid; place-items: center;
-      font-family: var(--display); font-size: 2rem; font-weight: 700;
-      color: #fff;
-      position: relative;
-      box-shadow: 0 -10px 30px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06);
+      border-radius: 6px;
+      font-family: var(--mono); font-weight: 700; font-size: 11px;
+      background: rgba(20,16,48,0.06);
+      color: var(--ink-2);
+      flex-shrink: 0;
     }
-    .m-1 { height: 220px; background: linear-gradient(180deg, #ffb347, #c99210); font-size: 2.4rem; }
-    .m-2 { height: 170px; background: linear-gradient(180deg, #c4a4ff, #7e6db5); }
-    .m-3 { height: 130px; background: linear-gradient(180deg, #d4a87b, #8b5e30); }
-    .m-block .m-trophy {
-      position: absolute; top: -36px;
-      font-size: 40px;
-      filter: drop-shadow(0 6px 8px rgba(201,146,16,0.45));
+    .m-quiz-opts li.correct {
+      background: rgba(125,211,168,0.18);
+      border-color: rgba(125,211,168,0.40);
     }
-    .m-block.m-1 { transform: translateY(-26px); }
-    .m-block.m-3 { transform: translateY(20px); }
+    .m-quiz-opts li.correct .m-key {
+      background: #7dd3a8; color: #fff;
+    }
+    .m-quiz-foot {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 18px;
+      border-top: 1px solid var(--card-bd);
+      font-family: var(--mono); font-size: 11px;
+      color: var(--ink-soft);
+    }
+    .m-quiz-foot .m-streak {
+      color: var(--accent); font-weight: 700;
+    }
     .m-terminal {
       padding: 22px; background: var(--ink); color: #f5ede0;
       font-family: var(--mono); font-size: 12px; line-height: 1.7;
@@ -528,7 +589,7 @@
       display: grid; place-items: center; font-size: 13px;
     }
 
-    /* ── 3 · ABOUT ─────────────────────────────────────────────────── */
+    /* 3 · ABOUT */
     .about { padding: 100px 0 80px; }
     .about-grid {
       display: grid;
@@ -581,7 +642,7 @@
       .skills-grid { grid-template-columns: 1fr 1fr; }
     }
 
-    /* ── 4 · CONTACT ─────────────────────────────────────────────────── */
+    /* 4 · CONTACT */
     .contact { padding: 120px 0 100px; text-align: center; }
     .contact-eyebrow {
       font-family: var(--mono); font-size: 11px;
@@ -663,7 +724,7 @@
       color: var(--bg); background: var(--ink); border-color: var(--ink);
     }
 
-    /* ── Footer ─────────────────────────────────────────────────────── */
+    /* Footer */
     footer.foot {
       padding: 36px 0 56px;
       border-top: 1px solid var(--line);
@@ -677,7 +738,7 @@
     }
     footer.foot a { color: inherit; }
 
-    /* ── Scroll-reveal ─────────────────────────────────────────────── */
+    /* Scroll-reveal */
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity .85s ease, transform .85s ease; }
     .reveal.in { opacity: 1; transform: none; }
     .reveal.d1 { transition-delay: .12s; }
@@ -825,10 +886,25 @@
           </div>
         </div>
         <div class="mock">
-          <div class="m-podium">
-            <div class="m-block m-2"><span>2</span></div>
-            <div class="m-block m-1"><span>1</span><span class="m-trophy">★</span></div>
-            <div class="m-block m-3"><span>3</span></div>
+          <div class="m-quiz">
+            <div class="m-quiz-head">
+              <span class="m-progress">Question <strong>8</strong> of 10</span>
+              <span class="m-xp">+50 XP</span>
+            </div>
+            <div class="m-quiz-body">
+              <p class="m-quiz-topic">Laravel</p>
+              <p class="m-quiz-q">What does CSRF protection defend against?</p>
+              <ul class="m-quiz-opts">
+                <li><span class="m-key">A</span><span>Cross-Site Request Forgery</span></li>
+                <li class="correct"><span class="m-key">B</span><span>Cross-Site Request Forgery (correct)</span></li>
+                <li><span class="m-key">C</span><span>Cross-Server Routing Failure</span></li>
+                <li><span class="m-key">D</span><span>Cached Session Render Format</span></li>
+              </ul>
+            </div>
+            <div class="m-quiz-foot">
+              <span>Time: <strong>00:24</strong></span>
+              <span class="m-streak">Streak 5x</span>
+            </div>
           </div>
         </div>
       </article>
