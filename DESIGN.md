@@ -301,6 +301,8 @@ assets/
   og-image.jpg          # 1200x630 share card (JPG, ~40KB)
 favicon.svg
 capture-projects.js     # Playwright script: logs into the local apps and screenshots them
+test/
+  smoke.cjs             # npm test — Playwright smoke test against the live site
 js/
   scrub-engine.js       # leftover from the scroll-world era (museum)
 references/
