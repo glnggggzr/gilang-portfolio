@@ -85,7 +85,7 @@ This is a static page. Pick any one:
 | -------------- | ------------------------------------------------------------------- |
 | Markup         | Semantic HTML5, single file                                         |
 | Styling        | Hand-written CSS in a `<style>` block; CSS variables for the palette |
-| Fonts          | [Fraunces](https://fonts.google.com/specimen/Fraunces), Inter, JetBrains Mono (Google Fonts) |
+| Fonts          | [Fraunces](https://fonts.google.com/specimen/Fraunces), [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono) (Google Fonts) |
 | Behaviour      | ~280 lines of vanilla JS: loader fade, nav-shadow, mobile nav, IntersectionObserver reveals, i18n switcher |
 | Tests          | `npm test` — Playwright smoke test (`test/smoke.cjs`): overflow, images, a11y hooks, hamburger, i18n. Needs the site served (Laragon) |
 | Build          | None. Open the file, edit, refresh.                                  |

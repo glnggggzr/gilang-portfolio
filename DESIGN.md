@@ -56,32 +56,26 @@ One accent color. Everything else is neutral or derived from the cream backgroun
 
 ### Typography
 
-Three fonts, three jobs. Google Fonts loaded once at top.
+Two fonts, two jobs. Google Fonts loaded once at top.
 
 | Font | CSS var | Use |
 |---|---|---|
-| **Fraunces** (variable serif, opsz 9–144) | `--display` | All headlines, brand, project titles, contact CTA, italic accents. The "editorial" voice. |
-| **Inter** (400/500/600/700) | `--body` | All body copy, buttons, nav links, bio text. |
-| **JetBrains Mono** (400/500/700) | `--mono` | Eyebrows, code, tag pills, project numbers, marquee items. Anything that should look terminal-y. |
+| **Fraunces** (variable serif, opsz 9–144) | `--display` / `--body` | All headlines, brand wordmark, project titles, contact CTA, italic accents, long-form bio. The "editorial" voice. |
+| **IBM Plex Mono** (400/500/600/700) | `--mono` | Eyebrows, hero intro, section subs, buttons, tag pills, project numbers, meta, marquee items. Anything that should look terminal-y. |
 
 **Type scale** (use clamp where responsive is needed):
 - Hero headline: `clamp(3rem, 9vw, 8.5rem)`, line-height `0.96`, letter-spacing `-0.035em`
 - Section title: `clamp(2rem, 4.4vw, 3.6rem)`, line-height `1.04`
 - Project name: `clamp(1.6rem, 2.6vw, 2.2rem)`
-- Body: `16px` base, `1.05–1.18rem` for hero/intro
+- Body (Fraunces): `16px` base, `1.05–1.18rem` for bio
+- Mono (intro, subs, buttons): `0.95–1.18rem`, line-height `1.7`
 - Mono caption: `10–11px`, letter-spacing `0.06–0.32em`, often uppercase
 
-**Rule**: Fraunces italic is for accent, never full sentences. Inter doesn't get italic for emphasis — use weight 600 instead.
+**Rule**: Fraunces italic is for accent, never full sentences. Mono text doesn't get italic for emphasis — use weight 600 instead.
 
-### Brand mark
+### Brand wordmark
 
-The G monogram is the visual anchor. Use it consistently:
-- 30×36px rounded square (radius 6px 6px 8px 8px — slightly tapered at bottom)
-- Coral background, white serif "G" inside
-- Soft shadow `0 6px 16px rgba(255,91,58,0.28)`
-- On hover: rotate `-6deg` and `scale(1.05)` over 350ms
-
-It appears in the navbar, the loader, and can be reused as a favicon or watermark. Don't make new versions of it (different sizes, colors, fonts).
+The brand is text-only: **"Gilang · portfolio"** in Fraunces 700. There is deliberately **no tile/monogram** — the G mark was tried and removed (2026-08, user: "logo G jelek mengganggu"). The favicon is a minimal coral "G" on transparent. Don't reintroduce a logo box; the wordmark + favicon are the identity.
 
 ---
 
@@ -221,7 +215,7 @@ A pill-shaped button (filled, dark) + serif italic email link beside it. This is
 ## 6 · Motion
 
 ### What animates
-- Loader: monogram bounces for ~1.4s until fonts ready, then fades.
+- Loader: wordmark "Gilang" pulses for ~1.4s until fonts ready, then fades.
 - Navbar: blur increases + bottom border appears when scrolled past 12px.
 - Hero eyebrow dot: live-pulse every 1.6s.
 - Marquee: 38s linear infinite horizontal scroll. Pauses on hover.
