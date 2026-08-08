@@ -16,6 +16,7 @@ Thumbs.db
 *.bak
 *.tmp
 *~
+_*.cjs
 local_main.txt
 main_backup.txt
 new_main_test.txt

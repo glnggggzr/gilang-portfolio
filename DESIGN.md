@@ -45,13 +45,14 @@ One accent color. Everything else is neutral or derived from the cream backgroun
 | `--bg` | `#f5ede0` | Page background, warm cream |
 | `--ink` | `#1a1530` | Primary text, dark plum-black |
 | `--ink-2` | `#574c66` | Secondary text |
-| `--ink-soft` | `#948aa3` | Tertiary text, eyebrows, captions |
-| `--accent` | `#ff5b3a` | **Coral. The only saturated color.** Used for: brand mark, live dots, hover states, CTA hover, marquee italics, accent line on eyebrows |
+| `--ink-soft` | `#6f657e` | Tertiary text, eyebrows, captions (4.71:1 on bg — WCAG AA) |
+| `--accent` | `#ff5b3a` | **Coral. The only saturated color.** Used for: brand mark, live dots, hover states, CTA hover, accent line on eyebrows |
+| `--accent-deep` | `#d93f1d` | Darker coral for **text glyphs** on cream (italic `<em>` accents, signature). Passes 3:1 on large text where `--accent` (2.65:1) fails. Not a second accent — a legibility variant |
 | `--accent-ink` | `#b5371a` | Darker coral, used inside coral backgrounds for readable text |
 | `--line` | `rgba(26,21,48,0.10)` | Subtle borders |
 | `--line-strong` | `rgba(26,21,48,0.20)` | Visible borders |
 
-**Rule**: if a new color is needed, don't add it. Use existing tokens with different opacity instead. A second accent is forbidden.
+**Rule**: if a new color is needed, don't add it. Use existing tokens with different opacity instead. A second accent is forbidden. (`--accent-deep` exists only so italic text on cream stays readable — it is the same hue, darker.)
 
 ### Typography
 
@@ -123,13 +124,13 @@ Odd-indexed projects (1st, 3rd) use default. Even-indexed (2nd, 4th) use reverse
 Below 760px:
 - Project cards collapse to single column
 - Skills grid: 2 columns still (fits comfortably)
-- Nav links hide, brand stays, CTA stays but smaller padding
+- Nav links collapse into a hamburger button (≤720px); brand and language switcher stay
 - Hero title: still readable but smaller (clamp handles it)
 - Body fonts: reduce via clamp
 
 Below 480px (phone portrait):
 - Marquee: still works, just smaller
-- Skills grid: 1 column is fine here
+- Skills grid: stays 2 columns — 8 tiles in 1 column makes the page needlessly long
 
 ---
 
@@ -171,18 +172,24 @@ Eyebrow has a 24px coral `::before` line. Title can have one `<em>` for italic a
 
 For reverse layout: add `style="grid-template-columns: 1fr 1.3fr;"` to swap order.
 
-### Mock components — what to make
+### Mock components — project screenshots
 
-Mockups show **real product content**, not generic shapes. The KlikKode mockup shows an actual quiz question (CSRF) because anyone who knows Laravel can verify it. The KlinikApp mockup shows a real dashboard with appointment data, not "lorem ipsum users".
+Project cards show **real screenshots of the actual apps**, not generic shapes or CSS mockups. The KlikKode shot shows the real quiz UI; the Manajemen Produk shot shows the real dashboard with live totals. Anyone who knows the stack can verify the product exists.
 
-| Mock | Use for | Don't use for |
+Screenshots are generated with `capture-projects.js` (Playwright): it logs into each local app (Laragon `.test` domains) and captures a 1440×900 viewport shot of the dashboard/landing page. Shipped assets are **WebP, 920px wide, q82** (`assets/projects/*.webp`) — re-run the capture script, then convert (PIL: `Image.resize(920, LANCZOS)` + `save('WEBP', quality=82)`).
+
+Rules:
+- The screenshot must show **real data** — a dashboard with zero rows reads as broken. Seed the app first.
+- Re-capture if the app's UI changed; a stale screenshot is worse than none.
+- Don't ship a screenshot of a login page or an error page.
+- Keep `capture-projects.js` in sync with the apps' current login credentials.
+
+| Image | Use for | Don't use for |
 |---|---|---|
-| `m-dash` (dashboard) | Apps with admin/data panels | Landing pages |
-| `m-quiz` (quiz UI) | Quiz/learning/gamification apps | E-commerce |
-| `m-terminal` (terminal) | CLI tools, dev utilities, scaffolds | Marketing pages |
-| `m-table` (data table) | CRUD apps, admin lists | Anything interactive |
+| Dashboard shot | Apps with admin/data panels | Landing pages |
+| Landing/quiz shot | Marketing-y or gamified apps | Dashboards |
 
-When adding a new project, **don't reuse the same mock type** for two projects in a row — alternate. The visual rhythm matters.
+When adding a new project: capture its real screen, convert to WebP 920w, drop it in `assets/projects/`. Don't reuse the same visual shape as the neighboring card — alternate dashboard / landing shots.
 
 ### Skills tile (`.skill`)
 
@@ -223,7 +230,7 @@ A pill-shaped button (filled, dark) + serif italic email link beside it. This is
 ### What does NOT animate
 - Project cards do not animate internally. Hover only lifts them by 3px and adds shadow.
 - Headlines don't animate in word-by-word or letter-by-letter.
-- Mock components don't have animations inside them.
+- Project screenshots don't have animations inside them.
 
 **Rule**: if something moves, it should be either contextually useful (live indicator) or ambient (marquee, scroll reveal). Decorative-only animations read as AI-generated.
 
@@ -252,7 +259,7 @@ Add the `.wrap` class for the container. Add `id` for nav anchor if needed. Use 
 
 ### New project card
 
-1. Choose a mock component that fits the project (don't reuse the last project's mock type).
+1. Capture a real screenshot of the project (see § 5 — `capture-projects.js`, WebP 920w). Don't reuse the neighboring card's visual shape (dashboard vs landing).
 2. Use the project card HTML structure above.
 3. If the project has a real link (GitHub, demo), link it.
 4. Tag pills (`.stack span`) are short — one or two words each.
@@ -273,7 +280,8 @@ The accent color is global, but if a section really needs visual emphasis (rare)
 - **Don't** use emojis in copy. Use them in mockup data if it fits (the trophy in KlikKode is debatable but doesn't carry meaning).
 - **Don't** add `backdrop-filter` blur to elements that aren't sticky headers.
 - **Don't** use gradients on text. Coral is solid.
-- **Don't** add animation to project mockups — they should look like static screenshots of real product.
+- **Don't** add animation to project screenshots — they should look like static captures of real product.
+- **Don't** ship fake contact data (WhatsApp numbers, phone, addresses). Leave a slot and ask, or omit it.
 - **Don't** add dark mode. This portfolio is one mood.
 - **Don't** add framework imports (Tailwind, Bootstrap, React). Plain CSS + vanilla JS only. This is a single HTML file by design.
 - **Don't** use placeholder copy like "Lorem ipsum", "Coming soon", "TBD". If you don't have the words, the section isn't ready.
@@ -289,7 +297,12 @@ The accent color is global, but if a section really needs visual emphasis (rare)
 ```
 index.html              # everything in one file
 assets/
-  scenes/               # animated SVGs for the scroll-world deeper view (currently unused on main page)
+  projects/             # real app screenshots, WebP 920w (generated by capture-projects.js)
+  og-image.jpg          # 1200x630 share card (JPG, ~40KB)
+favicon.svg
+capture-projects.js     # Playwright script: logs into the local apps and screenshots them
+js/
+  scrub-engine.js       # leftover from the scroll-world era (museum)
 references/
   scenes.md             # scene specs (museum)
   prompts.md            # Higgsfield / Codex prompt templates (museum)
@@ -297,7 +310,7 @@ references/
   runbook.md            # end-to-end asset-generation runbook (museum)
 README.md
 LICENSE                 # MIT, with oso95/scroll-world attribution
-.gitignore              # node_modules, screenshots, env, vendor
+.gitignore              # node_modules, screenshots, _*.cjs scratch, env
 ```
 
 The `references/` directory is a museum — leftover from when the scroll-world experience was the centerpiece. The current main page doesn't use it. **Keep it** so future-you remembers how to rebuild the 3D experience.
@@ -314,7 +327,41 @@ Semantic where it matters (`<header>`, `<section>`, `<article>`, `<nav>`, `<foot
 
 ### JS
 
-Three small IIFEs at the bottom: loader fade, nav shadow on scroll, intersection observer for reveals. Plus the lazy-mount of the scroll-world engine. No framework, no bundler. Total: ~50 lines.
+Five small IIFEs at the bottom: loader fade, nav shadow on scroll, mobile nav toggle, intersection observer for reveals, and the i18n language switcher (which also handles the lang-menu keyboard navigation). No framework, no bundler. Total: ~280 lines.
+
+### i18n
+
+The page ships with **English** (default) and **Bahasa Indonesia**. The dictionary lives in a single `I18N` object at the bottom of `<body>`. Each translatable string in the HTML is tagged with `data-i18n="dotted.path"`, e.g. `data-i18n="hero.title.suck"`.
+
+- **Switcher**: globe-icon + language code button in the topnav (top right). Click opens a dropdown listing the available languages. Click-outside or `Esc` closes it.
+- **Persistence**: chosen language is saved to `localStorage` under `portfolio-lang`.
+- **Auto-detect**: on first load, `navigator.language` is checked — any `id-*` browser auto-selects Indonesian; otherwise English.
+- **No-flash init**: a tiny inline `<script>` in `<head>` sets `<html lang>` + `data-lang` immediately so screen readers and font shapers don't see the wrong language for one frame.
+- **`<html lang>`**: updated dynamically on every switch so accessibility tools re-announce correctly.
+
+### Adding a new language
+
+1. Add a new key to `I18N` in the bottom script block, e.g. `fr: { ... }`. **Every key from `en` must exist** in the new language — the verifier in the test script counts keys per language.
+2. Add an `<li>` to the `.lang-menu` listbox: `<button data-lang="fr" ...>Français <span class="lang-native">FR</span></button>`.
+3. Update the auto-detect branch in `detect()` if you want the browser to suggest it (e.g. `nav.indexOf('fr') === 0 → 'fr'`).
+4. Verify in browser: switch, reload (state should persist), check `<html lang>` and `localStorage`.
+
+### What gets translated
+
+- All section eyebrows, titles, body copy
+- Nav links, CTAs, hero meta captions
+- Skill tile descriptions (the small italic line under each tool name)
+- Project names, taglines, category tags (`Featured`, `Coursework`)
+- Footer copyright line
+
+### What does NOT get translated
+
+- **Brand & code**: "Gilang", "portfolio" (kept — though the brand wordmark `portofolio` swaps in ID)
+- **Tool & framework names**: Laravel, CodeIgniter, MySQL, Git, GitHub, VS Code, Composer
+- **Project names**: KlinikApp, KlikKode, SIA GILANG (these are GitHub repo slugs)
+- **Marquee strip**: the rolling signature uses brand-voice English in both languages. Translating the marquee dilutes the brand.
+- **OG / Twitter meta**: the share card stays English. Client-side swaps can't update server-rendered meta.
+- **Code snippets in tagline**: `Laravel 11 · MySQL · Kategori + Produk` — technical, kept as-is.
 
 ### Commit messages
 

@@ -7,6 +7,60 @@
   <title>Gilang — Web Developer · Laravel · CodeIgniter</title>
   <meta name="description" content="Personal portfolio of Gilang — a web developer building with Laravel & CodeIgniter. Selected work, stack, and contact." />
   <meta name="author" content="Gilang" />
+  <link rel="canonical" href="https://gilangg24.github.io/gilang-portfolio/" />
+
+  <!-- Structured data (Person) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Gilang",
+    "jobTitle": "Web Developer",
+    "description": "Web developer building with Laravel and CodeIgniter.",
+    "url": "https://gilangg24.github.io/gilang-portfolio/",
+    "email": "mailto:gilangramdhani708@gmail.com",
+    "knowsAbout": ["Laravel", "CodeIgniter", "PHP", "MySQL", "Git"],
+    "sameAs": ["https://github.com/gilangg24"]
+  }
+  </script>
+
+  <!-- Favicon (SVG — supported by all modern browsers) -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <!-- Open Graph (LinkedIn, Discord, Facebook, WhatsApp, Slack, Telegram, ...) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Gilang — Portfolio" />
+  <meta property="og:title" content="Gilang — Web Developer · Laravel · CodeIgniter" />
+  <meta property="og:description" content="Personal portfolio of Gilang. Web developer building with Laravel & CodeIgniter. Selected work, stack, and contact." />
+  <meta property="og:url" content="https://gilangg24.github.io/gilang-portfolio/" />
+  <meta property="og:image" content="https://gilangg24.github.io/gilang-portfolio/assets/og-image.jpg" />
+  <meta property="og:image:secure_url" content="https://gilangg24.github.io/gilang-portfolio/assets/og-image.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Gilang — web developer, Laravel and CodeIgniter. Built in Indonesia." />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Gilang — Web Developer · Laravel · CodeIgniter" />
+  <meta name="twitter:description" content="Personal portfolio of Gilang. Web developer building with Laravel & CodeIgniter. Selected work, stack, and contact." />
+  <meta name="twitter:image" content="https://gilangg24.github.io/gilang-portfolio/assets/og-image.jpg" />
+  <meta name="twitter:image:alt" content="Gilang — web developer, Laravel and CodeIgniter. Built in Indonesia." />
+
+  <!-- Inline i18n init: set <html lang> immediately to avoid flash of wrong language.
+       The full dictionary + apply logic is at the bottom of <body>. -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('portfolio-lang');
+        var nav = (navigator.language || 'en').toLowerCase();
+        var lang = saved || (nav.indexOf('id') === 0 ? 'id' : 'en');
+        document.documentElement.lang = lang;
+        document.documentElement.setAttribute('data-lang', lang);
+      } catch (e) {}
+    })();
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,8 +74,9 @@
       --bg:           #f5ede0;
       --ink:          #1a1530;
       --ink-2:        #574c66;
-      --ink-soft:     #948aa3;
+      --ink-soft:     #6f657e;
       --accent:       #ff5b3a;
+      --accent-deep:  #d93f1d;
       --accent-ink:   #b5371a;
       --line:         rgba(26,21,48,0.10);
       --line-strong:  rgba(26,21,48,0.20);
@@ -45,6 +100,60 @@
       overflow-x: hidden;
     }
     ::selection { background: var(--ink); color: var(--bg); }
+
+    /* Skip link (a11y) */
+    .skip-link {
+      position: fixed; top: 12px; left: 12px; z-index: 2000;
+      padding: 10px 18px; border-radius: 999px;
+      background: var(--ink); color: var(--bg);
+      font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.04em;
+      text-decoration: none;
+      transform: translateY(-200%);
+      transition: transform .2s ease;
+    }
+    .skip-link:focus-visible { transform: translateY(0); outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    /* Mobile nav toggle (hamburger) */
+    .nav-toggle {
+      display: none;
+      position: absolute; right: calc(var(--gutter) + 52px);
+      top: 50%; transform: translateY(-50%);
+      width: 40px; height: 40px;
+      align-items: center; justify-content: center;
+      background: transparent; border: 1px solid var(--line-strong);
+      border-radius: 12px; cursor: pointer;
+      color: var(--ink-2);
+      transition: color .2s, border-color .2s, background .2s;
+    }
+    .nav-toggle:hover { color: var(--ink); border-color: var(--ink); background: rgba(26,21,48,0.04); }
+    .nav-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .nav-toggle .bar {
+      display: block; width: 18px; height: 2px;
+      background: currentColor; border-radius: 2px;
+      transition: transform .25s ease, opacity .2s ease;
+    }
+    .nav-toggle .bar + .bar { margin-top: 5px; }
+    .nav-toggle[aria-expanded="true"] .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] .bar:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    @media (max-width: 720px) {
+      .nav-toggle { display: flex; }
+      .nav-links {
+        position: absolute; top: calc(100% + 8px); left: var(--gutter); right: var(--gutter);
+        flex-direction: column; align-items: stretch; gap: 2px;
+        padding: 10px; border-radius: 16px;
+        background: var(--bg); border: 1px solid var(--line-strong);
+        box-shadow: var(--shadow-md);
+        opacity: 0; visibility: hidden; transform: translateY(-8px);
+        transition: opacity .2s ease, transform .2s ease, visibility .2s;
+      }
+      .nav-links.open { opacity: 1; visibility: visible; transform: translateY(0); }
+      .nav-links a {
+        padding: 12px 14px; border-radius: 10px;
+        font-size: 0.82rem; letter-spacing: 0.1em;
+      }
+      .nav-links a:hover, .nav-links a:focus-visible { background: rgba(26,21,48,0.05); color: var(--ink); }
+    }
 
     body::before {
       content: '';
@@ -155,8 +264,112 @@
       transition: color .2s;
     }
     .nav-links a:hover { color: var(--ink); }
+
+    /* Language switcher (positioned to the right of nav-links) */
+    .lang-switch {
+      position: absolute;
+      right: var(--gutter);
+      top: 50%;
+      transform: translateY(-50%);
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 11px 7px 10px;
+      background: transparent;
+      color: var(--ink-2);
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: color .2s, border-color .2s, background .2s;
+    }
+    .lang-switch:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+      background: rgba(26,21,48,0.04);
+    }
+    .lang-switch:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .lang-switch .globe {
+      width: 13px; height: 13px;
+      stroke: currentColor; stroke-width: 1.6;
+      fill: none;
+    }
+    .lang-switch .chev {
+      width: 9px; height: 9px;
+      stroke: currentColor; stroke-width: 1.8;
+      fill: none;
+      transition: transform .2s;
+    }
+    .lang-switch[aria-expanded="true"] .chev { transform: rotate(180deg); }
+
+    .lang-menu {
+      position: absolute;
+      right: var(--gutter);
+      top: calc(50% + 28px);
+      transform: translateY(-8px);
+      min-width: 160px;
+      background: var(--bg);
+      border: 1px solid var(--line-strong);
+      border-radius: 14px;
+      padding: 6px;
+      box-shadow: var(--shadow-md);
+      list-style: none;
+      margin: 0;
+      opacity: 0;
+      visibility: hidden;
+      transform-origin: top right;
+      transition: opacity .18s ease, transform .18s ease, visibility .18s;
+      z-index: 110;
+    }
+    .lang-menu.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .lang-menu li button {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+      padding: 9px 12px;
+      background: transparent;
+      border: 0;
+      border-radius: 9px;
+      color: var(--ink-2);
+      font-family: var(--body);
+      font-size: 0.86rem;
+      cursor: pointer;
+      text-align: left;
+      transition: background .15s, color .15s;
+    }
+    .lang-menu li button:hover,
+    .lang-menu li button:focus-visible {
+      background: rgba(26,21,48,0.05);
+      color: var(--ink);
+      outline: none;
+    }
+    .lang-menu li button[aria-checked="true"] {
+      color: var(--ink);
+      font-weight: 600;
+    }
+    .lang-menu li button[aria-checked="true"]::after {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .lang-menu li button .lang-native {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      color: var(--ink-soft);
+      margin-left: 6px;
+    }
     @media (max-width: 720px) {
-      .nav-links { display: none; }
+      .lang-switch { padding: 6px 9px; }
+      .lang-switch .lang-current { display: none; }
     }
 
     /* Loading */
@@ -215,7 +428,7 @@
     }
     .hero-title em {
       font-style: italic; font-weight: 300;
-      color: var(--accent);
+      color: var(--accent-deep);
     }
     .hero-title .strike {
       position: relative;
@@ -311,7 +524,7 @@
     }
     .marquee-item em {
       font-style: italic; font-weight: 400;
-      color: var(--accent);
+      color: var(--accent-deep);
     }
     .marquee-item .sep {
       display: inline-block;
@@ -343,7 +556,7 @@
     }
     .sect-title em {
       font-style: italic; font-weight: 300;
-      color: var(--accent);
+      color: var(--accent-deep);
     }
     .sect-sub {
       margin-top: 18px;
@@ -419,177 +632,16 @@
       .proj .body { padding: 28px; }
     }
 
-    /* Project mockup styles */
-    .m-dash, .m-podium, .m-terminal, .m-table {
+        /* Project screenshot */
+    .proj .mock > .proj-shot {
+      display: block;
       width: 100%; max-width: 460px;
-      background: #fff; border-radius: 14px;
-      box-shadow: var(--shadow-md);
-      overflow: hidden;
-    }
-    .m-dash-top {
-      display: flex; gap: 6px; align-items: center;
-      padding: 12px 14px; background: var(--bg);
-      border-bottom: 1px solid var(--card-bd);
-    }
-    .m-dash-top > span:not(.m-dash-title) {
-      width: 10px; height: 10px; border-radius: 50%; background: var(--ink-soft);
-    }
-    .m-dash-top > span:nth-child(1) { background: #ff6058; }
-    .m-dash-top > span:nth-child(2) { background: #ffbd2e; }
-    .m-dash-top > span:nth-child(3) { background: #28c941; }
-    .m-dash-title {
-      margin-left: 10px;
-      font-family: var(--mono); font-size: 11px;
-      color: var(--ink-2);
-    }
-    .m-dash-body { padding: 16px 18px 20px; }
-    .m-stat {
-      display: inline-block; width: 47%;
-      margin: 2px 1%; padding: 10px 12px;
-      background: rgba(255,91,58,0.06); border-radius: 10px;
-      vertical-align: top;
-    }
-    .m-stat .m-lbl {
-      display: block; font-family: var(--mono); font-size: 9.5px;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--ink-soft); margin-bottom: 4px;
-    }
-    .m-stat .m-num {
-      display: block; font-family: var(--display);
-      font-size: 1.6rem; font-weight: 700; color: var(--ink); line-height: 1;
-    }
-    .m-chart {
-      display: flex; align-items: flex-end; gap: 5px; height: 64px;
-      margin: 14px 0 12px; padding: 8px 0;
-      border-top: 1px dashed var(--line);
-      border-bottom: 1px dashed var(--line);
-    }
-    .m-chart span {
-      flex: 1;
-      background: var(--accent);
-      border-radius: 3px 3px 0 0;
-      min-height: 6px;
-    }
-    .m-chart span:nth-child(1) { background: var(--ink-soft); opacity: 0.4; }
-    .m-row {
-      display: grid; grid-template-columns: 1.3fr 1fr auto;
-      gap: 10px; align-items: center;
-      padding: 7px 0;
-      font-family: var(--mono); font-size: 11px; color: var(--ink-2);
-      border-bottom: 1px solid rgba(26,21,48,0.04);
-    }
-    .m-row:last-child { border-bottom: none; }
-    .m-row .m-ok   { padding: 2px 8px; border-radius: 999px; background: rgba(125,211,168,0.20); color: #2a6b4e; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; }
-    .m-row .m-live { padding: 2px 8px; border-radius: 999px; background: rgba(255,91,58,0.20); color: var(--accent-ink); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; }
-    .m-row .m-wait { padding: 2px 8px; border-radius: 999px; background: rgba(140,120,200,0.20); color: #4a3a7a; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; }
-    /* KlikKode: real quiz UI mock, not a podium */
-    .m-quiz {
-      width: 100%;
-      background: #fff;
+      height: auto;
       border-radius: 14px;
       box-shadow: var(--shadow-md);
-      overflow: hidden;
-      font-family: var(--body);
+      border: 1px solid var(--line);
     }
-    .m-quiz-head {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 18px;
-      background: var(--bg);
-      border-bottom: 1px solid var(--card-bd);
-      font-size: 12px;
-    }
-    .m-quiz-head .m-progress {
-      color: var(--ink-2); font-family: var(--mono);
-      letter-spacing: 0.04em;
-    }
-    .m-quiz-head .m-progress strong {
-      color: var(--ink); font-weight: 700;
-    }
-    .m-quiz-head .m-xp {
-      color: var(--accent); font-weight: 700;
-      font-family: var(--mono); font-size: 11px;
-      padding: 3px 10px; border-radius: 999px;
-      background: rgba(255,91,58,0.10);
-    }
-    .m-quiz-body { padding: 22px 22px 24px; }
-    .m-quiz-topic {
-      font-family: var(--mono); font-size: 10.5px;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: var(--ink-soft);
-      margin-bottom: 10px;
-    }
-    .m-quiz-q {
-      font-family: var(--display);
-      font-weight: 700;
-      font-size: 17px;
-      line-height: 1.3;
-      color: var(--ink);
-      letter-spacing: -0.01em;
-      margin-bottom: 18px;
-    }
-    .m-quiz-opts {
-      list-style: none; padding: 0; margin: 0;
-      display: grid; gap: 8px;
-    }
-    .m-quiz-opts li {
-      display: flex; align-items: center; gap: 12px;
-      padding: 11px 14px;
-      border: 1px solid var(--card-bd);
-      border-radius: 10px;
-      font-size: 13px;
-      color: var(--ink);
-      background: rgba(20,16,48,0.02);
-    }
-    .m-quiz-opts li .m-key {
-      width: 22px; height: 22px;
-      display: grid; place-items: center;
-      border-radius: 6px;
-      font-family: var(--mono); font-weight: 700; font-size: 11px;
-      background: rgba(20,16,48,0.06);
-      color: var(--ink-2);
-      flex-shrink: 0;
-    }
-    .m-quiz-opts li.correct {
-      background: rgba(125,211,168,0.18);
-      border-color: rgba(125,211,168,0.40);
-    }
-    .m-quiz-opts li.correct .m-key {
-      background: #7dd3a8; color: #fff;
-    }
-    .m-quiz-foot {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 12px 18px;
-      border-top: 1px solid var(--card-bd);
-      font-family: var(--mono); font-size: 11px;
-      color: var(--ink-soft);
-    }
-    .m-quiz-foot .m-streak {
-      color: var(--accent); font-weight: 700;
-    }
-    .m-terminal {
-      padding: 22px; background: var(--ink); color: #f5ede0;
-      font-family: var(--mono); font-size: 12px; line-height: 1.7;
-    }
-    .m-terminal .m-prompt { color: var(--accent); font-weight: 700; }
-    .m-terminal .m-info   { color: #7dd3a8; }
-    .m-table { padding: 0; }
-    .m-row.m-head {
-      background: var(--bg); padding: 11px 16px;
-      border-bottom: 1px solid var(--card-bd);
-      color: var(--ink-soft);
-      font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
-      font-weight: 700;
-    }
-    .m-table .m-row { padding: 11px 16px; border-bottom: 1px solid rgba(26,21,48,0.04); }
-    .m-table .m-row:nth-child(odd) { background: rgba(26,21,48,0.02); }
-    .m-table .m-row:last-child { border-bottom: none; }
-    .m-table .m-ok {
-      width: 20px; height: 20px; border-radius: 50%;
-      background: rgba(125,211,168,0.30); color: #2a6b4e;
-      display: grid; place-items: center; font-size: 13px;
-    }
-
-    /* 3 · ABOUT */
+/* 3 · ABOUT */
     .about { padding: 100px 0 80px; }
     .about-grid {
       display: grid;
@@ -607,7 +659,7 @@
     .about-bio .signature {
       margin-top: 28px;
       font-family: var(--display); font-style: italic; font-weight: 300;
-      font-size: 1.6rem; color: var(--accent);
+      font-size: 1.6rem; color: var(--accent-deep);
     }
     .skills-grid {
       display: grid; grid-template-columns: repeat(2, 1fr);
@@ -663,7 +715,7 @@
       margin: 0 auto;
       color: var(--ink);
     }
-    .contact-cta em { font-style: italic; font-weight: 300; color: var(--accent); }
+    .contact-cta em { font-style: italic; font-weight: 300; color: var(--accent-deep); }
     .contact-sub {
       margin: 28px auto 0;
       max-width: 50ch;
@@ -699,7 +751,7 @@
       padding-bottom: 2px;
       transition: color .2s, border-color .2s;
     }
-    .contact-mail-secondary:hover { color: var(--accent); border-color: var(--accent); }
+    .contact-mail-secondary:hover { color: var(--accent-deep); border-color: var(--accent-deep); }
     .contact-pills {
       margin-top: 56px;
       display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
@@ -744,59 +796,98 @@
     .reveal.d1 { transition-delay: .12s; }
     .reveal.d2 { transition-delay: .24s; }
     .reveal.d3 { transition-delay: .36s; }
-    @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .marquee-track { animation: none; }
+      #loader .loader-mark, .hero-eyebrow .dot { animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+    /* Grain layer is a paint cost on small screens; drop it */
+    @media (max-width: 760px) { body::after { display: none; } }
   </style>
 </head>
 <body>
+
+  <a class="skip-link" href="#work" data-i18n="a11y.skip">Skip to content</a>
 
   <div id="loader" aria-hidden="true">
     <div class="loader-mark">G</div>
   </div>
 
   <header class="topnav" id="topnav">
-    <a class="brand" href="#top" aria-label="Gilang — home">
+    <a class="brand" href="#top" data-i18n-aria="brand.aria" aria-label="Gilang — home">
       <span class="brand-mark"><span class="g-letter">G</span></span>
       <span class="brand-name">
         <span class="name">Gilang</span>
         <span class="sep">·</span>
-        <span class="port">portfolio</span>
+        <span class="port" data-i18n="brand.port">portfolio</span>
       </span>
     </a>
     <div class="topnav-inner">
-      <nav class="nav-links" aria-label="primary">
-        <a href="#work">Work</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+      <nav class="nav-links" id="site-nav" aria-label="primary">
+        <a href="#work" data-i18n="nav.work">Work</a>
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
       </nav>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"
+              aria-label="Menu" data-i18n-aria="nav.menu" data-nav-toggle>
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <button class="lang-switch" type="button"
+              aria-haspopup="listbox" aria-expanded="false"
+              aria-label="Language" data-i18n-aria="lang.aria" data-lang-toggle>
+        <svg class="globe" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M3 12h18 M12 3a14 14 0 0 1 0 18 M12 3a14 14 0 0 0 0 18"/>
+        </svg>
+        <span class="lang-current" data-lang-current>EN</span>
+        <svg class="chev" viewBox="0 0 12 12" aria-hidden="true">
+          <path d="M2 4 L6 8 L10 4"/>
+        </svg>
+      </button>
+      <ul class="lang-menu" role="listbox" aria-label="Language" data-lang-menu hidden>
+        <li role="presentation">
+          <button type="button" role="option" data-lang="en" aria-checked="true">
+            English <span class="lang-native">EN</span>
+          </button>
+        </li>
+        <li role="presentation">
+          <button type="button" role="option" data-lang="id" aria-checked="false">
+            Bahasa Indonesia <span class="lang-native">ID</span>
+          </button>
+        </li>
+      </ul>
     </div>
   </header>
 
   <section class="hero wrap" id="top">
     <p class="hero-eyebrow reveal">
       <span class="dot"></span>
-      <span>Open to work · Indonesia · GMT+7</span>
+      <span data-i18n="hero.eyebrow">Open to work · Indonesia · GMT+7</span>
     </p>
     <h1 class="hero-title reveal d1">
-      I build web apps<br/>
-      that <em>don&rsquo;t</em><br/>
-      <span class="strike">suck</span>.
+      <span data-i18n="hero.title.l1">I build web apps</span><br/>
+      <span data-i18n="hero.title.that">that</span> <em data-i18n="hero.title.dont">don&rsquo;t</em><br/>
+      <span class="strike" data-i18n="hero.title.suck">suck</span>.
     </h1>
     <p class="hero-sub reveal d2">
-      Hi, I&rsquo;m <strong>Gilang</strong> — a web developer shipping in
-      <strong>Laravel</strong> &amp; <strong>CodeIgniter</strong>, and getting
+      <span data-i18n="hero.sub.a">Hi, I&rsquo;m</span> <strong>Gilang</strong>
+      <span data-i18n="hero.sub.b">&mdash; a web developer shipping in</span>
+      <strong>Laravel</strong>
+      &amp; <strong>CodeIgniter</strong><span data-i18n="hero.sub.c">, and getting
       a little too excited about gamification. This is the portfolio, the work,
-      and the contact.
+      and the contact.</span>
     </p>
     <div class="hero-actions reveal d3">
-      <a class="primary" href="#work">See the work</a>
-      <a class="secondary" href="#contact">Get in touch →</a>
+      <a class="primary" href="#work" data-i18n="hero.cta.primary">See the work</a>
+      <a class="secondary" href="#contact" data-i18n="hero.cta.secondary">Get in touch →</a>
     </div>
     <div class="hero-meta reveal d3">
       <span>PHP <em>8.3</em></span>
       <span>Laravel <em>11</em></span>
       <span>CodeIgniter <em>4</em></span>
       <span>MySQL <em>8</em></span>
-      <span>Based in Indonesia</span>
+      <span data-i18n="hero.meta.location">Based in Indonesia</span>
     </div>
   </section>
 
@@ -819,9 +910,9 @@
 
   <section class="projects wrap" id="work">
     <div class="sect-head reveal">
-      <p class="sect-eyebrow">Selected work · 2026</p>
-      <h2 class="sect-title">Four repos, <em>one month.</em></h2>
-      <p class="sect-sub">
+      <p class="sect-eyebrow"><span data-i18n="projects.eyebrow">Selected work</span> · 2026</p>
+      <h2 class="sect-title"><span data-i18n="projects.title.main">Four projects,</span> <em data-i18n="projects.title.em">one month.</em></h2>
+      <p class="sect-sub" data-i18n="projects.sub">
         Every public repo I shipped lately. Real assignments, side
         experiments, and one stubborn attempt at making a CRUD app fun.
       </p>
@@ -831,33 +922,34 @@
 
       <article class="proj reveal" data-i="0">
         <div class="mock">
-          <div class="m-dash">
-            <div class="m-dash-top">
-              <span></span><span></span><span></span>
-              <span class="m-dash-title">klinikapp / dashboard</span>
-            </div>
-            <div class="m-dash-body">
-              <div class="m-stat"><span class="m-lbl">Pasien hari ini</span><span class="m-num">14</span></div>
-              <div class="m-stat"><span class="m-lbl">Antrian</span><span class="m-num">7</span></div>
-              <div class="m-stat"><span class="m-lbl">Selesai</span><span class="m-num">42</span></div>
-              <div class="m-stat"><span class="m-lbl">Dokter</span><span class="m-num">3</span></div>
-              <div class="m-chart">
-                <span style="height:30%"></span><span style="height:55%"></span><span style="height:48%"></span>
-                <span style="height:70%"></span><span style="height:62%"></span><span style="height:90%"></span>
-                <span style="height:78%"></span>
-              </div>
-              <div class="m-row"><span>Rina &middot; 09:00</span><span>Dr. Anisa</span><span class="m-ok">selesai</span></div>
-              <div class="m-row"><span>Sari &middot; 10:00</span><span>Dr. Hadi</span><span class="m-live">live</span></div>
-              <div class="m-row"><span>Budi &middot; 11:00</span><span>Dr. Hadi</span><span class="m-wait">antri</span></div>
-            </div>
-          </div>
+          <img class="proj-shot" src="assets/projects/manajemen-produk.webp" alt="Manajemen Produk dashboard screenshot" loading="lazy">
         </div>
         <div class="body">
-          <span class="num">01 &middot; Featured</span>
-          <h3 class="name">A clinic app that feels calm.</h3>
-          <p class="tagline">
-            Laravel 11 &middot; MySQL &middot; appointments, records, dashboards.
-            Built end-to-end with migrations, seeders, and a clean CRUD baseline.
+          <span class="num"><span data-i18n="proj1.num">01</span> · <span data-i18n="proj1.tag">Coursework</span></span>
+          <h3 class="name" data-i18n="proj1.name">A CRUD module that doesn&rsquo;t put you to sleep.</h3>
+          <p class="tagline" data-i18n="proj1.tagline">
+            Laravel 11 · MySQL · Kategori + Produk with real
+            validation, seeders, and a dashboard that actually shows totals.
+            The baseline most apps skip.
+          </p>
+          <div class="stack">
+            <span>Laravel 11</span><span>Blade</span><span>MySQL</span><span>Validation</span><span>Migrations</span>
+          </div>
+          <div class="meta">
+            <a href="https://github.com/gilangg24/tugas-crud-laravel" target="_blank" rel="noopener">github.com/gilangg24/tugas-crud-laravel ↗</a>
+            <span>· 2026</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="proj reveal d1" data-i="1" style="grid-template-columns: 1fr 1.3fr;">
+        <div class="body">
+          <span class="num"><span data-i18n="proj2.num">02</span> · <span data-i18n="proj2.tag">Featured</span></span>
+          <h3 class="name" data-i18n="proj2.name">A clinic app that feels calm.</h3>
+          <p class="tagline" data-i18n="proj2.tagline">
+            Laravel 11 · MySQL · appointments, patient records,
+            and a dashboard with a live registration feed. Built end-to-end
+            with migrations, seeders, and a clean CRUD baseline.
           </p>
           <div class="stack">
             <span>Laravel 11</span><span>Blade</span><span>Tailwind</span><span>MySQL</span><span>Migrations</span>
@@ -867,15 +959,22 @@
             <span>· 2026</span>
           </div>
         </div>
+        <div class="mock">
+          <img class="proj-shot" src="assets/projects/klinik-app.webp" alt="KlinikApp dashboard screenshot" loading="lazy">
+        </div>
       </article>
 
-      <article class="proj reveal d1" data-i="1" style="grid-template-columns: 1fr 1.3fr;">
+      <article class="proj reveal d2" data-i="2">
+        <div class="mock">
+          <img class="proj-shot" src="assets/projects/klikkode.webp" alt="KlikKode landing page screenshot" loading="lazy">
+        </div>
         <div class="body">
-          <span class="num">02 &middot; Featured</span>
-          <h3 class="name">A quiz that turns learning into XP.</h3>
-          <p class="tagline">
-            CodeIgniter 4 &middot; gamified quiz app with XP, leaderboards, and
-            topic paths. The kind of project that makes you forget you&rsquo;re studying.
+          <span class="num"><span data-i18n="proj3.num">03</span> · <span data-i18n="proj3.tag">Featured</span></span>
+          <h3 class="name" data-i18n="proj3.name">A quiz that turns learning into XP.</h3>
+          <p class="tagline" data-i18n="proj3.tagline">
+            CodeIgniter 4 · gamified quiz app with XP, leaderboards,
+            and topic paths. The kind of project that makes you forget
+            you&rsquo;re studying.
           </p>
           <div class="stack">
             <span>CodeIgniter 4</span><span>PHP 8.3</span><span>MySQL</span><span>XP · Levels</span>
@@ -885,81 +984,28 @@
             <span>· 2026</span>
           </div>
         </div>
-        <div class="mock">
-          <div class="m-quiz">
-            <div class="m-quiz-head">
-              <span class="m-progress">Question <strong>8</strong> of 10</span>
-              <span class="m-xp">+50 XP</span>
-            </div>
-            <div class="m-quiz-body">
-              <p class="m-quiz-topic">Laravel</p>
-              <p class="m-quiz-q">What does CSRF protection defend against?</p>
-              <ul class="m-quiz-opts">
-                <li><span class="m-key">A</span><span>Cross-Site Request Forgery</span></li>
-                <li class="correct"><span class="m-key">B</span><span>Cross-Site Request Forgery (correct)</span></li>
-                <li><span class="m-key">C</span><span>Cross-Server Routing Failure</span></li>
-                <li><span class="m-key">D</span><span>Cached Session Render Format</span></li>
-              </ul>
-            </div>
-            <div class="m-quiz-foot">
-              <span>Time: <strong>00:24</strong></span>
-              <span class="m-streak">Streak 5x</span>
-            </div>
-          </div>
-        </div>
       </article>
 
-      <article class="proj reveal d2" data-i="2">
-        <div class="mock">
-          <div class="m-terminal">
-            <span class="m-prompt">$</span> composer create-project codeigniter4/appstarter<br/>
-            <span class="m-info">&gt; installing v4.7.0&nbsp;&nbsp;&nbsp;· ok</span><br/>
-            <span class="m-prompt">$</span> php spark serve --port 8080<br/>
-            <span class="m-info">&gt; localhost:8080&nbsp;&nbsp;·&nbsp;&nbsp;ready</span>
-          </div>
-        </div>
+      <article class="proj reveal d3" data-i="3" style="grid-template-columns: 1fr 1.3fr;">
         <div class="body">
-          <span class="num">03 · Scaffolding</span>
-          <h3 class="name">A clean CI4 starter, ready to build on.</h3>
-          <p class="tagline">
-            Fresh CodeIgniter 4 appstarter with the standard directory layout,
-            ready for the next feature. Hand-picked — not auto-generated.
+          <span class="num"><span data-i18n="proj4.num">04</span> · <span data-i18n="proj4.tag">Featured</span></span>
+          <h3 class="name" data-i18n="proj4.name">SIA GILANG — academic ops, end to end.</h3>
+          <p class="tagline" data-i18n="proj4.tagline">
+            CodeIgniter 4 academic info system with auth, CRUD, and a KRS
+            join across four tables. The repo started as a clean appstarter
+            and grew into the only project I keep coming back to. Seeded
+            with Indonesian names so the demo doesn&rsquo;t feel like Lorem ipsum.
           </p>
           <div class="stack">
-            <span>CodeIgniter 4</span><span>Composer</span><span>PHP 8.2+</span><span>MVC</span>
+            <span>CodeIgniter 4</span><span>PHP 8.3</span><span>MySQL</span><span>Auth</span><span>Migrations</span><span>Seeders</span>
           </div>
           <div class="meta">
             <a href="https://github.com/gilangg24/codeigniter-app" target="_blank" rel="noopener">github.com/gilangg24/codeigniter-app ↗</a>
             <span>· 2026</span>
           </div>
         </div>
-      </article>
-
-      <article class="proj reveal d3" data-i="3" style="grid-template-columns: 1fr 1.3fr;">
-        <div class="body">
-          <span class="num">04 · Coursework</span>
-          <h3 class="name">Tugas CRUD · Laravel edition.</h3>
-          <p class="tagline">
-            A clean Laravel CRUD module for Kategori + Produk tables.
-            Compact, correct, properly validated — the baseline most apps skip.
-          </p>
-          <div class="stack">
-            <span>PHP</span><span>Laravel</span><span>MySQL</span><span>Validation</span>
-          </div>
-          <div class="meta">
-            <a href="https://github.com/gilangg24/tugas-crud-laravel" target="_blank" rel="noopener">github.com/gilangg24/tugas-crud-laravel ↗</a>
-            <span>· 2026</span>
-          </div>
-        </div>
         <div class="mock">
-          <div class="m-table">
-            <div class="m-row m-head"><span>#</span><span>Kategori</span><span>Produk</span><span></span></div>
-            <div class="m-row"><span>01</span><span>Minuman</span><span>Kopi · Teh</span><span class="m-ok">✓</span></div>
-            <div class="m-row"><span>02</span><span>Makanan</span><span>Nasi · Snack</span><span class="m-ok">✓</span></div>
-            <div class="m-row"><span>03</span><span>Elektronik</span><span>Laptop · HP</span><span class="m-ok">✓</span></div>
-            <div class="m-row"><span>04</span><span>ATK</span><span>Pulpen · Kertas</span><span class="m-ok">✓</span></div>
-            <div class="m-row"><span>05</span><span>Lainnya</span><span>Misc</span><span class="m-ok">✓</span></div>
-          </div>
+          <img class="proj-shot" src="assets/projects/sia-gilang.webp" alt="SIA GILANG dashboard screenshot" loading="lazy">
         </div>
       </article>
 
@@ -968,41 +1014,41 @@
 
   <section class="about wrap" id="about">
     <div class="sect-head reveal">
-      <p class="sect-eyebrow">About · Stack</p>
-      <h2 class="sect-title">A small toolbox, <em>used&nbsp;well.</em></h2>
+      <p class="sect-eyebrow"><span data-i18n="about.eyebrow.a">About</span> · <span data-i18n="about.eyebrow.b">Stack</span></p>
+      <h2 class="sect-title"><span data-i18n="about.title.main">A small toolbox,</span> <em data-i18n="about.title.em">used well.</em></h2>
     </div>
     <div class="about-grid">
 
       <div class="about-bio reveal d1">
-        <p>
+        <p data-i18n="about.bio.p1">
           I&rsquo;m a web developer based in Indonesia, currently shipping
           <strong>four public repos in one month</strong>, and getting properly
           stuck into the part of the job that isn&rsquo;t coding — naming things,
           planning migrations, deciding what <em>not</em> to build.
         </p>
-        <p>
+        <p data-i18n="about.bio.p2">
           My stack is PHP — <strong>Laravel</strong> when the package ecosystem
           pays for itself, <strong>CodeIgniter 4</strong> when I want every line of
           the request to be readable. I&rsquo;m exploring AI-assisted workflows
           this year (yes, this page was scaffolded by one), with the goal of staying
           curious without losing the craft.
         </p>
-        <p>
+        <p data-i18n="about.bio.p3">
           Outside the keyboard: coffee, late nights reading changelogs, and a
           stubborn belief that gamification can fix almost any UI.
         </p>
-        <p class="signature">— Gilang</p>
+        <p class="signature">&mdash; Gilang</p>
       </div>
 
       <div class="skills-grid">
-        <div class="skill reveal d1"><span class="ico laravel">L</span><div><h4>Laravel 11</h4><p>v11 · migrations · blade</p></div></div>
-        <div class="skill reveal d1"><span class="ico codeigniter">C</span><div><h4>CodeIgniter 4</h4><p>v4.7 · spark · mvc</p></div></div>
-        <div class="skill reveal d2"><span class="ico php">P</span><div><h4>PHP</h4><p>v8.3 · typed</p></div></div>
-        <div class="skill reveal d2"><span class="ico mysql">M</span><div><h4>MySQL</h4><p>v8 · schema · idx</p></div></div>
-        <div class="skill reveal d3"><span class="ico git">G</span><div><h4>Git · GitHub</h4><p>rebase · ci · pages</p></div></div>
-        <div class="skill reveal d3"><span class="ico vscode">V</span><div><h4>VS Code</h4><p>ts · js · php</p></div></div>
-        <div class="skill reveal d3"><span class="ico compose">Co</span><div><h4>Composer</h4><p>v2 · autoload</p></div></div>
-        <div class="skill reveal d3"><span class="ico ai">Ai</span><div><h4>AI-assisted</h4><p>learning · shipping</p></div></div>
+        <div class="skill reveal d1"><span class="ico laravel">L</span><div><h4>Laravel 11</h4><p data-i18n="skill.laravel">v11 · migrations · blade</p></div></div>
+        <div class="skill reveal d1"><span class="ico codeigniter">C</span><div><h4>CodeIgniter 4</h4><p data-i18n="skill.codeigniter">v4.7 · spark · mvc</p></div></div>
+        <div class="skill reveal d2"><span class="ico php">P</span><div><h4>PHP</h4><p data-i18n="skill.php">v8.3 · typed</p></div></div>
+        <div class="skill reveal d2"><span class="ico mysql">M</span><div><h4>MySQL</h4><p data-i18n="skill.mysql">v8 · schema · idx</p></div></div>
+        <div class="skill reveal d3"><span class="ico git">G</span><div><h4>Git · GitHub</h4><p data-i18n="skill.git">rebase · ci · pages</p></div></div>
+        <div class="skill reveal d3"><span class="ico vscode">V</span><div><h4>VS Code</h4><p data-i18n="skill.vscode">ts · js · php</p></div></div>
+        <div class="skill reveal d3"><span class="ico compose">Co</span><div><h4>Composer</h4><p data-i18n="skill.composer">v2 · autoload</p></div></div>
+        <div class="skill reveal d3"><span class="ico ai">Ai</span><div><h4>AI-assisted</h4><p data-i18n="skill.ai">learning · shipping</p></div></div>
       </div>
 
     </div>
@@ -1010,22 +1056,22 @@
 
   <section class="contact" id="contact">
     <div class="wrap">
-      <p class="contact-eyebrow reveal"><span class="dot"></span>Get in touch</p>
-      <h2 class="contact-cta reveal d1">Got an idea? <em>Let&rsquo;s build it.</em></h2>
-      <p class="contact-sub reveal d2">
+      <p class="contact-eyebrow reveal"><span class="dot"></span><span data-i18n="contact.eyebrow">Get in touch</span></p>
+      <h2 class="contact-cta reveal d1"><span data-i18n="contact.cta.main">Got an idea?</span> <em data-i18n="contact.cta.em">Let&rsquo;s build it.</em></h2>
+      <p class="contact-sub reveal d2" data-i18n="contact.sub">
         Open for freelance and full-time roles. Send a few lines about
         what you&rsquo;re working on, and I&rsquo;ll get back to you within a day.
       </p>
       <div class="contact-cta-row reveal d3">
-        <a class="contact-mail" href="mailto:gilangramdhani708@gmail.com">Hire me →</a>
+        <a class="contact-mail" href="mailto:gilangramdhani708@gmail.com" data-i18n="contact.cta.hire">Hire me →</a>
         <a class="contact-mail-secondary" href="mailto:gilangramdhani708@gmail.com">gilangramdhani708@gmail.com</a>
       </div>
       <div class="contact-pills reveal d3">
-        <span class="contact-pills-label">elsewhere</span>
+        <span class="contact-pills-label" data-i18n="contact.elsewhere">elsewhere</span>
         <a href="https://github.com/gilangg24" target="_blank" rel="noopener">GitHub</a>
         <a href="https://github.com/gilangg24/KlnikApp" target="_blank" rel="noopener">KlinikApp ↗</a>
         <a href="https://github.com/gilangg24/klikkode" target="_blank" rel="noopener">KlikKode ↗</a>
-        <a href="https://github.com/gilangg24/codeigniter-app" target="_blank" rel="noopener">codeigniter-app ↗</a>
+        <a href="https://github.com/gilangg24/codeigniter-app" target="_blank" rel="noopener">SIA GILANG ↗</a>
         <a href="https://github.com/gilangg24/tugas-crud-laravel" target="_blank" rel="noopener">tugas-crud-laravel ↗</a>
       </div>
     </div>
@@ -1033,21 +1079,22 @@
 
   <footer class="foot">
     <div class="wrap foot-inner">
-      <span>&copy; 2026 Gilang · Built in Indonesia</span>
-      <span>
-        Engine by <a href="https://github.com/oso95/scroll-world" target="_blank" rel="noopener">oso95/scroll-world</a>
-        · MIT
-      </span>
+      <span><span data-i18n="footer.copy">&copy; 2026 Gilang · Built in Indonesia</span></span>
+      <span>One HTML file · no frameworks</span>
     </div>
   </footer>
 
   <script>
     (function () {
       function hide() { var el = document.getElementById('loader'); if (el) el.classList.add('hidden'); }
+      var done = false;
+      function safeHide() { if (done) return; done = true; setTimeout(hide, 240); }
+      // Race fonts.ready against a 2s ceiling, fall back to window.load, and
+      // never let a slow/blocked font CDN keep the loader on screen.
+      setTimeout(safeHide, 2000);
+      window.addEventListener('load', safeHide, { once: true });
       if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(function () { setTimeout(hide, 240); });
-      } else {
-        window.addEventListener('load', function () { setTimeout(hide, 240); });
+        document.fonts.ready.then(safeHide, safeHide);
       }
     })();
 
@@ -1056,6 +1103,27 @@
       window.addEventListener('scroll', function () {
         nav.classList.toggle('scrolled', window.scrollY > 12);
       }, { passive: true });
+    })();
+
+    (function () {
+      var toggle = document.querySelector('[data-nav-toggle]');
+      var nav = document.getElementById('site-nav');
+      if (!toggle || !nav) return;
+      function setNav(open) {
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        nav.classList.toggle('open', open);
+      }
+      toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        setNav(toggle.getAttribute('aria-expanded') !== 'true');
+      });
+      nav.addEventListener('click', function () { setNav(false); });
+      document.addEventListener('click', function (e) {
+        if (!nav.contains(e.target) && !toggle.contains(e.target)) setNav(false);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setNav(false);
+      });
     })();
 
     (function () {
@@ -1072,6 +1140,259 @@
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
       document.querySelectorAll('.reveal').forEach(function (e) { io.observe(e); });
+    })();
+
+    /* ---------------------------------------------------------------------
+       i18n — language switcher
+       - Dictionary keyed by dotted path (e.g. 'hero.title.suck').
+       - Persists choice in localStorage.
+       - Auto-detects on first load via navigator.language.
+       - Add a new language by adding a key under I18N below.
+       --------------------------------------------------------------------- */
+    (function () {
+      var I18N = {
+        en: {
+          'brand.port':        'portfolio',
+          'brand.aria':        'Gilang — home',
+          'nav.menu':          'Menu',
+          'lang.aria':         'Language',
+          'a11y.skip':         'Skip to content',
+          'nav.work':          'Work',
+          'nav.about':         'About',
+          'nav.contact':       'Contact',
+          'hero.eyebrow':      'Open to work · Indonesia · GMT+7',
+          'hero.title.l1':     'I build web apps',
+          'hero.title.that':   'that',
+          'hero.title.dont':   'don\u2019t',
+          'hero.title.suck':   'suck',
+          'hero.sub.a':        'Hi, I\u2019m',
+          'hero.sub.b':        '\u2014 a web developer shipping in',
+          'hero.sub.c':        ', and getting a little too excited about gamification. This is the portfolio, the work, and the contact.',
+          'hero.cta.primary':  'See the work',
+          'hero.cta.secondary':'Get in touch \u2192',
+          'hero.meta.location':'Based in Indonesia',
+          'projects.eyebrow':  'Selected work',
+          'projects.title.main':'Four projects,',
+          'projects.title.em': 'one month.',
+          'projects.sub':      'Every public repo I shipped lately. Real assignments, side experiments, and one stubborn attempt at making a CRUD app fun.',
+          'proj1.num':         '01',
+          'proj1.tag':         'Coursework',
+          'proj1.name':        'A CRUD module that doesn\u2019t put you to sleep.',
+          'proj1.tagline':     'Laravel 11 · MySQL · Kategori + Produk with real validation, seeders, and a dashboard that actually shows totals. The baseline most apps skip.',
+          'proj2.num':         '02',
+          'proj2.tag':         'Featured',
+          'proj2.name':        'A clinic app that feels calm.',
+          'proj2.tagline':     'Laravel 11 · MySQL · appointments, patient records, and a dashboard with a live registration feed. Built end-to-end with migrations, seeders, and a clean CRUD baseline.',
+          'proj3.num':         '03',
+          'proj3.tag':         'Featured',
+          'proj3.name':        'A quiz that turns learning into XP.',
+          'proj3.tagline':     'CodeIgniter 4 · gamified quiz app with XP, leaderboards, and topic paths. The kind of project that makes you forget you\u2019re studying.',
+          'proj4.num':         '04',
+          'proj4.tag':         'Featured',
+          'proj4.name':        'SIA GILANG \u2014 academic ops, end to end.',
+          'proj4.tagline':     'CodeIgniter 4 academic info system with auth, CRUD, and a KRS join across four tables. The repo started as a clean appstarter and grew into the only project I keep coming back to. Seeded with Indonesian names so the demo doesn\u2019t feel like Lorem ipsum.',
+          'about.eyebrow.a':   'About',
+          'about.eyebrow.b':   'Stack',
+          'about.title.main':  'A small toolbox,',
+          'about.title.em':    'used well.',
+          'about.bio.p1':      'I\u2019m a web developer based in Indonesia, currently shipping four public repos in one month, and getting properly stuck into the part of the job that isn\u2019t coding \u2014 naming things, planning migrations, deciding what not to build.',
+          'about.bio.p2':      'My stack is PHP \u2014 Laravel when the package ecosystem pays for itself, CodeIgniter 4 when I want every line of the request to be readable. I\u2019m exploring AI-assisted workflows this year (yes, this page was scaffolded by one), with the goal of staying curious without losing the craft.',
+          'about.bio.p3':      'Outside the keyboard: coffee, late nights reading changelogs, and a stubborn belief that gamification can fix almost any UI.',
+          'skill.laravel':     'v11 \u00b7 migrations \u00b7 blade',
+          'skill.codeigniter': 'v4.7 \u00b7 spark \u00b7 mvc',
+          'skill.php':         'v8.3 \u00b7 typed',
+          'skill.mysql':       'v8 \u00b7 schema \u00b7 idx',
+          'skill.git':         'rebase \u00b7 ci \u00b7 pages',
+          'skill.vscode':      'ts \u00b7 js \u00b7 php',
+          'skill.composer':    'v2 \u00b7 autoload',
+          'skill.ai':          'learning \u00b7 shipping',
+          'contact.eyebrow':   'Get in touch',
+          'contact.cta.main':  'Got an idea?',
+          'contact.cta.em':    'Let\u2019s build it.',
+          'contact.sub':       'Open for freelance and full-time roles. Send a few lines about what you\u2019re working on, and I\u2019ll get back to you within a day.',
+          'contact.cta.hire':  'Hire me \u2192',
+          'contact.elsewhere': 'elsewhere',
+          'footer.copy':       '\u00a9 2026 Gilang \u00b7 Built in Indonesia'
+        },
+        id: {
+          'brand.port':        'portofolio',
+          'brand.aria':        'Gilang — beranda',
+          'nav.menu':          'Menu',
+          'lang.aria':         'Bahasa',
+          'a11y.skip':         'Langsung ke konten',
+          'nav.work':          'Karya',
+          'nav.about':         'Tentang',
+          'nav.contact':       'Kontak',
+          'hero.eyebrow':      'Terbuka untuk kerja \u00b7 Indonesia \u00b7 GMT+7',
+          'hero.title.l1':     'Saya bikin web app',
+          'hero.title.that':   '',
+          'hero.title.dont':   'yang nggak',
+          'hero.title.suck':   'ngebosenin',
+          'hero.sub.a':        'Hai, saya',
+          'hero.sub.b':        '\u2014 web developer yang biasa kirim app pakai',
+          'hero.sub.c':        ', dan kadang kelewat excited sama gamifikasi. Ini portofolio, karya, dan kontak saya.',
+          'hero.cta.primary':  'Lihat karya',
+          'hero.cta.secondary':'Hubungi saya \u2192',
+          'hero.meta.location':'Berbasis di Indonesia',
+          'projects.eyebrow':  'Karya pilihan',
+          'projects.title.main':'Empat proyek,',
+          'projects.title.em': 'satu bulan.',
+          'projects.sub':      'Setiap repo publik yang saya kirim belakangan ini. Tugas kuliah, eksperimen sampingan, dan satu usaha keras supaya app CRUD terasa seru.',
+          'proj1.num':         '01',
+          'proj1.tag':         'Tugas',
+          'proj1.name':        'Modul CRUD yang nggak bikin ngantuk.',
+          'proj1.tagline':     'Laravel 11 \u00b7 MySQL \u00b7 Kategori + Produk dengan validasi nyata, seeder, dan dashboard yang beneran nampilin total. Basic yang sering dilupain banyak app.',
+          'proj2.num':         '02',
+          'proj2.tag':         'Unggulan',
+          'proj2.name':        'App klinik yang berasa tenang.',
+          'proj2.tagline':     'Laravel 11 \u00b7 MySQL \u00b7 janji temu, rekam medis, dan dashboard dengan feed pendaftaran langsung. Dibangun end-to-end \u2014 migration, seeder, dan baseline CRUD yang bersih.',
+          'proj3.num':         '03',
+          'proj3.tag':         'Unggulan',
+          'proj3.name':        'Kuis yang bikin belajar berasa naik level.',
+          'proj3.tagline':     'CodeIgniter 4 \u00b7 app kuis bergaya gamifikasi dengan XP, leaderboard, dan jalur topik. Jenis proyek yang bikin lo lupa kalau lagi belajar.',
+          'proj4.num':         '04',
+          'proj4.tag':         'Unggulan',
+          'proj4.name':        'SIA GILANG \u2014 operasional akademik, end to end.',
+          'proj4.tagline':     'Sistem informasi akademik CodeIgniter 4 dengan auth, CRUD, dan join KRS lintas empat tabel. Repo ini mulai dari appstarter bersih dan tumbuh jadi satu-satunya proyek yang terus saya balik ke. Diisi nama-nama Indonesia biar demo-nya nggak berasa Lorem ipsum.',
+          'about.eyebrow.a':   'Tentang',
+          'about.eyebrow.b':   'Stack',
+          'about.title.main':  'Toolbox kecil,',
+          'about.title.em':    'dipakai maksimal.',
+          'about.bio.p1':      'Saya web developer yang berbasis di Indonesia, lagi ngirim empat repo publik dalam satu bulan, dan mulai kecanduan di sisi pekerjaan yang bukan coding \u2014 ngasih nama, merancang migration, mutusin apa yang nggak perlu dibangun.',
+          'about.bio.p2':      'Stack saya PHP \u2014 Laravel kalau ekosistem packagenya emang sebanding, CodeIgniter 4 kalau saya mau setiap baris request-nya kebaca. Tahun ini saya lagi eksplor workflow berbantu AI (ya, halaman ini juga di-scaffold pakai AI), tujuannya tetap penasaran tanpa kehilangan craft.',
+          'about.bio.p3':      'Di luar keyboard: kopi, begadang baca changelog, dan keyakinan keras kepala bahwa gamifikasi bisa nyembuhin hampir semua UI.',
+          'skill.laravel':     'v11 \u00b7 migration \u00b7 blade',
+          'skill.codeigniter': 'v4.7 \u00b7 spark \u00b7 mvc',
+          'skill.php':         'v8.3 \u00b7 typed',
+          'skill.mysql':       'v8 \u00b7 skema \u00b7 idx',
+          'skill.git':         'rebase \u00b7 ci \u00b7 pages',
+          'skill.vscode':      'ts \u00b7 js \u00b7 php',
+          'skill.composer':    'v2 \u00b7 autoload',
+          'skill.ai':          'belajar \u00b7 kirim',
+          'contact.eyebrow':   'Hubungi saya',
+          'contact.cta.main':  'Punya ide?',
+          'contact.cta.em':    'Ayo bangun bareng.',
+          'contact.sub':       'Terbuka untuk freelance dan full-time. Kirim beberapa baris tentang apa yang lagi lo kerjain, dan saya balas dalam sehari.',
+          'contact.cta.hire':  'Rekrut saya \u2192',
+          'contact.elsewhere': 'lainnya',
+          'footer.copy':       '\u00a9 2026 Gilang \u00b7 Dibuat di Indonesia'
+        }
+      };
+
+      var STORAGE_KEY = 'portfolio-lang';
+      var DEFAULT_LANG = 'en';
+
+      function detect() {
+        try {
+          var saved = localStorage.getItem(STORAGE_KEY);
+          if (saved && I18N[saved]) return saved;
+        } catch (e) {}
+        var nav = (navigator.language || '').toLowerCase();
+        if (nav.indexOf('id') === 0 && I18N.id) return 'id';
+        return DEFAULT_LANG;
+      }
+
+      function apply(lang) {
+        if (!I18N[lang]) lang = DEFAULT_LANG;
+        var dict = I18N[lang];
+
+        // Update html attributes (also done by inline init; keep idempotent)
+        document.documentElement.lang = lang;
+        document.documentElement.setAttribute('data-lang', lang);
+
+        // Swap all tagged text
+        var nodes = document.querySelectorAll('[data-i18n]');
+        for (var i = 0; i < nodes.length; i++) {
+          var key = nodes[i].getAttribute('data-i18n');
+          if (dict[key] != null) nodes[i].textContent = dict[key];
+        }
+        // Swap aria-labels too
+        var ariaNodes = document.querySelectorAll('[data-i18n-aria]');
+        for (var j = 0; j < ariaNodes.length; j++) {
+          var akey = ariaNodes[j].getAttribute('data-i18n-aria');
+          if (dict[akey] != null) ariaNodes[j].setAttribute('aria-label', dict[akey]);
+        }
+
+        // Update switcher UI
+        var cur = document.querySelector('[data-lang-current]');
+        if (cur) cur.textContent = lang.toUpperCase();
+        var opts = document.querySelectorAll('[data-lang]');
+        for (var k = 0; k < opts.length; k++) {
+          var checked = opts[k].getAttribute('data-lang') === lang;
+          opts[k].setAttribute('aria-checked', checked ? 'true' : 'false');
+        }
+
+        // Persist
+        try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+      }
+
+      // Toggle menu open/close
+      var toggle = document.querySelector('[data-lang-toggle]');
+      var menu   = document.querySelector('[data-lang-menu]');
+      function setMenu(open) {
+        if (!toggle || !menu) return;
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        menu.classList.toggle('open', open);
+        if (open) {
+          menu.removeAttribute('hidden');
+        } else {
+          // Delay hiding so the close transition can play
+          setTimeout(function () {
+            if (toggle.getAttribute('aria-expanded') === 'false') {
+              menu.setAttribute('hidden', '');
+            }
+          }, 200);
+        }
+      }
+      if (toggle) {
+        toggle.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var open = toggle.getAttribute('aria-expanded') === 'true';
+          setMenu(!open);
+        });
+      }
+      if (menu) {
+        menu.addEventListener('click', function (e) {
+          var btn = e.target.closest('[data-lang]');
+          if (!btn) return;
+          var lang = btn.getAttribute('data-lang');
+          apply(lang);
+          setMenu(false);
+        });
+        // Keyboard navigation (listbox pattern)
+        menu.addEventListener('keydown', function (e) {
+          var opts = Array.prototype.slice.call(menu.querySelectorAll('[data-lang]'));
+          if (!opts.length) return;
+          var idx = opts.indexOf(document.activeElement);
+          if (idx === -1) {
+            idx = 0;
+            for (var o = 0; o < opts.length; o++) {
+              if (opts[o].getAttribute('aria-checked') === 'true') { idx = o; break; }
+            }
+          }
+          var next = idx;
+          if (e.key === 'ArrowDown') next = (idx + 1) % opts.length;
+          else if (e.key === 'ArrowUp') next = (idx - 1 + opts.length) % opts.length;
+          else if (e.key === 'Home') next = 0;
+          else if (e.key === 'End') next = opts.length - 1;
+          else return;
+          e.preventDefault();
+          opts[next].focus();
+        });
+      }
+      // Click-outside / Escape to close
+      document.addEventListener('click', function (e) {
+        if (!menu || !toggle) return;
+        if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+          setMenu(false);
+        }
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setMenu(false);
+      });
+
+      // Initial apply (overrides inline-init in case saved value differs)
+      apply(detect());
     })();
   </script>
 
