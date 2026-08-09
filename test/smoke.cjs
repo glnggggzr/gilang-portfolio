@@ -30,7 +30,7 @@ function check(name, ok, detail) {
     ogAbs: (document.querySelector('meta[property="og:image"]')?.content || '').startsWith('https://'),
     skip: !!document.querySelector('.skip-link'),
     wa: document.querySelector('.contact-pills a[href*="wa.me"]')?.href,
-    cv: [...document.querySelectorAll('.contact-pills a')].some(a => a.innerText.includes('CV')),
+    cvHref: document.querySelector('.contact-pills a[download]')?.getAttribute('href'),
     foot: document.querySelector('footer').innerText,
   }));
   check('desktop: no horizontal overflow', !d.over);
@@ -39,7 +39,7 @@ function check(name, ok, detail) {
   check('desktop: canonical + JSON-LD + absolute og:image', d.can && d.ld && d.ogAbs);
   check('desktop: skip link present', d.skip);
   check('desktop: WhatsApp links to wa.me', d.wa === WA_LINK, d.wa);
-  check('desktop: no dead CV link', !d.cv);
+  check('desktop: CV links to real file', d.cvHref === 'assets/cv.pdf', d.cvHref);
   check('desktop: footer honest (no scroll-world claim)', !d.foot.includes('scroll-world'));
 
   const m = await browser.newPage({ viewport: { width: 390, height: 844 } });

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<title>CV — Gilang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700;9..144,900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1530; --ink-2: #574c66; --ink-soft: #6f657e;
+    --accent: #ff5b3a; --line: rgba(26,21,48,0.12);
+  }
+  body {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px; line-height: 1.55;
+    color: var(--ink); background: #fff;
+    padding: 34px 40px;
+  }
+  .head { display: flex; align-items: flex-end; justify-content: space-between; border-bottom: 2px solid var(--ink); padding-bottom: 14px; }
+  h1 { font-family: 'Fraunces', serif; font-weight: 900; font-size: 30px; letter-spacing: -0.02em; line-height: 1; }
+  h1 .dot { color: var(--accent); }
+  .role { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 14px; color: var(--ink-2); margin-top: 4px; }
+  .contact { text-align: right; font-size: 8.5px; color: var(--ink-2); line-height: 1.7; }
+  .contact b { color: var(--ink); font-weight: 600; }
+  section { margin-top: 18px; }
+  h2 {
+    font-family: 'Fraunces', serif; font-weight: 700; font-size: 13px;
+    letter-spacing: 0.02em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 8px;
+  }
+  h2::before { content: ''; width: 14px; height: 2px; background: var(--accent); }
+  .profile { color: var(--ink-2); max-width: 100%; }
+  .chips { display: flex; flex-wrap: wrap; gap: 4px; }
+  .chip {
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 3px 8px; font-size: 8px; color: var(--ink);
+  }
+  .proj { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; padding: 7px 0; border-bottom: 1px solid var(--line); }
+  .proj:last-child { border-bottom: none; }
+  .proj .name { font-family: 'Fraunces', serif; font-weight: 700; font-size: 11.5px; }
+  .proj .stack { font-size: 7.5px; color: var(--accent); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; margin-top: 1px; }
+  .proj ul { list-style: none; margin-top: 3px; grid-column: 1 / -1; }
+  .proj li { position: relative; padding-left: 10px; color: var(--ink-2); font-size: 8.5px; }
+  .proj li::before { content: ''; position: absolute; left: 0; top: 4px; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); }
+  .proj .repo { grid-column: 1 / -1; font-size: 7.5px; color: var(--ink-soft); margin-top: 2px; }
+  .edu { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--line); }
+  .edu .l { font-family: 'Fraunces', serif; font-weight: 700; font-size: 11px; }
+  .edu .d { color: var(--ink-2); font-size: 8.5px; }
+  .note { margin-top: 16px; font-size: 7.5px; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 8px; }
+</style>
+</head>
+<body>
+
+  <div class="head">
+    <div>
+      <h1>Gilang<span class="dot">.</span></h1>
+      <div class="role">Web Developer — Laravel &amp; CodeIgniter</div>
+    </div>
+    <div class="contact">
+      <b>gilangramdhani708@gmail.com</b><br/>
+      +62 877-1316-6791<br/>
+      <b>github.com/gilangg24</b><br/>
+      Indonesia · GMT+7
+    </div>
+  </div>
+
+  <section>
+    <h2>Profil</h2>
+    <p class="profile">Web developer berbasis di Indonesia, fokus PHP — Laravel untuk ekosistem package yang matang, CodeIgniter 4 saat ingin tiap baris request terbaca. Empat repo publik dikirim dalam satu bulan, terbiasa dengan workflow berbantu AI tanpa kehilangan craft. Suka gamifikasi dan membereskan detail yang biasanya dilompati.</p>
+  </section>
+
+  <section>
+    <h2>Keahlian</h2>
+    <div class="chips">
+      <span class="chip">Laravel 11</span>
+      <span class="chip">CodeIgniter 4</span>
+      <span class="chip">PHP 8.3</span>
+      <span class="chip">MySQL 8</span>
+      <span class="chip">Tailwind</span>
+      <span class="chip">Blade</span>
+      <span class="chip">Git / GitHub</span>
+      <span class="chip">Composer</span>
+      <span class="chip">AI-assisted workflow</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Proyek Terpilih</h2>
+
+    <div class="proj">
+      <span class="name">KlikKode</span>
+      <span class="stack">CodeIgniter 4 · 2026</span>
+      <ul>
+        <li>App kuis gamified: XP, level, dan papan peringkat</li>
+        <li>Auth, kategori, dan topik soal</li>
+        <li>Import soal dari CSV/JSON</li>
+      </ul>
+      <span class="repo">github.com/gilangg24/klikkode</span>
+    </div>
+
+    <div class="proj">
+      <span class="name">KlinikApp</span>
+      <span class="stack">Laravel 11 · 2026</span>
+      <ul>
+        <li>Janji temu dan rekam medis pasien</li>
+        <li>Dashboard dengan feed pendaftaran langsung</li>
+        <li>CRUD end-to-end: migration, seeder, validasi</li>
+      </ul>
+      <span class="repo">github.com/gilangg24/KlnikApp</span>
+    </div>
+
+    <div class="proj">
+      <span class="name">SIA GILANG</span>
+      <span class="stack">CodeIgniter 4 · 2026</span>
+      <ul>
+        <li>Sistem informasi akademik dengan auth dan CRUD</li>
+        <li>Join KRS lintas empat tabel</li>
+        <li>Seeder nama Indonesia agar demo terasa nyata</li>
+      </ul>
+      <span class="repo">github.com/gilangg24/codeigniter-app</span>
+    </div>
+
+    <div class="proj">
+      <span class="name">Manajemen Produk</span>
+      <span class="stack">Laravel 11 · 2026</span>
+      <ul>
+        <li>CRUD kategori + produk dengan validasi nyata</li>
+        <li>Dashboard menampilkan total kategori dan produk</li>
+        <li>Migration dan relasi antar tabel</li>
+      </ul>
+      <span class="repo">github.com/gilangg24/tugas-crud-laravel</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Pendidikan</h2>
+    <div class="edu">
+      <span class="l">S1 — Semester 5</span>
+      <span class="d">2026 · [Nama kampus]</span>
+    </div>
+  </section>
+
+  <p class="note">CV ini dibuat dari data portofolio: gilang-portfolio. Kampus dan jurusan menyusul — ganti placeholder [Nama kampus] sebelum dikirim.</p>
+
+</body>
+</html>
