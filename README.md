@@ -9,9 +9,9 @@
 
 ## What's here
 
-A single-page portfolio with five sections: **hero**, **selected work**, **about**, **contact**, **footer**. Designed to be skim-able by recruiters and clients in under a minute, with concrete links to four live GitHub repos.
+A single-page portfolio with five sections: **hero**, **selected work**, **about**, **contact**, **footer**. Designed to be skim-able by recruiters and clients in under a minute, showcasing four apps built end to end (dashboard, roles, database, UI).
 
-- ~40 KB total payload
+- ~110 KB total payload (includes inline brand logos)
 - Self-hosted fonts (Google Fonts) + a single inline `<style>` block
 - No tracking, no analytics, no third-party scripts
 
@@ -61,14 +61,14 @@ Open `index.html` in any editor. The whole page is in one file:
 
 ## Projects showcased
 
-| # | Project                                                                                 | Stack                  |
-| - | --------------------------------------------------------------------------------------- | ---------------------- |
-| 1 | [`gilangg24/KlnikApp`](https://github.com/gilangg24/KlnikApp)                           | Laravel · MySQL        |
-| 2 | [`gilangg24/klikkode`](https://github.com/gilangg24/klikkode)                           | CodeIgniter 4 · MySQL  |
-| 3 | [`gilangg24/codeigniter-app`](https://github.com/gilangg24/codeigniter-app)             | CodeIgniter 4          |
-| 4 | [`gilangg24/tugas-crud-laravel`](https://github.com/gilangg24/tugas-crud-laravel)       | Laravel                |
+| # | Project                              | Stack                  | Repo |
+| - | ------------------------------------ | ---------------------- | ---- |
+| 1 | Dekalase — katalog produk            | Laravel 13 · MySQL     | lokal (private) |
+| 2 | Ceritera — platform baca digital     | Laravel · MySQL · Cron | lokal (private) |
+| 3 | Coffee Shop — sistem kasir / POS     | Laravel · MySQL        | lokal (private) |
+| 4 | QuizHub — aplikasi kuis online       | Laravel · MySQL        | [gilangg24/klikkode](https://github.com/gilangg24/klikkode) |
 
-Each card on the page links out to the live repo.
+Each card shows a real screenshot of the running app. Apps without a public repo show no link (the GitHub pill points to the profile, which holds the public repos).
 
 ## Deploy
 

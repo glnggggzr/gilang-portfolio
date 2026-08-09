@@ -154,9 +154,9 @@ Eyebrow has a 24px coral `::before` line. Title can have one `<em>` for italic a
     <h3 class="name" data-i18n="proj1.name">Project title here.</h3>
     <p class="tagline" data-i18n="proj1.tagline">One-sentence description.</p>
     <ul class="feat">
-      <li data-i18n="proj1.f1">+ XP, level &amp; leaderboard</li>
-      <li data-i18n="proj1.f2">+ auth · kategori · topik soal</li>
-      <li data-i18n="proj1.f3">+ import soal CSV/JSON</li>
+      <li data-i18n="proj1.f1">+ roles admin &amp; staf</li>
+      <li data-i18n="proj1.f2">+ antarmuka ID/EN</li>
+      <li data-i18n="proj1.f3">+ SKU · margin · riwayat stok</li>
     </ul>
     <div class="stack">
       <span>Laravel 11</span><span>Blade</span><span>MySQL</span>
