@@ -147,24 +147,31 @@ Eyebrow has a 24px coral `::before` line. Title can have one `<em>` for italic a
 ```html
 <article class="proj reveal" data-i="0">
   <div class="mock">
-    <!-- mock component goes here -->
+    <!-- screenshot in browser chrome (.shot-frame) -->
   </div>
   <div class="body">
-    <span class="num">01 · Featured</span>
-    <h3 class="name">Project title here.</h3>
-    <p class="tagline">One-sentence description.</p>
+    <span class="num"><span data-i18n="proj1.num">01</span> · <span data-i18n="proj1.tag">Featured</span></span>
+    <h3 class="name" data-i18n="proj1.name">Project title here.</h3>
+    <p class="tagline" data-i18n="proj1.tagline">One-sentence description.</p>
+    <ul class="feat">
+      <li data-i18n="proj1.f1">+ XP, level &amp; leaderboard</li>
+      <li data-i18n="proj1.f2">+ auth · kategori · topik soal</li>
+      <li data-i18n="proj1.f3">+ import soal CSV/JSON</li>
+    </ul>
     <div class="stack">
       <span>Laravel 11</span><span>Blade</span><span>MySQL</span>
     </div>
     <div class="meta">
       <a href="...">github.com/user/repo ↗</a>
-      <span>· 2026</span>
+      <span class="live-dot" aria-hidden="true"></span><span>· 2026</span>
     </div>
   </div>
 </article>
 ```
 
 For reverse layout: add `style="grid-template-columns: 1fr 1.3fr;"` to swap order.
+
+The `.feat` list is 3 concrete feature points (mono, coral dot bullets) — real features only, never invented. The `.live-dot` marks the repo as active/current year.
 
 ### Mock components — project screenshots
 
@@ -189,7 +196,9 @@ When adding a new project: capture its real screen, convert to WebP 920w, drop i
 
 ```html
 <div class="skill reveal d1">
-  <span class="ico laravel">L</span>
+  <span class="ico laravel">
+    <svg viewBox="0 0 128 128"><!-- Laravel logo path --></svg>
+  </span>
   <div>
     <h4>Tool name</h4>
     <p>v1.0 · short detail</p>
@@ -197,10 +206,7 @@ When adding a new project: capture its real screen, convert to WebP 920w, drop i
 </div>
 ```
 
-The `.ico` uses a 2-letter monogram + gradient background per tool:
-- `laravel` (red), `codeigniter` (orange), `php` (purple), `mysql` (teal), `git` (orange-red), `vscode` (blue), `compose` (green), `ai` (coral).
-
-To add a new tool: define a new `.ico-X` class with its brand color gradient.
+The `.ico` is a white tile (40px, radius 11, hairline border) holding the tool's **real brand logo as inline SVG** (original colors — Laravel red, CodeIgniter orange, PHP elephant, MySQL dolphin, Git, VS Code, Composer). Sources: Devicon (`laravel-original`, `php-original`, ...) and Simple Icons. The AI-assisted tile uses a coral ✦ sparkle (no official logo exists).
 
 ### Marquee (`.marquee`)
 
@@ -218,6 +224,9 @@ A pill-shaped button (filled, dark) + serif italic email link beside it. This is
 - Loader: wordmark "Gilang" pulses for ~1.4s until fonts ready, then fades.
 - Navbar: blur increases + bottom border appears when scrolled past 12px.
 - Hero eyebrow dot: live-pulse every 1.6s.
+- Project meta live-dots: same live-pulse (marks the repo as current).
+- Hero scroll cue: "Scroll ↓" bobs gently at the bottom of the hero.
+- Back-to-top button: fades/slides in after 600px of scroll.
 - Marquee: 38s linear infinite horizontal scroll. Pauses on hover.
 - Section reveals: opacity + translateY on intersection observer. Delays: 0, .12s, .24s, .36s.
 
