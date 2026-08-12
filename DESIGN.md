@@ -93,8 +93,17 @@ Order is intentional. Don't reorder.
 2. **Marquee** — full-bleed strip between hero and work. Visual breath + brand signature.
 3. **Selected work** — single-column project list with alternating image/text grid.
 4. **About** — 2-column grid (bio + skills), 1.05fr | 1fr ratio.
-5. **Contact** — single column, centered, headline + sub + CTA + email + social pills.
-6. **Footer** — single line, two-column inner (copyright left, attribution right).
+5. **Process** — "How I work", 4-step grid for freelance clients (ghost num 03).
+6. **Contact** — single column, centered, headline + sub + CTA + email + social pills.
+7. **Footer** — single line, two-column inner (copyright left, attribution right).
+
+### Process section
+
+`#process`, between About and Contact. Four `.step` cards (`.process-grid`):
+Discovery & scope → Build in stages → Revise until it fits → Handover & docs.
+Grid 4 columns → 2 at ≤960px → 1 at ≤520px. Card styling matches `.skill`
+(border, translucent white, hover lift), big coral Fraunces step number.
+i18n keys `process.*` (EN/ID); nav link "Process"/"Cara kerja".
 
 ### Section padding
 - Top: 100–120px from previous section

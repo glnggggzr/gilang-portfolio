@@ -9,7 +9,7 @@
 
 ## What's here
 
-A single-page portfolio with five sections: **hero**, **selected work**, **about**, **contact**, **footer**. Designed to be skim-able by recruiters and clients in under a minute, showcasing four apps built end to end (dashboard, roles, database, UI).
+A single-page portfolio with six sections: **hero**, **selected work**, **about**, **process** (how I work), **contact**, **footer**. Designed to be skim-able by recruiters and clients in under a minute, showcasing four apps built end to end (dashboard, roles, database, UI).
 
 - ~110 KB total payload (includes inline brand logos)
 - Self-hosted fonts (Google Fonts) + a single inline `<style>` block

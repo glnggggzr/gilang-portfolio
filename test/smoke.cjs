@@ -31,6 +31,7 @@ function check(name, ok, detail) {
     skip: !!document.querySelector('.skip-link'),
     wa: document.querySelector('.contact-pills a[href*="wa.me"]')?.href,
     cvHref: document.querySelector('.contact-pills a[download]')?.getAttribute('href'),
+    steps: document.querySelectorAll('.process-grid .step').length,
     foot: document.querySelector('footer').innerText,
   }));
   check('desktop: no horizontal overflow', !d.over);
@@ -40,6 +41,7 @@ function check(name, ok, detail) {
   check('desktop: skip link present', d.skip);
   check('desktop: WhatsApp links to wa.me', d.wa === WA_LINK, d.wa);
   check('desktop: CV links to real file', d.cvHref === 'assets/cv.pdf', d.cvHref);
+  check('desktop: 4 process steps', d.steps === 4, d.steps);
   check('desktop: footer honest (no scroll-world claim)', !d.foot.includes('scroll-world'));
 
   const m = await browser.newPage({ viewport: { width: 390, height: 844 } });

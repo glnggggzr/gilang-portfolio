@@ -735,6 +735,29 @@
       .skills-grid { grid-template-columns: 1fr 1fr; }
     }
 
+    /* 3b · PROCESS (how I work) */
+    .process-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .step {
+      padding: 24px 20px 20px;
+      border: 1px solid var(--card-bd);
+      background: rgba(255,255,255,0.5);
+      border-radius: 16px;
+      transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    }
+    .step:hover { transform: translateY(-4px); border-color: rgba(255,91,58,0.45); box-shadow: var(--shadow-sm); }
+    .step-num {
+      display: block;
+      font-family: var(--display); font-weight: 900; font-size: 30px;
+      line-height: 1; color: var(--accent); margin-bottom: 12px;
+    }
+    .step h3 { font-family: var(--display); font-weight: 700; font-size: 1.05rem; color: var(--ink); margin-bottom: 6px; }
+    .step p  { font-family: var(--mono); font-size: 10.5px; line-height: 1.7; color: var(--ink-2); }
+    @media (max-width: 960px) { .process-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .process-grid { grid-template-columns: 1fr; } }
+
     /* 4 · CONTACT */
     .contact { padding: 120px 0 100px; text-align: center; }
     .contact-eyebrow {
@@ -954,6 +977,7 @@
       <nav class="nav-links" id="site-nav" aria-label="primary">
         <a href="#work" data-i18n="nav.work">Work</a>
         <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#process" data-i18n="nav.process">Process</a>
         <a href="#contact" data-i18n="nav.contact">Contact</a>
       </nav>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"
@@ -1209,6 +1233,37 @@
     </div>
   </section>
 
+  <section class="process wrap" id="process">
+    <div class="sect-head reveal">
+      <span class="ghost-num" aria-hidden="true">03</span>
+      <p class="sect-eyebrow"><span data-i18n="process.eyebrow">Process</span></p>
+      <h2 class="sect-title"><span data-i18n="process.title.main">How I work,</span> <em data-i18n="process.title.em">step by step.</em></h2>
+      <p class="sect-sub" data-i18n="process.sub">No mystery, no surprises &mdash; a clear path from first chat to handover.</p>
+    </div>
+    <div class="process-grid">
+      <div class="step reveal d1">
+        <span class="step-num" aria-hidden="true">01</span>
+        <h3 data-i18n="process.s1.t">Discovery &amp; scope</h3>
+        <p data-i18n="process.s1.d">Tell me the problem. I help you decide what actually needs to be built &mdash; before a single line of code.</p>
+      </div>
+      <div class="step reveal d2">
+        <span class="step-num" aria-hidden="true">02</span>
+        <h3 data-i18n="process.s2.t">Build in stages</h3>
+        <p data-i18n="process.s2.d">Features ship one by one, so you can see progress and give feedback at every step.</p>
+      </div>
+      <div class="step reveal d3">
+        <span class="step-num" aria-hidden="true">03</span>
+        <h3 data-i18n="process.s3.t">Revise until it fits</h3>
+        <p data-i18n="process.s3.d">I iterate until it feels right to use &mdash; not just &ldquo;done&rdquo;.</p>
+      </div>
+      <div class="step reveal d4">
+        <span class="step-num" aria-hidden="true">04</span>
+        <h3 data-i18n="process.s4.t">Handover &amp; docs</h3>
+        <p data-i18n="process.s4.d">Source code, documentation, and how to maintain it &mdash; ready to continue without me.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="contact" id="contact">
     <div class="wrap">
       <p class="contact-eyebrow reveal"><span class="dot"></span><span data-i18n="contact.eyebrow">Get in touch</span></p>
@@ -1330,6 +1385,7 @@
           'nav.work':          'Work',
           'nav.about':         'About',
           'nav.contact':       'Contact',
+          'nav.process':       'Process',
           'hero.eyebrow':      'Open to work · Indonesia · GMT+7',
           'hero.title.l1':     'I build web apps',
           'hero.title.that':   'that',
@@ -1381,6 +1437,18 @@
           'about.bio.p1':	 'I\u2019m a web developer based in Indonesia \u2014 currently in my 5th semester of Sistem Teknologi Informasi \u2014 building apps end to end, and getting properly stuck into the part of the job that isn\u2019t coding \u2014 naming things, planning migrations, deciding what not to build.',
           'about.bio.p2':      'My stack is PHP \u2014 Laravel when the package ecosystem pays for itself, CodeIgniter 4 when I want every line of the request to be readable. I\u2019m exploring AI-assisted workflows this year (yes, this page was scaffolded by one), with the goal of staying curious without losing the craft.',
           'about.bio.p3':      'Outside the keyboard: coffee, late nights reading changelogs, and a stubborn belief that gamification can fix almost any UI.',
+          'process.eyebrow':   'Process',
+          'process.title.main':'How I work,',
+          'process.title.em':  'step by step.',
+          'process.sub':       'No mystery, no surprises \u2014 a clear path from first chat to handover.',
+          'process.s1.t':      'Discovery & scope',
+          'process.s1.d':      'Tell me the problem. I help you decide what actually needs to be built \u2014 before a single line of code.',
+          'process.s2.t':      'Build in stages',
+          'process.s2.d':      'Features ship one by one, so you can see progress and give feedback at every step.',
+          'process.s3.t':      'Revise until it fits',
+          'process.s3.d':      'I iterate until it feels right to use \u2014 not just \u201cdone\u201d.',
+          'process.s4.t':      'Handover & docs',
+          'process.s4.d':      'Source code, documentation, and how to maintain it \u2014 ready to continue without me.',
           'skill.laravel':     'v11 \u00b7 migrations \u00b7 blade',
           'skill.codeigniter': 'v4.7 \u00b7 spark \u00b7 mvc',
           'skill.php':         'v8.3 \u00b7 typed',
@@ -1407,6 +1475,7 @@
           'nav.work':          'Karya',
           'nav.about':         'Tentang',
           'nav.contact':       'Kontak',
+          'nav.process':       'Cara kerja',
           'hero.eyebrow':      'Terbuka untuk kerja \u00b7 Indonesia \u00b7 GMT+7',
           'hero.title.l1':     'Saya bikin web app',
           'hero.title.that':   '',
@@ -1458,6 +1527,18 @@
           'about.bio.p1':	 'Saya web developer yang berbasis di Indonesia \u2014 lagi jalan di semester 5 Sistem Teknologi Informasi \u2014 ngirim app end-to-end, dan mulai kecanduan di sisi pekerjaan yang bukan coding \u2014 ngasih nama, merancang migration, mutusin apa yang nggak perlu dibangun.',
           'about.bio.p2':      'Stack saya PHP \u2014 Laravel kalau ekosistem packagenya emang sebanding, CodeIgniter 4 kalau saya mau setiap baris request-nya kebaca. Tahun ini saya lagi eksplor workflow berbantu AI (ya, halaman ini juga di-scaffold pakai AI), tujuannya tetap penasaran tanpa kehilangan craft.',
           'about.bio.p3':      'Di luar keyboard: kopi, begadang baca changelog, dan keyakinan keras kepala bahwa gamifikasi bisa nyembuhin hampir semua UI.',
+          'process.eyebrow':   'Proses',
+          'process.title.main':'Cara saya bekerja,',
+          'process.title.em':  'langkah demi langkah.',
+          'process.sub':       'Tanpa misteri, tanpa kejutan \u2014 alur yang jelas dari obrolan pertama sampai serah terima.',
+          'process.s1.t':      'Diskusi & scope',
+          'process.s1.d':      'Ceritakan masalahnya. Saya bantu tentukan apa yang benar-benar perlu dibangun \u2014 sebelum satu baris kode pun ditulis.',
+          'process.s2.t':      'Bangun bertahap',
+          'process.s2.d':      'Fitur dibangun satu per satu, jadi kamu bisa lihat progres dan kasih masukan di tiap langkah.',
+          'process.s3.t':      'Revisi sampai pas',
+          'process.s3.d':      'Saya iterasi sampai benar-benar nyaman dipakai \u2014 bukan cuma \u201cberes\u201d.',
+          'process.s4.t':      'Serah terima & dokumentasi',
+          'process.s4.d':      'Source code, dokumentasi, dan cara maintain \u2014 siap dilanjutkan tanpa saya.',
           'skill.laravel':     'v11 \u00b7 migration \u00b7 blade',
           'skill.codeigniter': 'v4.7 \u00b7 spark \u00b7 mvc',
           'skill.php':         'v8.3 \u00b7 typed',
