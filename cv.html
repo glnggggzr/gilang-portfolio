@@ -3,9 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <title>CV — Gilang Zahra Ramdhani</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700;9..144,900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/fonts/fonts.css" />
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -53,6 +51,8 @@
   .langs { display: flex; gap: 16px; font-size: 8.5px; color: var(--ink-2); }
   .langs b { color: var(--ink); font-weight: 600; }
   .note { margin-top: 12px; font-size: 7px; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 6px; }
+  @page { size: A4; margin: 0; }
+  @media print { html, body { background: #fff; } }
 </style>
 </head>
 <body>
@@ -66,13 +66,14 @@
       Jakarta Selatan, Indonesia<br/>
       <b>+62 877-1316-6791</b><br/>
       <b>gilangramdhani708@gmail.com</b><br/>
-      <b>github.com/gilangg24</b>
+      <b>github.com/glnggggzr</b><br/>
+      <b>glnggggzr.github.io/gilang-portfolio</b>
     </div>
   </div>
 
   <section>
     <h2>Profil</h2>
-    <p class="profile">Web developer dengan pengalaman membangun aplikasi web berbasis PHP (Laravel dan CodeIgniter) — sistem kasir, platform baca digital, dan aplikasi katalog produk. Terbiasa dengan MySQL, version control Git, dan mengembangkan fitur secara bertahap dari perancangan hingga implementasi.</p>
+    <p class="profile">Web developer dengan pengalaman membangun aplikasi web berbasis PHP (Laravel dan CodeIgniter) — portal akademik kampus, toko daring, platform baca digital, dan aplikasi katalog produk. Terbiasa dengan MySQL, version control Git, dan mengembangkan fitur secara bertahap dari perancangan hingga implementasi.</p>
   </section>
 
   <section>
@@ -81,7 +82,7 @@
       <span class="chip">PHP</span>
       <span class="chip">JavaScript</span>
       <span class="chip">HTML / CSS</span>
-      <span class="chip">Laravel 11</span>
+      <span class="chip">Laravel 11–13</span>
       <span class="chip">CodeIgniter 4</span>
       <span class="chip">Bootstrap</span>
       <span class="chip">Tailwind CSS</span>
@@ -136,19 +137,20 @@
     </div>
 
     <div class="item">
-      <span class="name">Coffee Shop — Sistem Kasir / Point of Sale</span>
-      <span class="meta">Laravel · MySQL</span>
+      <span class="name">eCampus UTMJ — Portal Akademik Kampus</span>
+      <span class="meta">Next.js · TypeScript · Drizzle</span>
       <ul>
-        <li>Manajemen menu, transaksi, dan stok.</li>
-        <li>Soft delete dengan pemulihan stok serta pencatatan log aktivitas pengguna.</li>
+        <li>Rebuild mandiri layanan akademik kampus dengan pendekatan mobile-first (navigasi bawah lima tab, tabel menjadi kartu).</li>
+        <li>Pengisian KRS dengan validasi beban SKS dan jadwal bentrok, persetujuan dosen PA, nilai, kehadiran, tagihan UKT, hingga cetak KRS.</li>
       </ul>
     </div>
 
     <div class="item">
-      <span class="name">QuizHub — Aplikasi Kuis Online</span>
+      <span class="name">UmmatStore — Toko Daring &amp; Panel Admin</span>
       <span class="meta">Laravel · MySQL</span>
       <ul>
-        <li>Manajemen topik, kuis, dan soal berbasis relasi database terstruktur.</li>
+        <li>Katalog, keranjang, checkout, konfirmasi pembayaran, dan lacak pesanan.</li>
+        <li>Panel admin untuk produk, pelanggan, dan pengaturan toko.</li>
       </ul>
     </div>
   </section>
@@ -161,7 +163,7 @@
     </div>
   </section>
 
-  <p class="note">Dibuat dari data portofolio gilang-portfolio + CV pribadi · diperbarui Agustus 2026.</p>
+  <p class="note">Dibuat dari data portofolio gilang-portfolio + CV pribadi · diperbarui Oktober 2026.</p>
 
 </body>
 </html>

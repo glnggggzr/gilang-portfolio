@@ -24,9 +24,8 @@ SOFTWARE.
 
 ## Third-party attributions
 
-This project includes `js/scrub-engine.js`, adapted from
+The prompt templates and pipeline guidance in `references/` are adapted from
 [`oso95/scroll-world`](https://github.com/oso95/scroll-world)
-(also MIT, copyright oso95 and contributors). The prompt templates and
-pipeline guidance in `references/` are likewise adapted from that upstream
-project. See upstream LICENSE at:
+(also MIT, copyright oso95 and contributors). The scroll-engine file itself is
+no longer part of this repository. See upstream LICENSE at:
 https://github.com/oso95/scroll-world/blob/main/LICENSE
