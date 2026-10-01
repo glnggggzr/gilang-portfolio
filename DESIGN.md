@@ -65,6 +65,13 @@ Two fonts, two jobs. Self-hosted under `assets/fonts/` and loaded once at the to
 
 **Type scale** (use clamp where responsive is needed):
 - Hero headline: `clamp(3rem, 9vw, 8.5rem)`, line-height `0.96`, letter-spacing `-0.035em`
+- Hero layout: two columns when the portrait is present — copy left, portrait right
+  (`grid-template-columns: minmax(0,1fr) clamp(206px, 22vw, 320px)`); headline drops to
+  `clamp(2.6rem, 8.1vw, 7.4rem)` so the three lines still fit. Below 960px it collapses to one
+  column and the portrait (max 224px) sits after the tech pills.
+- Hero portrait: `assets/potret.webp` (640×853, 3:4, ~23 KB) in a rounded panel (`padding:10px`,
+  1px `--line-strong` border, `--shadow-md`, 13px image radius) with a 3px `--accent` bar on the
+  left edge. Portrait is a cutout composited on a warm gradient so its edge blends with `--bg`.
 - Section title: `clamp(2rem, 4.4vw, 3.6rem)`, line-height `1.04`
 - Project name: `clamp(1.6rem, 2.6vw, 2.2rem)`
 - Body (Fraunces): `16px` base, `1.05–1.18rem` for bio
@@ -89,7 +96,7 @@ Container: `max-width: 1200px`, centered with `margin: 0 auto`, padded with `--g
 
 Order is intentional. Don't reorder.
 
-1. **Hero** — single column, big serif headline, marquee strip directly below.
+1. **Hero** — copy on the left, portrait card on the right (single column below 960px), big serif headline, marquee strip directly below.
 2. **Marquee** — full-bleed strip between hero and work. Visual breath + brand signature.
 3. **Selected work** — single-column project list with alternating image/text grid.
 4. **About** — 2-column grid (bio + skills), 1.05fr | 1fr ratio.
