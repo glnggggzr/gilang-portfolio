@@ -61,7 +61,8 @@ Two fonts, two jobs. Self-hosted under `assets/fonts/` and loaded once at the to
 | Font | CSS var | Use |
 |---|---|---|
 | **Fraunces** (variable serif, opsz 9–144) | `--display` / `--body` | All headlines, brand wordmark, project titles, contact CTA, italic accents, long-form bio. The "editorial" voice. |
-| **IBM Plex Mono** (400/500/600/700) | `--mono` | Eyebrows, hero intro, section subs, buttons, tag pills, project numbers, meta, marquee items. Anything that should look terminal-y. |
+| **Plus Jakarta Sans** (200–800, variable) | `--sans` | Prose/running text: hero intro, section subs, contact sub. Self-hosted (latin + latin-ext only, ~48 KB). |
+| **IBM Plex Mono** (400/500/600/700) | `--mono` | Labels only: eyebrows, buttons, tag pills, project numbers, meta, feature lists, marquee. Anything that should look terminal-y. |
 
 **Type scale** (use clamp where responsive is needed):
 - Hero headline: `clamp(3rem, 9vw, 8.5rem)`, line-height `0.96`, letter-spacing `-0.035em`

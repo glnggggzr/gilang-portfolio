@@ -110,7 +110,7 @@ Other hosts work too, since this is a plain static page: **Netlify** (drag-and-d
 | -------------- | ------------------------------------------------------------------- |
 | Markup         | Semantic HTML5, single file                                         |
 | Styling        | Hand-written CSS in a `<style>` block; CSS variables for the palette |
-| Fonts          | Self-hosted [Fraunces](https://fonts.google.com/specimen/Fraunces) + [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono) (`assets/fonts/fonts.css`) |
+| Fonts          | Self-hosted: Fraunces + Plus Jakarta Sans + IBM Plex Mono (`assets/fonts/fonts.css`, no Google Fonts request) |
 | Behaviour      | ~280 lines of vanilla JS: loader fade, nav-shadow, mobile nav, IntersectionObserver reveals, i18n switcher |
 | Tests          | `npm install` then `npm test` — Playwright smoke test (`test/smoke.cjs`): overflow, images, a11y hooks, hamburger, i18n. Needs the site served |
 | Build          | None. Open the file, edit, refresh.                                  |

@@ -62,6 +62,7 @@
     })();
   </script>
 
+  <link rel="preload" href="assets/fonts/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yw.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="assets/fonts/fonts.css" />
 
   <style>
@@ -83,6 +84,7 @@
       --display: 'Fraunces', ui-serif, Georgia, serif;
       --body:    'Fraunces', ui-serif, Georgia, serif;
       --mono:    'IBM Plex Mono', ui-monospace, Menlo, monospace;
+      --sans:    'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
       --gutter: clamp(1.25rem, 4vw, 3rem);
       --max-w:  1200px;
     }
@@ -444,11 +446,13 @@
     }
     .hero-sub {
       margin-top: 40px;
-      max-width: 60ch;
-      font-family: var(--mono);
-      font-size: clamp(1.05rem, 1.25vw, 1.18rem);
+      max-width: 58ch;
+      font-family: var(--sans);
+      font-size: clamp(1.06rem, 1.3vw, 1.2rem);
+      font-weight: 400;
       color: var(--ink-2);
-      line-height: 1.7;
+      line-height: 1.62;
+      letter-spacing: -0.005em;
     }
     .hero-sub strong { color: var(--ink); font-weight: 600; }
     .hero-actions {
@@ -560,10 +564,10 @@
     }
     .sect-sub {
       margin-top: 18px;
-      font-family: var(--mono);
-      font-size: 0.95rem;
+      font-family: var(--sans);
+      font-size: 1rem;
       color: var(--ink-2);
-      max-width: 58ch; line-height: 1.7;
+      max-width: 58ch; line-height: 1.62;
     }
 
     /* 2 · PROJECTS */
@@ -783,9 +787,9 @@
     .contact-sub {
       margin: 28px auto 0;
       max-width: 52ch;
-      font-family: var(--mono);
-      font-size: 0.98rem;
-      line-height: 1.7;
+      font-family: var(--sans);
+      font-size: 1.02rem;
+      line-height: 1.62;
       color: var(--ink-2);
     }
     .contact-cta-row {
