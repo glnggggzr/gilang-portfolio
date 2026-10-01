@@ -78,12 +78,30 @@ Each card shows a real screenshot of the running app. Apps without a public repo
 
 ## Deploy
 
-This is a static page. Pick any one:
+The live site at <https://glnggggzr.github.io/gilang-portfolio/> is served from the **`gh-pages` branch** (Settings → Pages → branch `gh-pages`, folder `/`) — and that branch holds *only* `index.html` + `assets/**`. The source of truth is `main` (`references/`, `test/`, `capture-projects.js`, `cv.html` stay there and are never published).
 
-- **GitHub Pages** — Settings → Pages → branch `main` / folder `/`.
-- **Netlify** — drag-and-drop the folder at https://app.netlify.com/drop.
-- **Vercel** — `vercel` in the project root, zero config.
-- **Cloudflare Pages** — connect the repo, build command empty, output `.`.
+So publishing takes **two pushes**. Pushing only `main` leaves the live site on the old version — this is the #1 gotcha in this repo.
+
+```bash
+REPO="D:/project/laragon/www/gilang-portfolio"   # adjust to your checkout
+git -C "$REPO" push origin main                  # 1. source of truth
+
+# 2. what visitors actually get (index.html + assets only)
+git -C "$REPO" worktree add --detach "$REPO/../_ghpub" origin/gh-pages
+cd "$REPO/../_ghpub"
+rm -rf assets && cp -r "$REPO/assets" . \
+  && cp "$REPO/index.html" "$REPO/favicon.svg" "$REPO/robots.txt" "$REPO/sitemap.xml" .
+git add -A && git commit -m "deploy site (gh-pages)" && git push origin HEAD:gh-pages
+cd - && git -C "$REPO" worktree remove --force "$REPO/../_ghpub"
+```
+
+Wait ~1–3 minutes, then confirm the new build is live (any file you added should answer 200):
+
+```bash
+curl -s -o current.html -w "%{http_code}\n" https://glnggggzr.github.io/gilang-portfolio/
+```
+
+Other hosts work too, since this is a plain static page: **Netlify** (drag-and-drop the folder), **Vercel** (`vercel` in the root, zero config), **Cloudflare Pages** (empty build command, output `.`).
 
 ## Tech
 
