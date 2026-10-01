@@ -971,8 +971,57 @@
       .hero-photo { margin-top: 46px; max-width: 224px; padding: 8px; }
       .hero-photo::after { top: 18px; bottom: 18px; }
     }
+  
+    /* kartu selang-seling (dulu inline style — tidak bisa di-override media query) */
+    .proj-flip { grid-template-columns: 1fr 1.3fr; }
+    @media (max-width: 760px) { .proj, .proj-flip { grid-template-columns: 1fr; } }
+
+    /* ============ perbaikan: gutter konsisten untuk bagian yang menimpa padding .wrap ============ */
+    .projects.wrap, .about.wrap, .process.wrap {
+      max-width: none;
+      padding-left: max(var(--gutter), calc((100% - var(--max-w)) / 2));
+      padding-right: max(var(--gutter), calc((100% - var(--max-w)) / 2));
+    }
+
+    /* gambar kartu: kunci rasio supaya tata letak tidak melompat saat gambar dimuat */
+    .shot-frame .proj-shot, .proj-shot { aspect-ratio: 16 / 10; object-fit: cover; object-position: top center; }
+
+    /* ============ penyesuaian tampilan ponsel ============ */
+    @media (max-width: 760px) {
+      .projects { padding-top: 84px; padding-bottom: 56px; }
+      .about    { padding-top: 72px; padding-bottom: 60px; }
+      .process  { padding-top: 72px; padding-bottom: 60px; }
+
+      /* teks kecil jangan di bawah 12px supaya enak dibaca di ponsel */
+      .proj .feat li { font-size: 12.5px; line-height: 1.55; }
+      .proj .feat { gap: 9px; }
+      .proj .meta, .proj .num { font-size: 12px; letter-spacing: 0.04em; }
+      .proj .stack span { font-size: 12px; padding: 6px 12px; }
+      .proj .stack { gap: 7px; }
+      .skill p, .step p { font-size: 12.5px; line-height: 1.6; }
+      .shot-url { font-size: 11px; }
+      .hero-meta span { font-size: 12px; padding: 8px 13px; }
+      .hero-meta { gap: 9px; }
+      .sect-sub, .contact-sub { font-size: 16.5px; }
+      footer.foot { font-size: 11.5px; letter-spacing: 0.04em; }
+      .contact-pills a { font-size: 13px; }
+      .proj { border-radius: 20px; }
+      .proj .body { gap: 12px; }
+      .proj .tagline { font-size: 16.5px; }
+    }
+    @media (max-width: 430px) {
+      .hero-title { letter-spacing: -0.028em; }
+      .sect-title { font-size: 29px; }
+      .proj .name { font-size: 23px; }
+      .proj .body { padding: 22px 20px; }
+      .proj .mock { padding: 18px; }
+      .proj .feat li { font-size: 12px; }
+      .marquee-item { gap: 34px; }
+      .marquee-track { gap: 34px; }
+    }
   </style>
-<noscript><style>.reveal{opacity:1 !important;transform:none !important}#loader{display:none !important}    </style></noscript>
+<noscript><style>.reveal{opacity:1 !important;transform:none !important}#loader{display:none !important}    
+    </style></noscript>
 </head>
 <body>
 
@@ -1125,7 +1174,7 @@
         </div>
       </article>
 
-            <article class="proj reveal d1" style="grid-template-columns: 1fr 1.3fr;" data-i="1">
+            <article class="proj proj-flip reveal d1" data-i="1">
         <div class="mock">
           <div class="shot-frame">
             <div class="shot-bar">
@@ -1179,7 +1228,7 @@
         </div>
       </article>
 
-            <article class="proj reveal d3" style="grid-template-columns: 1fr 1.3fr;" data-i="3">
+            <article class="proj proj-flip reveal d3" data-i="3">
         <div class="mock">
           <div class="shot-frame">
             <div class="shot-bar">
