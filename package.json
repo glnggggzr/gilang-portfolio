@@ -4,7 +4,8 @@
   "description": "Personal portfolio of Gilang — a web developer building with Laravel & CodeIgniter. One HTML file, no build step, no frameworks.",
   "main": "test-preview.js",
   "scripts": {
-    "test": "node test/smoke.cjs"
+    "test": "node test/smoke.cjs",
+    "test:local": "node test/local.cjs"
   },
   "keywords": [
     "portfolio",

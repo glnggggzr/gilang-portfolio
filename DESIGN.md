@@ -1,5 +1,37 @@
 # DESIGN.md
 
+## Current approved direction
+
+This section supersedes the historical design notes below wherever they differ.
+
+- Audience: business clients who need a website, product catalog, store, or admin application.
+- Voice: concrete and bilingual. The hero says what Gilang builds with Laravel and CodeIgniter; avoid exaggerated outcomes or response-time promises.
+- Dials: ENERGY 2 / RHYTHM 3 / MOTION 1. The portrait introduces the developer, the service strip summarizes the offer, and screenshots lead the project section. No looping marquee or decorative status animation.
+- Palette: preserve warm cream and coral. Use dark coral for small accent text, focus indicators, and filled-button hover states. The slightly darker cream featured card identifies one project without introducing another accent.
+- Typography: Fraunces for headings at weight 500 (never above 600), Plus Jakarta Sans for prose and feature descriptions, IBM Plex Mono for metadata and controls. All fonts remain local.
+- Portrait: reuse `assets/potret.webp`, without generating or editing a new identity asset. Desktop places it alongside the hero; phones use a compact portrait and caption below the actions.
+- Projects: Dekalase is the only featured project. Ceritera, eCampus, and UmmatStore use descriptive category labels. Screenshots have no 460px desktop cap; native `details/summary` exposes context, implementation, scope, and source-verified routes, including without JavaScript.
+- Honesty: these are portfolio projects, not asserted client commissions. eCampus is an independent rebuild, not the official university portal. Payment confirmation in UmmatStore includes admin verification. Do not add client counts, performance metrics, or testimonials.
+- Contact: WhatsApp `6287713166791` is primary. One email link is secondary. Ask for the business description, needed features, target date, optional reference, and budget range.
+- Resilience: keep the English HTML fallback aligned with the EN dictionary and maintain the ID dictionary. Native details and navigation work without JavaScript. Keyboard menus return focus on Escape. No external fonts or scripts.
+
+### Source map for case studies
+
+- Dekalase: `../aplikasi-produk/routes/web.php`; product catalog, authenticated product/category management, import/export, activity history, admin settings and restore routes. Name confirmed in `resources/views/welcome.blade.php`.
+- Ceritera: `../ceritera/routes/web.php`; stories, reader progress, history, notes, bookmarks. The earlier automated-rotation/CMS copy is no longer used because the inspected route files did not establish those claims.
+- eCampus: `D:/project/ecampus-utmj/src/app/(app)/` and `src/lib/krs.ts`; KRS, adviser screens, grades, attendance, bills, printable KRS, credit/capacity/timetable validation.
+- UmmatStore: `../ummatstore/routes/web.php` and `routes/admin.php`; guest checkout, payment confirmation, tracking, admin payment verification, order states, variants, stock adjustments.
+
+### Local verification
+
+`npm run test:local` starts an ephemeral loopback server and an isolated headless browser, then closes both. It does not publish or use a signed-in browser. Install the existing Playwright dependency first. Set `CHROME_PATH` if Chrome is elsewhere; set `QA_OUTPUT` to keep screenshots and JSON reports outside this repo. On Windows, the default browser executable is `C:/Program Files/Google/Chrome/Application/chrome.exe`.
+
+The suite checks EN/ID, 360/390/430/620/768/960/1024/1280px, open and closed case studies, keyboard controls, anchors, focus, local assets, CV download, and no-JavaScript fallback. Outbound WhatsApp/email/GitHub activations are captured locally without sending a message or asserting remote service delivery.
+
+## Historical design notes
+
+The remainder documents the earlier design and is retained for context, not as a requirement to restore the old hero, marquee, weight-700 headings, or duplicate email CTA.
+
 A reference for this portfolio. Read this before adding anything.
 
 The point is: every choice below has a reason. When you add a section, a project card, a mock, or a line of CSS, you should be able to point to which decision it follows. If you can't, it's probably wrong.
