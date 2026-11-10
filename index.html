@@ -466,6 +466,7 @@
       border: 1.5px solid var(--line-strong);
     }
     .hero-actions .secondary:hover { transform: translateY(-2px); border-color: var(--ink); }
+    .brief-note { margin-top: 12px; max-width: 48ch; color: var(--ink-soft); font: 400 .78rem/1.55 var(--sans); }
     .hero-meta {
       margin-top: 56px;
       display: flex; gap: 16px; flex-wrap: wrap;
@@ -481,14 +482,24 @@
       font-weight: 500;
     }
 
-    .services { padding-block: 32px; border-block: 1px solid var(--line-strong); }
-    .services-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; }
+    .preview { padding: 48px 0 16px; }
+    .preview-inner { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: clamp(24px, 5vw, 72px); align-items: center; }
+    .preview-copy { max-width: 30ch; }
+    .preview-kicker { font: 500 .72rem/1.5 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--accent-ink); }
+    .preview-title { margin-top: 12px; font: 500 clamp(1.8rem, 3vw, 2.7rem)/1.05 var(--display); letter-spacing: -.025em; }
+    .preview-sub { margin-top: 14px; color: var(--ink-2); font: 400 1rem/1.62 var(--sans); }
+    .preview-link { display: inline-flex; align-items: center; min-height: 44px; margin-top: 18px; color: var(--ink); font: 600 .8rem var(--mono); text-decoration: none; border-bottom: 1px solid var(--ink); }
+    .preview-shot { border: 1px solid var(--line-strong); border-radius: 18px; overflow: hidden; background: #fff; box-shadow: var(--shadow-md); }
+    .preview-shot img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top center; }
+    .services { padding-block: 54px; border-block: 1px solid var(--line-strong); }
+    .services-inner { display: grid; grid-template-columns: minmax(180px, .7fr) minmax(0, 1.3fr); gap: 40px; }
     .services h2 { font: 500 clamp(1.5rem, 2.5vw, 2rem)/1.2 var(--display); }
-    .services dl { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
-    .services dt { font-weight: 600; margin-bottom: 8px; }
-    .services dd { color: var(--ink-2); font-size: .95rem; }
-    @media (max-width: 760px) { .services-inner { grid-template-columns: 1fr; gap: 24px; } }
-    @media (max-width: 520px) { .services dl { grid-template-columns: 1fr; gap: 20px; } }
+    .services dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; }
+    .services dl > div { padding-top: 14px; border-top: 2px solid var(--accent); }
+    .services dt { font: 500 1.05rem/1.25 var(--display); margin-bottom: 8px; }
+    .services dd { color: var(--ink-2); font: 400 .95rem/1.6 var(--sans); }
+    @media (max-width: 900px) { .preview-inner { grid-template-columns: 1fr 1.35fr; } .services-inner { grid-template-columns: 1fr; gap: 24px; } }
+    @media (max-width: 760px) { .preview { padding-top: 30px; } .preview-inner { grid-template-columns: 1fr; gap: 24px; } .preview-copy { max-width: 40ch; } .services dl { grid-template-columns: 1fr; gap: 22px; } }
 
     /* Section header */
     .sect-head { max-width: 720px; margin-bottom: 64px; }
@@ -651,6 +662,7 @@
     .case-study dd { font: 400 .9rem/1.7 var(--sans); color: var(--ink-2); }
     .case-study code { font: 400 .75rem/1.7 var(--mono); overflow-wrap: anywhere; }
     .project-note { color: var(--ink-2); font-size: .8rem; }
+    .project-contribution { color: var(--ink-2); font: 400 .86rem/1.6 var(--sans); max-width: 42ch; }
 /* 3 · ABOUT */
     .about { padding: 100px 0 80px; }
     .about-grid {
@@ -1026,7 +1038,7 @@
     }
     @media (max-width: 390px) { .skill { flex-direction: column; } }
   </style>
-<noscript><style>.reveal{opacity:1 !important;transform:none !important}#loader{display:none !important}
+<noscript><style>html { scroll-behavior: auto; }.reveal{opacity:1 !important;transform:none !important}#loader{display:none !important}
     .nav-toggle, .lang-switch, .to-top { display: none !important; }
     @media (max-width:720px) {
       .topnav { position: static; }
@@ -1102,16 +1114,16 @@
       <span data-i18n="hero.title.l1">Websites for</span>
       <em data-i18n="hero.title.em">your business.</em>
     </h1>
-    <p class="hero-sub reveal d2" data-i18n="hero.sub">I build business websites and web apps with Laravel and CodeIgniter: product catalogs, online stores, and admin panels for day-to-day work.</p>
+    <p class="hero-sub reveal d2" data-i18n="hero.sub">I build Laravel and CodeIgniter websites for businesses: product catalogs, online stores, and admin panels that support day-to-day work.</p>
     <div class="hero-actions reveal d3">
-      <a class="primary" href="https://wa.me/6287713166791" target="_blank" rel="noopener" data-i18n="hero.cta.primary">Discuss on WhatsApp</a>
+      <a class="primary" href="https://wa.me/6287713166791" target="_blank" rel="noopener" data-i18n="hero.cta.primary">Send a project brief</a>
       <a class="secondary" href="#work" data-i18n="hero.cta.secondary">View projects</a>
     </div>
+    <p class="brief-note reveal d3" data-i18n="hero.brief">Include your business, key features, target date, and an optional reference or budget range.</p>
     <div class="hero-meta reveal d3">
-      <span>PHP <em>8.3</em></span>
       <span>Laravel <em>11&ndash;13</em></span>
       <span>CodeIgniter <em>4</em></span>
-      <span>MySQL <em>8</em></span>
+      <span>PHP <em>8.3</em></span>
       <span data-i18n="hero.meta.location">Based in Indonesia</span>
     </div>
       </div>
@@ -1123,12 +1135,27 @@
     <a class="hero-scroll" href="#work"><span data-i18n="hero.scroll">Scroll</span> <span class="arr" aria-hidden="true">↓</span></a>
   </section>
 
+  <section class="preview wrap" aria-labelledby="preview-title">
+    <div class="preview-inner">
+      <div class="preview-copy reveal">
+        <p class="preview-kicker" data-i18n="preview.kicker">A project, up close</p>
+        <h2 class="preview-title" id="preview-title" data-i18n="preview.title">Dekalase keeps the catalog public and the workbench focused.</h2>
+        <p class="preview-sub" data-i18n="preview.sub">A real dashboard preview from the featured project. The full case study explains the catalog, product management, and activity history.</p>
+        <a class="preview-link" href="#dekalase" data-i18n="preview.link">Read the Dekalase case study ↓</a>
+      </div>
+      <a class="preview-shot reveal d1" href="#dekalase" aria-label="Dekalase project preview">
+        <img src="assets/projects/manajemen-produk.webp" alt="Dekalase product management dashboard" width="920" height="575" loading="eager">
+      </a>
+    </div>
+  </section>
+
   <section class="services" aria-labelledby="services-title">
     <div class="wrap services-inner">
       <h2 id="services-title" data-i18n="services.title">What I can build</h2>
       <dl>
-        <div><dt data-i18n="services.web.t">Business websites & stores</dt><dd data-i18n="services.web.d">Introduce your products, publish a catalog, or take orders online.</dd></div>
-        <div><dt data-i18n="services.app.t">Admin panels & web apps</dt><dd data-i18n="services.app.d">Manage products, user access, and the records your team works with.</dd></div>
+        <div><dt data-i18n="services.catalog.t">Catalogs that stay clear</dt><dd data-i18n="services.catalog.d">Publish products publicly, with the structure needed to keep the catalog maintainable.</dd></div>
+        <div><dt data-i18n="services.store.t">Storefronts that explain the next step</dt><dd data-i18n="services.store.d">Guide visitors from product details to checkout or a direct enquiry.</dd></div>
+        <div><dt data-i18n="services.admin.t">Admin tools for daily work</dt><dd data-i18n="services.admin.d">Turn product, order, access, and activity workflows into one usable web app.</dd></div>
       </dl>
     </div>
   </section>
@@ -1167,6 +1194,7 @@
           <div class="stack">
 <span>Laravel</span><span>Blade</span><span>Tailwind</span><span>MySQL</span>
           </div>
+          <p class="project-contribution" data-i18n="proj1.contribution">Contribution: separated the public catalog from authenticated product and category management, with admin roles, settings, and recovery routes.</p>
           <p class="project-note" data-i18n="case.portfolio">Portfolio project · 2026</p>
           <details class="case-study">
             <summary data-i18n="proj1.more">Case study: Dekalase</summary>
@@ -1357,10 +1385,10 @@
       <p class="contact-eyebrow reveal"><span class="dot"></span><span data-i18n="contact.eyebrow">Get in touch</span></p>
       <h2 class="contact-cta reveal d1" data-i18n="contact.title">Tell me about your website.</h2>
       <p class="contact-sub reveal d2" data-i18n="contact.sub">
-        Send a short business description, the features you need, and your target date. Include a reference website and budget range if you have them.
+        Tell me about a Laravel or CodeIgniter business website, product catalog, online store, or admin panel you need. Include the business context, key features, target date, and a reference or budget range if you have them.
       </p>
       <div class="contact-cta-row reveal d3">
-        <a class="contact-mail" href="https://wa.me/6287713166791" target="_blank" rel="noopener" data-i18n="contact.cta.hire">Discuss on WhatsApp</a>
+        <a class="contact-mail" href="https://wa.me/6287713166791" target="_blank" rel="noopener" data-i18n="contact.cta.hire">Send a project brief</a>
         <a class="contact-mail-secondary" href="mailto:gilangramdhani708@gmail.com">gilangramdhani708@gmail.com</a>
       </div>
       <div class="contact-pills reveal d3">
@@ -1477,15 +1505,22 @@
           'hero.eyebrow':      'Gilang · Web developer · Indonesia',
           'hero.title.l1':     'Websites for',
           'hero.title.em':     'your business.',
-          'hero.sub':          'I build business websites and web apps with Laravel and CodeIgniter: product catalogs, online stores, and admin panels for day-to-day work.',
+          'hero.sub':          'I build Laravel and CodeIgniter websites for businesses: product catalogs, online stores, and admin panels that support day-to-day work.',
           'hero.photo':        'The developer behind these projects.',
-          'hero.cta.primary':  'Discuss on WhatsApp',
+          'hero.cta.primary':  'Send a project brief',
           'hero.cta.secondary':'View projects',
+          'hero.brief':        'Include your business, key features, target date, and an optional reference or budget range.',
           'services.title':    'What I can build',
-          'services.web.t':    'Business websites & stores',
-          'services.web.d':    'Introduce your products, publish a catalog, or take orders online.',
-          'services.app.t':    'Admin panels & web apps',
-          'services.app.d':    'Manage products, user access, and the records your team works with.',
+          'services.catalog.t':'Catalogs that stay clear',
+          'services.catalog.d':'Publish products publicly, with the structure needed to keep the catalog maintainable.',
+          'services.store.t':  'Storefronts that explain the next step',
+          'services.store.d':  'Guide visitors from product details to checkout or a direct enquiry.',
+          'services.admin.t':  'Admin tools for daily work',
+          'services.admin.d':  'Turn product, order, access, and activity workflows into one usable web app.',
+          'preview.kicker':    'A project, up close',
+          'preview.title':     'Dekalase keeps the catalog public and the workbench focused.',
+          'preview.sub':       'A real dashboard preview from the featured project. The full case study explains the catalog, product management, and activity history.',
+          'preview.link':      'Read the Dekalase case study ↓',
           'hero.meta.location':'Based in Indonesia',
           'hero.scroll':	 'Scroll',
           'projects.eyebrow':  'Selected work',
@@ -1513,6 +1548,7 @@
           'proj1.f1':          'Admin and staff access',
           'proj1.f2':          'Indonesian and English interface',
           'proj1.f3':          'Product import, export, and activity history',
+          'proj1.contribution':'Contribution: separated the public catalog from authenticated product and category management, with admin roles, settings, and recovery routes.',
           'proj3.num':	 '03',
           'proj3.tag':         'Independent rebuild',
           'proj3.name':        'eCampus',
@@ -1570,8 +1606,8 @@
           'skill.ai':          'learning \u00b7 shipping',
           'contact.eyebrow':   'Get in touch',
           'contact.title':     'Tell me about your website.',
-          'contact.sub':       'Send a short business description, the features you need, and your target date. Include a reference website and budget range if you have them.',
-          'contact.cta.hire':   'Discuss on WhatsApp',
+          'contact.sub':       'Tell me about a Laravel or CodeIgniter business website, product catalog, online store, or admin panel you need. Include the business context, key features, target date, and a reference or budget range if you have them.',
+          'contact.cta.hire':   'Send a project brief',
           'contact.elsewhere': 'elsewhere',
           'footer.note':       'One HTML file · local fonts',
           'footer.copy':       '\u00a9 2026 Gilang \u00b7 Built in Indonesia'
@@ -1590,15 +1626,22 @@
           'hero.eyebrow':      'Gilang · Web developer · Indonesia',
           'hero.title.l1':     'Website untuk',
           'hero.title.em':     'bisnis Anda.',
-          'hero.sub':          'Saya membuat website bisnis dan aplikasi web dengan Laravel dan CodeIgniter: katalog produk, toko online, serta panel admin untuk pekerjaan sehari-hari.',
+          'hero.sub':          'Saya membuat website bisnis dengan Laravel dan CodeIgniter: katalog produk, toko online, serta panel admin untuk pekerjaan sehari-hari.',
           'hero.photo':        'Pengembang di balik proyek-proyek ini.',
-          'hero.cta.primary':  'Diskusi via WhatsApp',
+          'hero.cta.primary':  'Kirim brief proyek',
           'hero.cta.secondary':'Lihat proyek',
+          'hero.brief':        'Sertakan bisnis Anda, fitur utama, target waktu, serta referensi atau kisaran anggaran jika ada.',
           'services.title':    'Yang bisa saya bangun',
-          'services.web.t':    'Website bisnis & toko online',
-          'services.web.d':    'Perkenalkan produk, tampilkan katalog, atau terima pesanan secara online.',
-          'services.app.t':    'Panel admin & aplikasi web',
-          'services.app.d':    'Kelola produk, hak akses, dan data yang dipakai tim dalam pekerjaan sehari-hari.',
+          'services.catalog.t':'Katalog yang tetap rapi',
+          'services.catalog.d':'Tampilkan produk secara publik dengan struktur yang mudah dipelihara.',
+          'services.store.t':  'Toko online dengan alur jelas',
+          'services.store.d':  'Arahkan pengunjung dari detail produk ke checkout atau pertanyaan langsung.',
+          'services.admin.t':  'Alat admin untuk kerja harian',
+          'services.admin.d':  'Satukan alur produk, pesanan, akses, dan aktivitas dalam aplikasi web yang mudah dipakai.',
+          'preview.kicker':    'Satu proyek, lebih dekat',
+          'preview.title':     'Dekalase memisahkan katalog publik dari ruang kerja pengelola.',
+          'preview.sub':       'Pratinjau dashboard asli dari proyek unggulan. Studi kasusnya menjelaskan katalog, pengelolaan produk, dan riwayat aktivitas.',
+          'preview.link':      'Baca studi kasus Dekalase ↓',
           'hero.meta.location':'Berbasis di Indonesia',
           'hero.scroll':	 'Gulir',
           'projects.eyebrow':  'Karya pilihan',
@@ -1626,6 +1669,7 @@
           'proj1.f1':          'Hak akses admin dan staf',
           'proj1.f2':          'Antarmuka Indonesia dan Inggris',
           'proj1.f3':          'Impor, ekspor produk, dan riwayat aktivitas',
+          'proj1.contribution':'Kontribusi: memisahkan katalog publik dari pengelolaan produk dan kategori yang memerlukan login, termasuk peran admin, pengaturan, dan rute pemulihan.',
           'proj3.num':	 '03',
           'proj3.tag':         'Rebuild mandiri',
           'proj3.name':        'eCampus',
@@ -1683,8 +1727,8 @@
           'skill.ai':          'belajar \u00b7 kirim',
           'contact.eyebrow':   'Hubungi saya',
           'contact.title':     'Ceritakan kebutuhan website Anda.',
-          'contact.sub':       'Kirim gambaran bisnis, fitur yang dibutuhkan, dan target waktu. Sertakan referensi website serta kisaran anggaran jika sudah ada.',
-          'contact.cta.hire':   'Diskusi via WhatsApp',
+          'contact.sub':       'Ceritakan website bisnis Laravel atau CodeIgniter, katalog produk, toko online, atau panel admin yang Anda butuhkan. Sertakan konteks bisnis, fitur utama, target waktu, serta referensi atau kisaran anggaran jika ada.',
+          'contact.cta.hire':   'Kirim brief proyek',
           'contact.elsewhere': 'lainnya',
           'footer.note':       'Satu file HTML · font lokal',
           'footer.copy':       '\u00a9 2026 Gilang \u00b7 Dibuat di Indonesia'
